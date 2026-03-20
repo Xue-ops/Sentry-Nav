@@ -38,10 +38,10 @@
 
 using namespace std::chrono_literals;
 
-static const std::string FILTER_NAME = "speed_filter";
-static const std::string INFO_TOPIC = "costmap_filter_info";
-static const std::string MASK_TOPIC = "mask";
-static const std::string SPEED_LIMIT_TOPIC = "speed_limit";
+static const char FILTER_NAME[]{"speed_filter"};
+static const char INFO_TOPIC[]{"costmap_filter_info"};
+static const char MASK_TOPIC[]{"mask"};
+static const char SPEED_LIMIT_TOPIC[]{"speed_limit"};
 
 static const double NO_TRANSLATION = 0.0;
 static const double TRANSLATION_X = 1.0;
@@ -82,7 +82,7 @@ private:
 class MaskPublisher : public rclcpp::Node
 {
 public:
-  MaskPublisher(const nav_msgs::msg::OccupancyGrid & mask)
+  explicit MaskPublisher(const nav_msgs::msg::OccupancyGrid & mask)
   : Node("mask_pub")
   {
     publisher_ = this->create_publisher<nav_msgs::msg::OccupancyGrid>(
@@ -104,7 +104,7 @@ private:
 class SpeedLimitSubscriber : public rclcpp::Node
 {
 public:
-  SpeedLimitSubscriber(const std::string & speed_limit_topic)
+  explicit SpeedLimitSubscriber(const std::string & speed_limit_topic)
   : Node("speed_limit_sub"), speed_limit_updated_(false)
   {
     subscriber_ = this->create_subscription<nav2_msgs::msg::SpeedLimit>(
@@ -349,20 +349,20 @@ bool TestNode::createSpeedFilter(const std::string & global_frame)
   nav2_costmap_2d::LayeredCostmap layers(global_frame, false, false);
 
   node_->declare_parameter(
-    FILTER_NAME + ".transform_tolerance", rclcpp::ParameterValue(0.5));
+    std::string(FILTER_NAME) + ".transform_tolerance", rclcpp::ParameterValue(0.5));
   node_->set_parameter(
-    rclcpp::Parameter(FILTER_NAME + ".transform_tolerance", 0.5));
+    rclcpp::Parameter(std::string(FILTER_NAME) + ".transform_tolerance", 0.5));
   node_->declare_parameter(
-    FILTER_NAME + ".filter_info_topic", rclcpp::ParameterValue(INFO_TOPIC));
+    std::string(FILTER_NAME) + ".filter_info_topic", rclcpp::ParameterValue(INFO_TOPIC));
   node_->set_parameter(
-    rclcpp::Parameter(FILTER_NAME + ".filter_info_topic", INFO_TOPIC));
+    rclcpp::Parameter(std::string(FILTER_NAME) + ".filter_info_topic", INFO_TOPIC));
   node_->declare_parameter(
-    FILTER_NAME + ".speed_limit_topic", rclcpp::ParameterValue(SPEED_LIMIT_TOPIC));
+    std::string(FILTER_NAME) + ".speed_limit_topic", rclcpp::ParameterValue(SPEED_LIMIT_TOPIC));
   node_->set_parameter(
-    rclcpp::Parameter(FILTER_NAME + ".speed_limit_topic", SPEED_LIMIT_TOPIC));
+    rclcpp::Parameter(std::string(FILTER_NAME) + ".speed_limit_topic", SPEED_LIMIT_TOPIC));
 
   speed_filter_ = std::make_shared<nav2_costmap_2d::SpeedFilter>();
-  speed_filter_->initialize(&layers, FILTER_NAME, tf_buffer_.get(), node_, nullptr, nullptr);
+  speed_filter_->initialize(&layers, FILTER_NAME, tf_buffer_.get(), node_, nullptr);
   speed_filter_->initializeFilter(INFO_TOPIC);
 
   speed_limit_subscriber_ = std::make_shared<SpeedLimitSubscriber>(SPEED_LIMIT_TOPIC);
@@ -633,7 +633,7 @@ void TestNode::reset()
 
 TEST_F(TestNode, testPercentSpeedLimit)
 {
-  // Initilize test system
+  // Initialize test system
   createMaps("map");
   publishMaps(nav2_costmap_2d::SPEED_FILTER_PERCENT, 0.0, 1.0);
   EXPECT_TRUE(createSpeedFilter("map"));
@@ -648,7 +648,7 @@ TEST_F(TestNode, testPercentSpeedLimit)
 
 TEST_F(TestNode, testIncorrectPercentSpeedLimit)
 {
-  // Initilize test system
+  // Initialize test system
   createMaps("map");
   publishMaps(nav2_costmap_2d::SPEED_FILTER_PERCENT, -50.0, 2.0);
   EXPECT_TRUE(createSpeedFilter("map"));
@@ -663,7 +663,7 @@ TEST_F(TestNode, testIncorrectPercentSpeedLimit)
 
 TEST_F(TestNode, testAbsoluteSpeedLimit)
 {
-  // Initilize test system
+  // Initialize test system
   createMaps("map");
   publishMaps(nav2_costmap_2d::SPEED_FILTER_ABSOLUTE, 1.23, 4.5);
   EXPECT_TRUE(createSpeedFilter("map"));
@@ -678,7 +678,7 @@ TEST_F(TestNode, testAbsoluteSpeedLimit)
 
 TEST_F(TestNode, testIncorrectAbsoluteSpeedLimit)
 {
-  // Initilize test system
+  // Initialize test system
   createMaps("map");
   publishMaps(nav2_costmap_2d::SPEED_FILTER_ABSOLUTE, -50.0, 2.0);
   EXPECT_TRUE(createSpeedFilter("map"));
@@ -693,7 +693,7 @@ TEST_F(TestNode, testIncorrectAbsoluteSpeedLimit)
 
 TEST_F(TestNode, testOutOfBounds)
 {
-  // Initilize test system
+  // Initialize test system
   createMaps("map");
   publishMaps(nav2_costmap_2d::SPEED_FILTER_PERCENT, 0.0, 1.0);
   EXPECT_TRUE(createSpeedFilter("map"));
@@ -708,7 +708,7 @@ TEST_F(TestNode, testOutOfBounds)
 
 TEST_F(TestNode, testInfoRePublish)
 {
-  // Initilize test system
+  // Initialize test system
   createMaps("map");
   publishMaps(nav2_costmap_2d::SPEED_FILTER_ABSOLUTE, 1.23, 4.5);
   EXPECT_TRUE(createSpeedFilter("map"));
@@ -728,7 +728,7 @@ TEST_F(TestNode, testInfoRePublish)
 
 TEST_F(TestNode, testMaskRePublish)
 {
-  // Initilize test system
+  // Initialize test system
   createMaps("map");
   publishMaps(nav2_costmap_2d::SPEED_FILTER_ABSOLUTE, 1.23, 4.5);
   EXPECT_TRUE(createSpeedFilter("map"));
@@ -747,7 +747,7 @@ TEST_F(TestNode, testMaskRePublish)
 
 TEST_F(TestNode, testIncorrectFilterType)
 {
-  // Initilize test system
+  // Initialize test system
   createMaps("map");
   publishMaps(INCORRECT_TYPE, 1.23, 4.5);
   EXPECT_FALSE(createSpeedFilter("map"));
@@ -759,7 +759,7 @@ TEST_F(TestNode, testIncorrectFilterType)
 
 TEST_F(TestNode, testDifferentFrame)
 {
-  // Initilize test system
+  // Initialize test system
   createMaps("map");
   publishMaps(nav2_costmap_2d::SPEED_FILTER_PERCENT, 0.0, 1.0);
   EXPECT_TRUE(createSpeedFilter("odom"));

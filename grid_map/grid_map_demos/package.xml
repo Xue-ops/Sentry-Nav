@@ -29,6 +29,7 @@
   <depend>octomap_msgs</depend>
   <depend>rclcpp</depend>
   <depend>sensor_msgs</depend>
+  <depend>tf2_eigen</depend>
 
   <exec_depend>octomap_rviz_plugins</exec_depend>
   <exec_depend>octomap_server</exec_depend>

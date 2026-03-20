@@ -46,15 +46,6 @@ public:
   /**
    * @brief A constructor for LifeCycleMangerClient
    * @param name Managed node name
-   * @param ns Service node namespace
-   */
-  explicit LifecycleManagerClient(
-    const std::string & name,
-    const std::string & ns = "");
-
-  /**
-   * @brief A constructor for LifeCycleMangerClient
-   * @param name Managed node name
    * @param parent_node Node that execute the service calls
    */
   explicit LifecycleManagerClient(
@@ -92,23 +83,6 @@ public:
    * @return ACTIVE or INACTIVE or TIMEOUT
    */
   SystemStatus is_active(const std::chrono::nanoseconds timeout = std::chrono::nanoseconds(-1));
-
-  // A couple convenience methods to facilitate scripting tests
-  /**
-   * @brief Set initial pose with covariance
-   * @param x X position
-   * @param y Y position
-   * @param theta orientation
-   */
-  void set_initial_pose(double x, double y, double theta);
-  /**
-   * @brief Send goal pose to NavigationToPose action server
-   * @param x X position
-   * @param y Y position
-   * @param theta orientation
-   * @return true or false
-   */
-  bool navigate_to_pose(double x, double y, double theta);
 
 protected:
   using ManageLifecycleNodes = nav2_msgs::srv::ManageLifecycleNodes;

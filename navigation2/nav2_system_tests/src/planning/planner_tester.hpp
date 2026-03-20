@@ -27,6 +27,7 @@
 #include "nav_msgs/msg/occupancy_grid.hpp"
 #include "nav2_msgs/msg/costmap.hpp"
 #include "nav2_msgs/srv/get_costmap.hpp"
+#include "nav2_msgs/srv/is_path_valid.hpp"
 #include "visualization_msgs/msg/marker.hpp"
 #include "nav2_util/costmap.hpp"
 #include "nav2_util/node_thread.hpp"
@@ -61,6 +62,9 @@ public:
 
   void setCostmap(nav2_util::Costmap * costmap)
   {
+    std::unique_lock<nav2_costmap_2d::Costmap2D::mutex_t> lock(
+      *(costmap_ros_->getCostmap()->getMutex()));
+
     nav2_msgs::msg::CostmapMetaData prop;
     nav2_msgs::msg::Costmap cm = costmap->get_costmap(prop);
     prop = cm.metadata;
@@ -150,10 +154,13 @@ public:
     ComputePathToPoseResult & path,
     const double deviation_tolerance = 1.0);
 
+
   // Runs multiple tests with random initial and goal poses
   bool defaultPlannerRandomTests(
     const unsigned int number_tests,
     const float acceptable_fail_ratio);
+
+  bool isPathValid(nav_msgs::msg::Path & path);
 
 private:
   void setCostmap();
@@ -183,6 +190,9 @@ private:
 
   // The global planner
   std::shared_ptr<NavFnPlannerTester> planner_tester_;
+
+  // The is path valid client
+  rclcpp::Client<nav2_msgs::srv::IsPathValid>::SharedPtr path_valid_client_;
 
   // A thread for spinning the ROS node
   std::unique_ptr<nav2_util::NodeThread> spin_thread_;

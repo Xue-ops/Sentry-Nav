@@ -35,11 +35,13 @@
 #include "nav2_amcl/sensors/laser/laser.hpp"
 #include "nav2_msgs/msg/particle.hpp"
 #include "nav2_msgs/msg/particle_cloud.hpp"
+#include "nav2_msgs/srv/set_initial_pose.hpp"
 #include "nav_msgs/srv/set_map.hpp"
 #include "sensor_msgs/msg/laser_scan.hpp"
 #include "std_srvs/srv/empty.hpp"
 #include "tf2_ros/transform_broadcaster.h"
 #include "tf2_ros/transform_listener.h"
+#include "pluginlib/class_loader.hpp"
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
@@ -60,8 +62,9 @@ class AmclNode : public nav2_util::LifecycleNode
 public:
   /*
    * @brief AMCL constructor
+   * @param options Additional options to control creation of the node.
    */
-  AmclNode();
+  explicit AmclNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
   /*
    * @brief AMCL destructor
    */
@@ -89,9 +92,25 @@ protected:
    */
   nav2_util::CallbackReturn on_shutdown(const rclcpp_lifecycle::State & state) override;
 
+  /**
+   * @brief Callback executed when a parameter change is detected
+   * @param event ParameterEvent message
+   */
+  rcl_interfaces::msg::SetParametersResult
+  dynamicParametersCallback(std::vector<rclcpp::Parameter> parameters);
+
+  // Dynamic parameters handler
+  rclcpp::node_interfaces::OnSetParametersCallbackHandle::SharedPtr dyn_params_handler_;
+
   // Since the sensor data from gazebo or the robot is not lifecycle enabled, we won't
   // respond until we're in the active state
   std::atomic<bool> active_{false};
+
+  // Dedicated callback group and executor for services and subscriptions in AmclNode,
+  // in order to isolate TF timer used in message filter.
+  rclcpp::CallbackGroup::SharedPtr callback_group_;
+  rclcpp::executors::SingleThreadedExecutor::SharedPtr executor_;
+  std::unique_ptr<nav2_util::NodeThread> executor_thread_;
 
   // Pose hypothesis
   typedef struct
@@ -147,17 +166,14 @@ protected:
   bool sent_first_transform_{false};
   bool latest_tf_valid_{false};
   tf2::Transform latest_tf_;
-  /*
-   * @brief Wait for transformation required to operate (laser to base)
-   */
-  void waitForTransforms();
 
   // Message filters
   /*
    * @brief Initialize incoming data message subscribers and filters
    */
   void initMessageFilters();
-  std::unique_ptr<message_filters::Subscriber<sensor_msgs::msg::LaserScan>> laser_scan_sub_;
+  std::unique_ptr<message_filters::Subscriber<sensor_msgs::msg::LaserScan,
+    rclcpp_lifecycle::LifecycleNode>> laser_scan_sub_;
   std::unique_ptr<tf2_ros::MessageFilter<sensor_msgs::msg::LaserScan>> laser_scan_filter_;
   message_filters::Connection laser_scan_connection_;
 
@@ -195,6 +211,16 @@ protected:
     const std::shared_ptr<std_srvs::srv::Empty::Request> request,
     std::shared_ptr<std_srvs::srv::Empty::Response> response);
 
+  // service server for providing an initial pose guess
+  rclcpp::Service<nav2_msgs::srv::SetInitialPose>::SharedPtr initial_guess_srv_;
+  /*
+   * @brief Service callback for an initial pose guess request
+   */
+  void initialPoseReceivedSrv(
+    const std::shared_ptr<rmw_request_id_t> request_header,
+    const std::shared_ptr<nav2_msgs::srv::SetInitialPose::Request> request,
+    std::shared_ptr<nav2_msgs::srv::SetInitialPose::Response> response);
+
   // Let amcl update samples without requiring motion
   rclcpp::Service<std_srvs::srv::Empty>::SharedPtr nomotion_update_srv_;
   /*
@@ -213,11 +239,13 @@ protected:
    * @brief Initialize odometry
    */
   void initOdometry();
-  std::unique_ptr<nav2_amcl::MotionModel> motion_model_;
+  std::shared_ptr<nav2_amcl::MotionModel> motion_model_;
   geometry_msgs::msg::PoseStamped latest_odom_pose_;
   geometry_msgs::msg::PoseWithCovarianceStamped last_published_pose_;
   double init_pose_[3];  // Initial robot pose
   double init_cov_[3];
+  pluginlib::ClassLoader<nav2_amcl::MotionModel> plugin_loader_{"nav2_amcl",
+    "nav2_amcl::MotionModel"};
   /*
    * @brief Get robot pose in odom frame using TF
    */
@@ -256,11 +284,7 @@ protected:
   std::vector<bool> lasers_update_;
   std::map<std::string, int> frame_to_laser_;
   rclcpp::Time last_laser_received_ts_;
-  /*
-   * @brief Check if a laser has been received
-   */
-  void checkLaserReceived();
-  std::chrono::seconds laser_check_interval_;  // TODO(mjeronimo): not initialized
+
   /*
    * @brief Check if sufficient time has elapsed to get an update
    */

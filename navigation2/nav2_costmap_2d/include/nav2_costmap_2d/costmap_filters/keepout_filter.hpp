@@ -35,16 +35,15 @@
  * Author: Alexey Merzlyakov
  *********************************************************************/
 
-#ifndef NAV2_COSTMAP_2D__KEEPOUT_FILTER_HPP_
-#define NAV2_COSTMAP_2D__KEEPOUT_FILTER_HPP_
-
-#include "nav2_costmap_2d/costmap_filters/costmap_filter.hpp"
+#ifndef NAV2_COSTMAP_2D__COSTMAP_FILTERS__KEEPOUT_FILTER_HPP_
+#define NAV2_COSTMAP_2D__COSTMAP_FILTERS__KEEPOUT_FILTER_HPP_
 
 #include <string>
 #include <memory>
 
+#include "nav2_costmap_2d/costmap_filters/costmap_filter.hpp"
+
 #include "rclcpp/rclcpp.hpp"
-#include "nav_msgs/msg/occupancy_grid.hpp"
 #include "nav2_msgs/msg/costmap_filter_info.hpp"
 
 namespace nav2_costmap_2d
@@ -68,6 +67,20 @@ public:
    */
   void initializeFilter(
     const std::string & filter_info_topic);
+
+  /**
+   * @brief Update the bounds of the master costmap by this layer's update dimensions
+   * @param robot_x X pose of robot
+   * @param robot_y Y pose of robot
+   * @param robot_yaw Robot orientation
+   * @param min_x X min map coord of the window to update
+   * @param min_y Y min map coord of the window to update
+   * @param max_x X max map coord of the window to update
+   * @param max_y Y max map coord of the window to update
+   */
+  void updateBounds(
+    double robot_x, double robot_y, double robot_yaw,
+    double * min_x, double * min_y, double * max_x, double * max_y) override;
 
   /**
    * @brief Process the keepout layer at the current pose / bounds / grid
@@ -104,8 +117,14 @@ private:
 
   std::string mask_frame_;  // Frame where mask located in
   std::string global_frame_;  // Frame of currnet layer (master_grid)
+
+  unsigned int x_{0};
+  unsigned int y_{0};
+  unsigned int width_{0};
+  unsigned int height_{0};
+  bool has_updated_data_{false};
 };
 
 }  // namespace nav2_costmap_2d
 
-#endif  // NAV2_COSTMAP_2D__KEEPOUT_FILTER_HPP_
+#endif  // NAV2_COSTMAP_2D__COSTMAP_FILTERS__KEEPOUT_FILTER_HPP_

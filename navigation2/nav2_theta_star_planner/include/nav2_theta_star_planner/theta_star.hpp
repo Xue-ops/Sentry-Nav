@@ -24,7 +24,9 @@
 #include "nav2_costmap_2d/costmap_2d_ros.hpp"
 
 const double INF_COST = DBL_MAX;
-const int LETHAL_COST = 252;
+const int UNKNOWN_COST = 255;
+const int OCCUPIED_COST = 254;
+const int MAX_NON_OBSTACLE_COST = 252;
 
 struct coordsM
 {
@@ -70,6 +72,8 @@ public:
   double w_heuristic_cost_;
   /// parameter to set the number of adjacent nodes to be searched on
   int how_many_corners_;
+  /// parameter to set weather the planner can plan through unknown space
+  bool allow_unknown_;
   /// the x-directional and y-directional lengths of the map respectively
   int size_x_, size_y_;
 
@@ -86,12 +90,13 @@ public:
   bool generatePath(std::vector<coordsW> & raw_path);
 
   /**
-   * @brief this function checks whether the cost of a point(cx, cy) on the costmap is less than the LETHAL_COST
+   * @brief this function checks whether the cost of a point(cx, cy) on the costmap is less than or equal to the MAX_NON_OBSTACLE_COST
    * @return the result of the check
    */
   inline bool isSafe(const int & cx, const int & cy) const
   {
-    return costmap_->getCost(cx, cy) < LETHAL_COST;
+    return (costmap_->getCost(cx, cy) == UNKNOWN_COST && allow_unknown_) ||
+           costmap_->getCost(cx, cy) <= MAX_NON_OBSTACLE_COST;
   }
 
   /**
@@ -102,8 +107,8 @@ public:
     const geometry_msgs::msg::PoseStamped & goal);
 
   /**
-   * @brief checks whether the start and goal points have costmap costs greater than LETHAL_COST
-   * @return true if the cost of any one of the points is greater than LETHAL_COST
+   * @brief checks whether the start and goal points have costmap costs greater than MAX_NON_OBSTACLE_COST
+   * @return true if the cost of any one of the points is greater than MAX_NON_OBSTACLE_COST
    */
   bool isUnsafeToPlan() const
   {
@@ -180,13 +185,19 @@ protected:
   /**
    * @brief it is an overloaded function to ease the cost calculations while performing the LOS check
    * @param cost denotes the total straight line traversal cost; it adds the traversal cost for the node (cx, cy) at every instance; it is also being returned
-   * @return false if the traversal cost is greater than / equal to the LETHAL_COST and true otherwise
+   * @return false if the traversal cost is greater than the MAX_NON_OBSTACLE_COST and true otherwise
    */
   bool isSafe(const int & cx, const int & cy, double & cost) const
   {
     double curr_cost = getCost(cx, cy);
-    if (curr_cost < LETHAL_COST) {
-      cost += w_traversal_cost_ * curr_cost * curr_cost / LETHAL_COST / LETHAL_COST;
+    if ((costmap_->getCost(cx, cy) == UNKNOWN_COST && allow_unknown_) ||
+      curr_cost <= MAX_NON_OBSTACLE_COST)
+    {
+      if (costmap_->getCost(cx, cy) == UNKNOWN_COST) {
+        curr_cost = OCCUPIED_COST - 1;
+      }
+      cost += w_traversal_cost_ * curr_cost * curr_cost / MAX_NON_OBSTACLE_COST /
+        MAX_NON_OBSTACLE_COST;
       return true;
     } else {
       return false;
@@ -210,7 +221,8 @@ protected:
   inline double getTraversalCost(const int & cx, const int & cy)
   {
     double curr_cost = getCost(cx, cy);
-    return w_traversal_cost_ * curr_cost * curr_cost / LETHAL_COST / LETHAL_COST;
+    return w_traversal_cost_ * curr_cost * curr_cost / MAX_NON_OBSTACLE_COST /
+           MAX_NON_OBSTACLE_COST;
   }
 
   /**

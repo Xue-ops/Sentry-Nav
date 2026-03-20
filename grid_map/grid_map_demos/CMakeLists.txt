@@ -20,6 +20,7 @@ find_package(OCTOMAP REQUIRED)
 find_package(octomap_msgs REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
+find_package(tf2_eigen REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
@@ -206,6 +207,7 @@ ament_target_dependencies(
   grid_map_filters
   grid_map_cv
   filters
+  tf2_eigen
 )
 
 ament_target_dependencies(
@@ -214,6 +216,7 @@ ament_target_dependencies(
   grid_map_filters
   grid_map_cv
   filters
+  tf2_eigen
 )
 
 ament_target_dependencies(

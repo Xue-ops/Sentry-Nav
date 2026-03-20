@@ -29,6 +29,7 @@
 
 #include "nav2_smac_planner/constants.hpp"
 #include "nav2_smac_planner/node_hybrid.hpp"
+#include "nav2_smac_planner/node_lattice.hpp"
 #include "nav2_smac_planner/node_2d.hpp"
 #include "nav2_smac_planner/types.hpp"
 #include "nav2_smac_planner/collision_checker.hpp"
@@ -46,7 +47,6 @@ class NodeBasic
 public:
   /**
    * @brief A constructor for nav2_smac_planner::NodeBasic
-   * @param cost_in The costmap cost at this node
    * @param index The index of this node for self-reference
    */
   explicit NodeBasic(const unsigned int index)
@@ -55,13 +55,27 @@ public:
   {
   }
 
-  typename NodeT::Coordinates pose;  // Used by NodeHybrid
-  NodeT * graph_node_ptr;
-  unsigned int index;
-};
+  /**
+   * @brief Take a NodeBasic and populate it with any necessary state
+   * cached in the queue for NodeT.
+   * @param node NodeT ptr to populate metadata into NodeBasic
+   */
+  void populateSearchNode(NodeT * & node);
 
-template class NodeBasic<Node2D>;
-template class NodeBasic<NodeHybrid>;
+  /**
+   * @brief Take a NodeBasic and populate it with any necessary state
+   * cached in the queue for NodeTs.
+   * @param node Search node (basic) object to initialize internal node
+   * with state
+   */
+  void processSearchNode();
+
+  typename NodeT::Coordinates pose;  // Used by NodeHybrid and NodeLattice
+  NodeT * graph_node_ptr;
+  MotionPrimitive * prim_ptr;  // Used by NodeLattice
+  unsigned int index, motion_index;
+  bool backward;
+};
 
 }  // namespace nav2_smac_planner
 

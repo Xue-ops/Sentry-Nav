@@ -39,6 +39,7 @@
 #include "nav2_costmap_2d/cost_values.hpp"
 
 using namespace std::chrono_literals;
+using namespace std::chrono;  // NOLINT
 using nav2_util::declare_parameter_if_not_declared;
 using rcl_interfaces::msg::ParameterType;
 using std::placeholders::_1;
@@ -69,6 +70,7 @@ NavfnPlanner::configure(
   costmap_ = costmap_ros->getCostmap();
   global_frame_ = costmap_ros->getGlobalFrameID();
 
+  node_ = parent;
   auto node = parent.lock();
   clock_ = node->get_clock();
   logger_ = node->get_logger();
@@ -93,16 +95,6 @@ NavfnPlanner::configure(
   planner_ = std::make_unique<NavFn>(
     costmap_->getSizeInCellsX(),
     costmap_->getSizeInCellsY());
-
-  // Setup callback for changes to parameters.
-  parameters_client_ = std::make_shared<rclcpp::AsyncParametersClient>(
-    node->get_node_base_interface(),
-    node->get_node_topics_interface(),
-    node->get_node_graph_interface(),
-    node->get_node_services_interface());
-
-  parameter_event_sub_ = parameters_client_->on_parameter_event(
-    std::bind(&NavfnPlanner::on_parameter_event_callback, this, _1));
 }
 
 void
@@ -111,6 +103,10 @@ NavfnPlanner::activate()
   RCLCPP_INFO(
     logger_, "Activating plugin %s of type NavfnPlanner",
     name_.c_str());
+  // Add callback for dynamic parameters
+  auto node = node_.lock();
+  dyn_params_handler_ = node->add_on_set_parameters_callback(
+    std::bind(&NavfnPlanner::dynamicParametersCallback, this, _1));
 }
 
 void
@@ -119,6 +115,7 @@ NavfnPlanner::deactivate()
   RCLCPP_INFO(
     logger_, "Deactivating plugin %s of type NavfnPlanner",
     name_.c_str());
+  dyn_params_handler_.reset();
 }
 
 void
@@ -184,8 +181,7 @@ nav_msgs::msg::Path NavfnPlanner::createPlan(
 #ifdef BENCHMARK_TESTING
   steady_clock::time_point b = steady_clock::now();
   duration<double> time_span = duration_cast<duration<double>>(b - a);
-  std::cout << "It took " << time_span.count() * 1000 <<
-    " milliseconds with " << num_iterations << " iterations." << std::endl;
+  std::cout << "It took " << time_span.count() * 1000 << std::endl;
 #endif
 
   return path;
@@ -214,8 +210,6 @@ NavfnPlanner::makePlan(
 
   plan.header.stamp = clock_->now();
   plan.header.frame_id = global_frame_;
-
-  // TODO(orduno): add checks for start and goal reference frame -- should be in global frame
 
   double wx = start.position.x;
   double wy = start.position.y;
@@ -266,9 +260,6 @@ NavfnPlanner::makePlan(
   int map_goal[2];
   map_goal[0] = mx;
   map_goal[1] = my;
-
-  // TODO(orduno): Explain why we are providing 'map_goal' to setStart().
-  //               Same for setGoal, seems reversed. Computing backwards?
 
   planner_->setStart(map_goal);
   planner_->setGoal(map_start);
@@ -372,6 +363,7 @@ NavfnPlanner::smoothApproachToGoal(
   }
   geometry_msgs::msg::PoseStamped goal_copy;
   goal_copy.pose = goal;
+  goal_copy.header = plan.header;
   plan.poses.push_back(goal_copy);
 }
 
@@ -427,6 +419,7 @@ NavfnPlanner::getPlanFromPotential(
     mapToWorld(x[i], y[i], world_x, world_y);
 
     geometry_msgs::msg::PoseStamped pose;
+    pose.header = plan.header;
     pose.pose.position.x = world_x;
     pose.pose.position.y = world_y;
     pose.pose.position.z = 0.0;
@@ -528,29 +521,30 @@ NavfnPlanner::clearRobotCell(unsigned int mx, unsigned int my)
   costmap_->setCost(mx, my, nav2_costmap_2d::FREE_SPACE);
 }
 
-void
-NavfnPlanner::on_parameter_event_callback(
-  const rcl_interfaces::msg::ParameterEvent::SharedPtr event)
+rcl_interfaces::msg::SetParametersResult
+NavfnPlanner::dynamicParametersCallback(std::vector<rclcpp::Parameter> parameters)
 {
-  for (auto & changed_parameter : event->changed_parameters) {
-    const auto & type = changed_parameter.value.type;
-    const auto & name = changed_parameter.name;
-    const auto & value = changed_parameter.value;
+  rcl_interfaces::msg::SetParametersResult result;
+  for (auto parameter : parameters) {
+    const auto & type = parameter.get_type();
+    const auto & name = parameter.get_name();
 
     if (type == ParameterType::PARAMETER_DOUBLE) {
       if (name == name_ + ".tolerance") {
-        tolerance_ = value.double_value;
+        tolerance_ = parameter.as_double();
       }
     } else if (type == ParameterType::PARAMETER_BOOL) {
       if (name == name_ + ".use_astar") {
-        use_astar_ = value.bool_value;
+        use_astar_ = parameter.as_bool();
       } else if (name == name_ + ".allow_unknown") {
-        allow_unknown_ = value.bool_value;
+        allow_unknown_ = parameter.as_bool();
       } else if (name == name_ + ".use_final_approach_orientation") {
-        use_final_approach_orientation_ = value.bool_value;
+        use_final_approach_orientation_ = parameter.as_bool();
       }
     }
   }
+  result.successful = true;
+  return result;
 }
 
 }  // namespace nav2_navfn_planner

@@ -7,7 +7,7 @@ pcl_grid_map_extraction:
       y: 0.0
       z: 0.0
     rotation: #intrinsic rotation X-Y-Z (r-p-y)sequence
-      r: 3.14
+      r: 0.0
       p: 0.0
       y: 1.57
   cluster_extraction:
@@ -26,7 +26,7 @@ pcl_grid_map_extraction:
       z: 0.03
   grid_map:
     min_num_points_per_cell: 2
-    resolution: 0.1
+    resolution: 0.05
     # 0: Smallest value among the average values ​​of each cluster
     # 1: Mean value of the cluster with the most points
     height_type: 1

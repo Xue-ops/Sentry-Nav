@@ -40,6 +40,7 @@
 
 #include <mutex>
 #include <string>
+#include <vector>
 
 #include "map_msgs/msg/occupancy_grid_update.hpp"
 #include "message_filters/subscriber.h"
@@ -47,6 +48,7 @@
 #include "nav2_costmap_2d/layered_costmap.hpp"
 #include "nav_msgs/msg/occupancy_grid.hpp"
 #include "rclcpp/rclcpp.hpp"
+#include "nav2_costmap_2d/footprint.hpp"
 
 namespace nav2_costmap_2d
 {
@@ -122,7 +124,7 @@ public:
    */
   virtual void matchSize();
 
-private:
+protected:
   /**
    * @brief Get parameters of layer
    */
@@ -152,6 +154,24 @@ private:
    */
   unsigned char interpretValue(unsigned char value);
 
+  /**
+   * @brief Callback executed when a parameter change is detected
+   * @param event ParameterEvent message
+   */
+  rcl_interfaces::msg::SetParametersResult
+  dynamicParametersCallback(std::vector<rclcpp::Parameter> parameters);
+
+  std::vector<geometry_msgs::msg::Point> transformed_footprint_;
+  bool footprint_clearing_enabled_;
+  /**
+   * @brief Clear costmap layer info below the robot's footprint
+   */
+  void updateFootprint(
+    double robot_x, double robot_y, double robot_yaw, double * min_x,
+    double * min_y,
+    double * max_x,
+    double * max_y);
+
   std::string global_frame_;  ///< @brief The global frame for the costmap
   std::string map_frame_;  /// @brief frame that map is located in
 
@@ -175,9 +195,11 @@ private:
   unsigned char unknown_cost_value_;
   bool trinary_costmap_;
   bool map_received_{false};
+  bool map_received_in_update_bounds_{false};
   tf2::Duration transform_tolerance_;
-  std::atomic<bool> update_in_progress_;
   nav_msgs::msg::OccupancyGrid::SharedPtr map_buffer_;
+  // Dynamic parameters handler
+  rclcpp::node_interfaces::OnSetParametersCallbackHandle::SharedPtr dyn_params_handler_;
 };
 
 }  // namespace nav2_costmap_2d

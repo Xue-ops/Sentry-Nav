@@ -35,14 +35,15 @@ void FollowPathAction::on_tick()
   getInput("goal_checker_id", goal_.goal_checker_id);
 }
 
-void FollowPathAction::on_wait_for_result()
+void FollowPathAction::on_wait_for_result(
+  std::shared_ptr<const nav2_msgs::action::FollowPath::Feedback>/*feedback*/)
 {
   // Grab the new path
   nav_msgs::msg::Path new_path;
   getInput("path", new_path);
 
   // Check if it is not same with the current one
-  if (goal_.path != new_path) {
+  if (goal_.path != new_path && new_path != nav_msgs::msg::Path()) {
     // the action server on the next loop iteration
     goal_.path = new_path;
     goal_updated_ = true;
