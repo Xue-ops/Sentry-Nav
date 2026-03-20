@@ -1,6 +1,6 @@
 pcd_to_gridmap:
   ros__parameters:
-    pcd_file_path: "/home/xli/MT20260227_150609-Cloud_Opt.pcd"
+    pcd_file_path: "/home/xli/0227_cut_up.pcd"
     map_frame_id: "map"
     filters:
       filter1:  # Fill holes in the map with inpainting.
