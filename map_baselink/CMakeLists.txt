@@ -11,12 +11,21 @@ find_package(ament_cmake REQUIRED)
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
+find_package(tf2_msgs REQUIRED)
 
-add_executable(map_to_baselink_node src/map_to_baselink.cpp)
+add_executable(map_to_baselink_node src/map_to_baselink_node.cpp)
 
 ament_target_dependencies(map_to_baselink_node
   rclcpp
-  
+  geometry_msgs
+  tf2
+  tf2_ros
+  tf2_geometry_msgs
+  tf2_msgs
 )
 
 install(TARGETS
