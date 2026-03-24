@@ -11,6 +11,8 @@
 #include "tf2_ros/transform_listener.h"
 #include "tf2_ros/transform_broadcaster.h"
 #include "tf2_ros/create_timer_ros.h"
+#include "tf2_geometry_msgs/tf2_geometry_msgs.hpp"
+#include "tf2/LinearMath/Transform.h"
 
 class MapToBaseLinkNode : public rclcpp::Node
 {
@@ -18,10 +20,12 @@ public:
   MapToBaseLinkNode()
   : Node("map_to_baselink_node")
   {
+    odom_frame_ = this->declare_parameter<std::string>("odom_frame", "odom");
+    odom_nav_frame_ = this->declare_parameter<std::string>("odom_nav_frame", "odom_nav");
     map_frame_ = this->declare_parameter<std::string>("map_frame", "map");
     base_frame_ = this->declare_parameter<std::string>("base_frame", "odin1_base_link");
     output_topic_ = this->declare_parameter<std::string>("output_topic", "/map_base_pose");
-    publish_tf_ = this->declare_parameter<bool>("publish_tf", false);
+    publish_tf_ = this->declare_parameter<bool>("publish_tf", true);
     tf_pub_frame_ = this->declare_parameter<std::string>("tf_child_frame", "map_corrected_base_link");
     publish_rate_ = this->declare_parameter<double>("publish_rate", 20.0);
 
@@ -41,8 +45,10 @@ public:
       std::chrono::duration_cast<std::chrono::milliseconds>(period),
       std::bind(&MapToBaseLinkNode::timerCallback, this));
 
-    RCLCPP_INFO(this->get_logger(),
-      "Started. map_frame=%s, base_frame=%s, output_topic=%s, publish_tf=%s",
+    RCLCPP_INFO(
+      this->get_logger(),
+      "Started. odom_frame=%s, map_frame=%s, base_frame=%s, output_topic=%s, publish_tf=%s",
+      odom_frame_.c_str(),
       map_frame_.c_str(),
       base_frame_.c_str(),
       output_topic_.c_str(),
@@ -50,9 +56,11 @@ public:
   }
 
 private:
+  std::string odom_frame_;
   std::string map_frame_;
   std::string base_frame_;
   std::string output_topic_;
+  std::string odom_nav_frame_;
   bool publish_tf_;
   std::string tf_pub_frame_;
   double publish_rate_;
@@ -66,13 +74,20 @@ private:
 
   void timerCallback()
   {
-    geometry_msgs::msg::TransformStamped tf_map_base;
+    geometry_msgs::msg::TransformStamped tf_odom_map;
+    geometry_msgs::msg::TransformStamped tf_odom_base;
 
     try {
-      // 直接让 tf2 算 map -> base
-      tf_map_base = tf_buffer_->lookupTransform(
+      // 正变换：map -> odom
+      tf_odom_map = tf_buffer_->lookupTransform(
         map_frame_,
-        base_frame_,
+        odom_frame_,
+        tf2::TimePointZero);
+
+      // 正变换：odom -> base
+      tf_odom_base = tf_buffer_->lookupTransform(
+        odom_frame_,
+        base_frame_, 
         tf2::TimePointZero);
 
     } catch (const tf2::TransformException & ex) {
@@ -80,30 +95,39 @@ private:
         this->get_logger(),
         *this->get_clock(),
         2000,
-        "Cannot lookup %s -> %s: %s",
-        map_frame_.c_str(),
-        base_frame_.c_str(),
+        "Cannot lookup transforms: %s",
         ex.what());
       return;
     }
 
+    // 转成 tf2::Transform
+    tf2::Transform T_odom_map, T_odom_base;
+    tf2::fromMsg(tf_odom_map.transform, T_odom_map);
+    tf2::fromMsg(tf_odom_base.transform, T_odom_base);
+
+    // 按你要求：直接把 odom->map 实施到 base_link 上
+    tf2::Transform T_result = T_odom_map * T_odom_base;
+
     // 发布 PoseStamped
     geometry_msgs::msg::PoseStamped pose_msg;
-    pose_msg.header.stamp = tf_map_base.header.stamp;
-    pose_msg.header.frame_id = map_frame_;
-    pose_msg.pose.position.x = tf_map_base.transform.translation.x;
-    pose_msg.pose.position.y = tf_map_base.transform.translation.y;
-    pose_msg.pose.position.z = tf_map_base.transform.translation.z;
-    pose_msg.pose.orientation = tf_map_base.transform.rotation;
+    pose_msg.header.stamp = this->now();
+    pose_msg.header.frame_id = odom_frame_;
+    pose_msg.pose.position.x = T_result.getOrigin().x();
+    pose_msg.pose.position.y = T_result.getOrigin().y();
+    pose_msg.pose.position.z = T_result.getOrigin().z();
+    pose_msg.pose.orientation = tf2::toMsg(T_result.getRotation());
     pose_pub_->publish(pose_msg);
 
     // 可选发布 TF
     if (publish_tf_) {
       geometry_msgs::msg::TransformStamped tf_out;
-      tf_out.header.stamp = tf_map_base.header.stamp;
-      tf_out.header.frame_id = map_frame_;
+      tf_out.header.stamp = this->now();
+      tf_out.header.frame_id = odom_frame_;
       tf_out.child_frame_id = tf_pub_frame_;
-      tf_out.transform = tf_map_base.transform;
+      tf_out.transform.translation.x = T_result.getOrigin().x();
+      tf_out.transform.translation.y = T_result.getOrigin().y();
+      tf_out.transform.translation.z = T_result.getOrigin().z();
+      tf_out.transform.rotation = tf2::toMsg(T_result.getRotation());
       tf_broadcaster_->sendTransform(tf_out);
     }
   }
