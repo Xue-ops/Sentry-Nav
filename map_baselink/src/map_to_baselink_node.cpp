@@ -122,7 +122,7 @@ private:
     if (publish_tf_) {
       geometry_msgs::msg::TransformStamped tf_out;
       tf_out.header.stamp = this->now();
-      tf_out.header.frame_id = odom_frame_;
+      tf_out.header.frame_id = odom_nav_frame_;
       tf_out.child_frame_id = tf_pub_frame_;
       tf_out.transform.translation.x = T_result.getOrigin().x();
       tf_out.transform.translation.y = T_result.getOrigin().y();

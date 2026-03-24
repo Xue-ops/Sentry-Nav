@@ -18,6 +18,7 @@ find_package(tf2_geometry_msgs REQUIRED)
 find_package(tf2_msgs REQUIRED)
 
 add_executable(map_to_baselink_node src/map_to_baselink_node.cpp)
+add_executable(nav_identity_bridge src/nav_identity_bridge.cpp)
 
 ament_target_dependencies(map_to_baselink_node
   rclcpp
@@ -28,8 +29,15 @@ ament_target_dependencies(map_to_baselink_node
   tf2_msgs
 )
 
+ament_target_dependencies(nav_identity_bridge
+  rclcpp
+  geometry_msgs
+  tf2_ros
+)
+
 install(TARGETS
   map_to_baselink_node
+  nav_identity_bridge
   DESTINATION lib/${PROJECT_NAME}
 )
 
