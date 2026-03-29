@@ -24,7 +24,7 @@ public:
     slope_layer_ = this->declare_parameter<std::string>("slope_layer", "slope");
     occupancy_layer_ = this->declare_parameter<std::string>("occupancy_layer", "occupancy");
 
-    slope_threshold_ = this->declare_parameter<double>("slope_threshold", 0.8);
+    slope_threshold_ = this->declare_parameter<double>("slope_threshold", 0.6);
     min_obstacle_height_ = this->declare_parameter<double>("min_obstacle_height", -1e9);
     max_obstacle_height_ = this->declare_parameter<double>("max_obstacle_height", 1e9);
 
