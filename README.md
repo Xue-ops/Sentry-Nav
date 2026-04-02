@@ -10,6 +10,10 @@ export TURTLEBOT3_MODEL=waffle
 export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/humble/share/turtlebot3_gazebo/models:~/catkin_ws/src/turtlebot3_simulations/turtlebot3_gazebo/models
 ros2 launch nav2_bringup tb3_simulation_launch.py headless:=False
 
+run nav2
+ros2 launch nav2_bringup navigation_launch.py   use_sim_time:=false   params_file:=/home/xli/catkin_ws/src/Sentry-Nav/navigation2/nav2_bringup/params/nav2_params.yaml
+
+
 /cmd_vel: geometry_msgs/msg/Twist
 ---
 linear:

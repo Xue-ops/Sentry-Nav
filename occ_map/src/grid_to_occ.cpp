@@ -119,7 +119,7 @@ private:
 
     // 保留原始 header/frame
     occ_msg.header.stamp = msg->header.stamp;
-    occ_msg.header.frame_id = msg->header.frame_id;
+    occ_msg.header.frame_id = "map_nav";
 
     map_pub_->publish(occ_msg);
   }

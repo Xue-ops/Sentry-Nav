@@ -17,7 +17,7 @@ public:
   {
     // ---- parameters ----
     this->declare_parameter<std::string>("pcd_file", "");
-    this->declare_parameter<std::string>("frame_id", "odom");
+    this->declare_parameter<std::string>("frame_id", "map");
     this->declare_parameter<std::string>("topic", "/pcd_cloud");
     this->declare_parameter<double>("leaf_size", 0.03);
     this->declare_parameter<int>("exit_after_sec", 10);
