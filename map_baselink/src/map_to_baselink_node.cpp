@@ -26,6 +26,7 @@ public:
     base_frame_ = this->declare_parameter<std::string>("base_frame", "odin1_base_link");
     output_topic_ = this->declare_parameter<std::string>("output_topic", "/map_base_pose");
     publish_tf_ = this->declare_parameter<bool>("publish_tf", true);
+    if_nav2_ = this->declare_parameter<bool>("if_nav2", true);
     tf_pub_frame_ = this->declare_parameter<std::string>("tf_child_frame", "map_corrected_base_link");
     publish_rate_ = this->declare_parameter<double>("publish_rate", 20.0);
 
@@ -62,6 +63,7 @@ private:
   std::string output_topic_;
   std::string odom_nav_frame_;
   bool publish_tf_;
+  bool if_nav2_;
   std::string tf_pub_frame_;
   double publish_rate_;
 

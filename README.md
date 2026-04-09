@@ -1,9 +1,11 @@
 Publish pcd to rviz2
 ros2 run graph_show pcd_publisher --ros-args -p pcd_path:=/home/xli/MT20260322_143851-Cloud_Opt.pcd
 
-For map_baselink
+For map_baselink (need in order)
 colcon build --packages-select map_baselink
+ros2 run map_baselink nav_identity_bridge
 ros2 run map_baselink map_to_baselink_node
+ros2 run map_baselink cloud_frame_transformer
 
 run nav2 demo
 export TURTLEBOT3_MODEL=waffle

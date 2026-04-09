@@ -16,9 +16,12 @@ find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(tf2_msgs REQUIRED)
+find_package(tf2_sensor_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
 
 add_executable(map_to_baselink_node src/map_to_baselink_node.cpp)
 add_executable(nav_identity_bridge src/nav_identity_bridge.cpp)
+add_executable(cloud_frame_transformer src/cloud_frame_transformer.cpp)
 
 ament_target_dependencies(map_to_baselink_node
   rclcpp
@@ -35,9 +38,19 @@ ament_target_dependencies(nav_identity_bridge
   tf2_ros
 )
 
+ament_target_dependencies(cloud_frame_transformer
+  rclcpp
+  sensor_msgs
+  geometry_msgs
+  tf2
+  tf2_ros
+  tf2_sensor_msgs
+)
+
 install(TARGETS
   map_to_baselink_node
   nav_identity_bridge
+  cloud_frame_transformer
   DESTINATION lib/${PROJECT_NAME}
 )
 
