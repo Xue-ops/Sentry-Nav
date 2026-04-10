@@ -7,6 +7,11 @@ ros2 run map_baselink nav_identity_bridge
 ros2 run map_baselink map_to_baselink_node
 ros2 run map_baselink cloud_frame_transformer
 
+For display map
+prerequest: nav_identity_bridge is running
+ros2 launch grid_map_demos pcd_to_gridmap_demo_launch.py 
+ros2 run occ_map gridmap_to_occ_node
+
 run nav2 demo
 export TURTLEBOT3_MODEL=waffle
 export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/humble/share/turtlebot3_gazebo/models:~/catkin_ws/src/turtlebot3_simulations/turtlebot3_gazebo/models
