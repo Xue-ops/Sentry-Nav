@@ -1,7 +1,7 @@
 Publish pcd to rviz2
 ros2 run graph_show pcd_publisher --ros-args -p pcd_path:=/home/xli/MT20260322_143851-Cloud_Opt.pcd
 
-For map_baselink (need in order)
+For map->odom->baselink tf link (need in order)
 colcon build --packages-select map_baselink
 ros2 run map_baselink nav_identity_bridge
 ros2 run map_baselink map_to_baselink_node
@@ -11,6 +11,13 @@ For display map
 prerequest: nav_identity_bridge is running
 ros2 launch grid_map_demos pcd_to_gridmap_demo_launch.py 
 ros2 run occ_map gridmap_to_occ_node
+
+Save map during display
+cd script
+python3 save_occmap.py
+
+display saved map
+ros2 run occ_map map_publish --ros-args -p yaml_path:=/home/xli/catkin_ws/src/Sentry-Nav/map/map_nav.yaml
 
 run nav2 demo
 export TURTLEBOT3_MODEL=waffle
