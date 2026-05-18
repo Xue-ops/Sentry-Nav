@@ -21,6 +21,9 @@ after saved, change the format of origin to 'origin: [-9.619055175781252, -20.52
 display saved map
 ros2 run occ_map map_publish --ros-args -p yaml_path:=/home/xli/catkin_ws/src/Sentry-Nav/map/map_nav.yaml
 
+Run the tf tree and the saved map
+ros2 launch sentry_nav_bringup savedmap_rviz_bringup.launch.py
+
 run nav2 demo
 export TURTLEBOT3_MODEL=waffle
 export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/humble/share/turtlebot3_gazebo/models:~/catkin_ws/src/turtlebot3_simulations/turtlebot3_gazebo/models
