@@ -21,7 +21,7 @@ public:
   {
     input_topic_ = declare_parameter<std::string>("input_topic", "/odin1/cloud_slam");
     output_topic_ = declare_parameter<std::string>("output_topic", "/cloud_nav2");
-    target_frame_ = declare_parameter<std::string>("target_frame", "map_nav");
+    target_frame_ = declare_parameter<std::string>("target_frame", "odom_nav");
 
     sub_ = create_subscription<sensor_msgs::msg::PointCloud2>(
       input_topic_,
