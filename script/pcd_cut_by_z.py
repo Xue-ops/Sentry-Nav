@@ -3,8 +3,8 @@ import open3d as o3d
 import numpy as np
 
 # ========= 直接写死 =========
-INPUT_PCD = "/home/xli/MT20260322_143851-Cloud_Opt.pcd"
-OUTPUT_PCD = "/home/xli/0322_cut_up.pcd"
+INPUT_PCD = "/home/xli/MT20260517_235852-Cloud_Opt.pcd"
+OUTPUT_PCD = "/home/xli/0517_cut_up.pcd"
 Z_THRESHOLD = 0
 # ===========================
 

@@ -6,9 +6,9 @@
 #include "sensor_msgs/msg/point_cloud2.hpp"
 #include "geometry_msgs/msg/transform_stamped.hpp"
 
+#include "tf2/time.h"
 #include "tf2_ros/buffer.h"
 #include "tf2_ros/transform_listener.h"
-#include "tf2_ros/create_timer_ros.h"
 #include "tf2_sensor_msgs/tf2_sensor_msgs.hpp"
 
 class CloudFrameTransformer : public rclcpp::Node
@@ -21,16 +21,19 @@ public:
   {
     input_topic_ = declare_parameter<std::string>("input_topic", "/odin1/cloud_slam");
     output_topic_ = declare_parameter<std::string>("output_topic", "/cloud_nav2");
-    target_frame_ = declare_parameter<std::string>("target_frame", "odin1_base_link");
+    target_frame_ = declare_parameter<std::string>("target_frame", "map_nav");
 
     sub_ = create_subscription<sensor_msgs::msg::PointCloud2>(
       input_topic_,
       rclcpp::SensorDataQoS(),
       std::bind(&CloudFrameTransformer::cloudCallback, this, std::placeholders::_1));
 
+    rclcpp::QoS pub_qos(rclcpp::KeepLast(10));
+    pub_qos.reliable();
+
     pub_ = create_publisher<sensor_msgs::msg::PointCloud2>(
       output_topic_,
-      rclcpp::SensorDataQoS());
+      pub_qos);
 
     RCLCPP_INFO(get_logger(), "Transforming %s -> %s -> %s",
       input_topic_.c_str(), target_frame_.c_str(), output_topic_.c_str());
@@ -43,12 +46,15 @@ private:
       auto tf = tf_buffer_.lookupTransform(
         target_frame_,
         msg->header.frame_id,
-        msg->header.stamp,
+        rclcpp::Time(0),
         rclcpp::Duration::from_seconds(0.1));
 
       sensor_msgs::msg::PointCloud2 out_cloud;
       tf2::doTransform(*msg, out_cloud, tf);
+
+      out_cloud.header.stamp = msg->header.stamp;
       out_cloud.header.frame_id = target_frame_;
+
       pub_->publish(out_cloud);
 
     } catch (const tf2::TransformException & ex) {

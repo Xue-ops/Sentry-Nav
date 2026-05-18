@@ -1,5 +1,5 @@
 Publish pcd to rviz2
-ros2 run graph_show pcd_publisher --ros-args -p pcd_path:=/home/xli/MT20260322_143851-Cloud_Opt.pcd
+ros2 run graph_show pcd_publisher --ros-args -p pcd_path:=/home/xli/MT20260518_072007-Cloud_Opt.pcd
 
 For map->odom->baselink tf link (need in order)
 colcon build --packages-select map_baselink
@@ -14,7 +14,9 @@ ros2 run occ_map gridmap_to_occ_node
 
 Save map during display
 cd script
+source /opt/ros/humble/setup.bash
 python3 save_occmap.py
+after saved, change the format of origin to 'origin: [-9.619055175781252, -20.525349998474123, 0.0]'
 
 display saved map
 ros2 run occ_map map_publish --ros-args -p yaml_path:=/home/xli/catkin_ws/src/Sentry-Nav/map/map_nav.yaml
