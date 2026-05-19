@@ -196,7 +196,7 @@ local_costmap:
       plugins: ["voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 3.0
+        cost_scaling_factor: 1.0
         inflation_radius: 0.1
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
@@ -245,7 +245,7 @@ global_costmap:
       global_frame: map_nav
       robot_base_frame: map_corrected_base_link
       use_sim_time: True
-      robot_radius: 0.22
+      robot_radius: 0.20
       resolution: 0.05
       track_unknown_space: true
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
@@ -268,8 +268,8 @@ global_costmap:
         map_subscribe_transient_local: False
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 3.0
-        inflation_radius: 0.1
+        cost_scaling_factor: 10.0
+        inflation_radius: 0.4
       always_send_full_costmap: True
 
 map_server:

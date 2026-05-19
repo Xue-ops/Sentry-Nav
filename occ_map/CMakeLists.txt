@@ -18,6 +18,7 @@ find_package(grid_map_core REQUIRED)
 find_package(geometry_msgs REQUIRED)
 
 add_executable(gridmap_to_occ_node src/grid_to_occ.cpp)
+add_executable(gridmap_to_occ_scale_node src/grid_to_occ_scale.cpp)
 
 add_executable(map_publish src/map_publish.cpp)
 
@@ -35,8 +36,17 @@ ament_target_dependencies(gridmap_to_occ_node
   grid_map_core
 )
 
+ament_target_dependencies(gridmap_to_occ_scale_node
+  rclcpp
+  nav_msgs
+  grid_map_ros
+  grid_map_msgs
+  grid_map_core
+)
+
 install(TARGETS
   gridmap_to_occ_node
+  gridmap_to_occ_scale_node
   map_publish
   DESTINATION lib/${PROJECT_NAME}
 )
