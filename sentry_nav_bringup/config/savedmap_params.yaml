@@ -1,0 +1,3 @@
+map_publish:
+  ros__parameters:
+    yaml_path: /home/xli/catkin_ws/src/Sentry-Nav/map/map_nav.yaml

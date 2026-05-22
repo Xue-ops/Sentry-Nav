@@ -1,5 +1,5 @@
 Publish pcd to rviz2
-ros2 run graph_show pcd_publisher --ros-args -p pcd_path:=/home/xli/MT20260518_072007-Cloud_Opt.pcd
+ros2 run graph_show pcd_publisher --ros-args -p pcd_path:=/home/xli/MT20260517_235852-Cloud_Opt.pcd
 
 For map->odom->baselink tf link (need in order)
 colcon build --packages-select map_baselink

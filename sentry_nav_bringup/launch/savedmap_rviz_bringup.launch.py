@@ -1,12 +1,18 @@
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import PathJoinSubstitution
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
+    map_params_file = LaunchConfiguration('map_params_file')
+    default_map_params_file = PathJoinSubstitution([
+        FindPackageShare('sentry_nav_bringup'),
+        'config',
+        'savedmap_params.yaml'
+    ])
 
     savedmap_tf_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -15,7 +21,10 @@ def generate_launch_description():
                 'launch',
                 'savedmap_tf_bringup.py'
             ])
-        )
+        ),
+        launch_arguments={
+            'map_params_file': map_params_file
+        }.items()
     )
 
     rviz_config = PathJoinSubstitution([
@@ -33,6 +42,11 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
+        DeclareLaunchArgument(
+            'map_params_file',
+            default_value=default_map_params_file,
+            description='Path to saved map bringup parameter file'
+        ),
         savedmap_tf_launch,
         rviz2_node,
     ])
