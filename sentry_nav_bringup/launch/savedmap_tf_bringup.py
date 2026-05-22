@@ -25,21 +25,24 @@ def generate_launch_description():
             package='map_baselink',
             executable='nav_identity_bridge',
             name='nav_identity_bridge',
-            output='screen'
+            output='screen',
+            parameters=[map_params_file]
         ),
 
         Node(
             package='map_baselink',
             executable='map_to_baselink_node',
             name='map_to_baselink_node',
-            output='screen'
+            output='screen',
+            parameters=[map_params_file]
         ),
 
         Node(
             package='map_baselink',
             executable='cloud_frame_transformer',
             name='cloud_frame_transformer',
-            output='screen'
+            output='screen',
+            parameters=[map_params_file]
         ),
 
         Node(

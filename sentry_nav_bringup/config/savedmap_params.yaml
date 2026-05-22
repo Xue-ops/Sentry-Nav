@@ -1,3 +1,21 @@
+nav_identity_bridge:
+  ros__parameters:
+    use_sim_time: true
+
+map_to_baselink_node:
+  ros__parameters:
+    use_sim_time: true
+
+cloud_frame_transformer:
+  ros__parameters:
+    use_sim_time: true
+
 map_publish:
   ros__parameters:
-    yaml_path: /home/xli/catkin_ws/src/Sentry-Nav/map/map_nav.yaml
+    use_sim_time: true
+    yaml_path: /home/xli/catkin_ws/src/sentry_description/maps/cad_map.yaml
+    #地图yaml文件路径,默认/home/xli/catkin_ws/src/Sentry-Nav/map/map_nav.yaml
+
+rviz2_savedmap_nav:
+  ros__parameters:
+    use_sim_time: true

@@ -38,7 +38,8 @@ def generate_launch_description():
         executable='rviz2',
         name='rviz2_savedmap_nav',
         output='screen',
-        arguments=['-d', rviz_config]
+        arguments=['-d', rviz_config],
+        parameters=[map_params_file]
     )
 
     return LaunchDescription([
