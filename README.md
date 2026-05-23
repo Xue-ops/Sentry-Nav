@@ -5,6 +5,7 @@ For map->odom->baselink tf link (need in order)
 colcon build --packages-select map_baselink
 ros2 run map_baselink nav_identity_bridge
 ros2 run map_baselink map_to_baselink_node
+ros2 run cpp_lidar_filter lidar_filter_node
 ros2 run map_baselink cloud_frame_transformer
 
 For display map

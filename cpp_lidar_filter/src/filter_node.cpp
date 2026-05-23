@@ -15,8 +15,8 @@ public:
     this->declare_parameter("input_topic", "/odin1/cloud_slam");
     this->declare_parameter("output_topic", "/odin1/cloud_slam_filtered");
     // 裁剪参数 (CropBox)
-    this->declare_parameter("min_x", -0.4);
-    this->declare_parameter("max_x", 0.4);
+    this->declare_parameter("min_x", -0.3);
+    this->declare_parameter("max_x", 0.3);
     this->declare_parameter("min_y", -0.3);
     this->declare_parameter("max_y", 0.3);
     this->declare_parameter("min_z", -0.1);

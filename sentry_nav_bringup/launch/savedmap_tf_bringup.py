@@ -38,6 +38,25 @@ def generate_launch_description():
         ),
 
         Node(
+            package='cpp_lidar_filter',
+            executable='lidar_filter_node',
+            name='lidar_filter_node',
+            output='screen',
+            parameters=[{
+                'input_topic': '/odin1/cloud_slam',
+                'output_topic': '/odin1/cloud_slam_filtered',
+                'min_x': -0.3,
+                'max_x': 0.3,
+                'min_y': -0.3,
+                'max_y': 0.3,
+                'min_z': -0.1,
+                'max_z': 0.6,
+                'negative': True,
+                'leaf_size': 0.05,
+            }]
+        ),
+
+        Node(
             package='map_baselink',
             executable='cloud_frame_transformer',
             name='cloud_frame_transformer',
