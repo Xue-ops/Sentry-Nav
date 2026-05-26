@@ -202,7 +202,7 @@ controller_server:
         critical_weight: 20.0 #近距离障碍物惩罚
         consider_footprint: false #用圆形近似，omni机器人更高效
         collision_cost: 10000.0
-        collision_margin_distance: 0.2 #碰撞边界余量
+        collision_margin_distance: 0.3 #碰撞边界余量
         near_goal_distance: 0.5
 
       CostCritic: #通过 costmap 梯度引导避障
@@ -291,8 +291,8 @@ local_costmap:
       plugins: ["static_layer","stvl_voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 4.0
-        inflation_radius: 0.35
+        cost_scaling_factor: 8.0
+        inflation_radius: 0.25
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
         enabled: True
