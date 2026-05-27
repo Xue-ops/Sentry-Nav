@@ -67,3 +67,28 @@ pose:
       y: 0.0
       z: 0.0
       w: 1.0
+
+
+#### 模式 A：逐点停靠（Follow Waypoints）
+
+机器人依次到达每个航点，在每个点停下后再前往下一个。
+
+```bash
+ros2 launch waypoint_editor waypoint_to_nav2.launch.py waypoint_file:=/home/xli/catkin_ws/src/Sentry-Nav/sentry_nav_bringup/wps/patrol.csv
+```
+
+```bash
+ros2 service call /start_waypoint_following std_srvs/srv/Trigger
+```
+
+#### 模式 B：平滑穿越（Navigate Through Poses）
+
+机器人规划一条连续路径穿越所有航点，中间不停留。
+
+```bash
+ros2 launch waypoint_editor waypoint_through_nav2.launch.py waypoint_file:=/home/xli/catkin_ws/src/Sentry-Nav/sentry_nav_bringup/wps/patrol.csv
+```
+
+```bash
+ros2 service call /start_waypoint_through std_srvs/srv/Trigger
+```

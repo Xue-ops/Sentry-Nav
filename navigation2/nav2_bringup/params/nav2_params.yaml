@@ -135,7 +135,7 @@ controller_server:
     general_goal_checker:
       stateful: True
       plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 0.25
+      xy_goal_tolerance: 0.5
       yaw_goal_tolerance: 6.28
     FollowPath:
       #MPPI param
@@ -143,8 +143,8 @@ controller_server:
       inner_plugin: "nav2_mppi_controller::MPPIController"
       approach_distance: 2.5  #距目标时开始限速
       approach_velocity: 0.8 #限速值
-      direct_approach_distance: 1.0  #进入直接驱动模式的距离，绕过MPPI防止画弧
-      direct_approach_kp: 5.0  #直接驱动P控制增益
+      direct_approach_distance: 0.5  #进入直接驱动模式的距离，绕过MPPI防止画弧
+      direct_approach_kp: 3.0  #直接驱动P控制增益
       time_steps: 80  #增加到80，预测时域4.8s，让MPPI能看到冲过目标的后果
       model_dt: 0.05  #稍微放大步长，配合time_steps延长预测时域
       batch_size: 1500 #控制器的采样数。
@@ -170,7 +170,7 @@ controller_server:
       az_min: -3.0
 
       iteration_count: 1
-      prune_distance: 1.7 #高速下提前剪枝已通过的路径点
+      prune_distance: 3.0 #高速下提前剪枝已通过的路径点
       transform_tolerance: 0.1
       temperature: 0.25 #大幅降低：让 MPPI 更果断选最优轨迹，不在次优之间摇摆
       gamma: 0.015 #稍微提高正则化，减少激进抖动
@@ -193,7 +193,7 @@ controller_server:
       GoalCritic: #必须开启，否则机器人没有到达目标的动力
         enabled: true
         cost_power: 1
-        cost_weight: 25.0 #提高权重，增强最终接近阶段的目标吸引力，防止弧线绕圈
+        cost_weight: 40.0 #提高权重，增强最终接近阶段的目标吸引力，防止弧线绕圈
         threshold_to_consider: 4.0
       ObstaclesCritic: #开启提供额外的障碍物排斥力
         enabled: true
@@ -202,7 +202,7 @@ controller_server:
         critical_weight: 20.0 #近距离障碍物惩罚
         consider_footprint: false #用圆形近似，omni机器人更高效
         collision_cost: 10000.0
-        collision_margin_distance: 0.3 #碰撞边界余量
+        collision_margin_distance: 0.5 #碰撞边界余量
         near_goal_distance: 0.5
 
       CostCritic: #通过 costmap 梯度引导避障
