@@ -1,0 +1,6 @@
+Consolidate compiler generated dependencies of target map_to_baselink_node
+Consolidate compiler generated dependencies of target nav_identity_bridge
+Consolidate compiler generated dependencies of target cloud_frame_transformer
+[ 16%] Building CXX object CMakeFiles/map_to_baselink_node.dir/src/map_to_baselink_node.cpp.o
+[ 50%] Built target cloud_frame_transformer
+[ 83%] Built target nav_identity_bridge

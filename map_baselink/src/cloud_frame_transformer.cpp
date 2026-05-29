@@ -20,6 +20,8 @@ public:
     tf_listener_(tf_buffer_)
   {
     input_topic_ = declare_parameter<std::string>("input_topic", "/odin1/cloud_slam_filtered");
+    mid360_pointcloud_topic_ = declare_parameter<std::string>("mid360_pointcloud_topic", "livox/lidar");
+    mid360_frame_ = declare_parameter<std::string>("mid360_frame", "livox_frame");
     output_topic_ = declare_parameter<std::string>("output_topic", "/cloud_nav2");
     target_frame_ = declare_parameter<std::string>("target_frame", "odom_nav");
 
@@ -68,6 +70,8 @@ private:
   std::string input_topic_;
   std::string output_topic_;
   std::string target_frame_;
+  std::string mid360_pointcloud_topic_;
+  std::string mid360_frame_;
 
   rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr sub_;
   rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pub_;

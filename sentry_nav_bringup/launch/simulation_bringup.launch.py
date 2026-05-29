@@ -10,6 +10,7 @@ def generate_launch_description():
     map_params_file = LaunchConfiguration('map_params_file')
     params_file = LaunchConfiguration('params_file')
     use_sim_time = LaunchConfiguration('use_sim_time')
+    if_on_robot = LaunchConfiguration('if_on_robot')
 
     default_map_params_file = PathJoinSubstitution([
         FindPackageShare('sentry_nav_bringup'),
@@ -40,7 +41,8 @@ def generate_launch_description():
             ])
         ),
         launch_arguments={
-            'map_params_file': map_params_file
+            'map_params_file': map_params_file,
+            'if_on_robot': if_on_robot,
         }.items()
     )
 
@@ -73,6 +75,11 @@ def generate_launch_description():
             'params_file',
             default_value=default_params_file,
             description='Path to Nav2 parameter file'
+        ),
+        DeclareLaunchArgument(
+            'if_on_robot',
+            default_value='false',
+            description='Whether map_to_baselink_node should publish real robot lidar extrinsics'
         ),
         fake_odom_map_node,
         savedmap_rviz_bringup,

@@ -8,6 +8,7 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     map_params_file = LaunchConfiguration('map_params_file')
+    if_on_robot = LaunchConfiguration('if_on_robot')
     default_map_params_file = PathJoinSubstitution([
         FindPackageShare('sentry_nav_bringup'),
         'config',
@@ -23,7 +24,8 @@ def generate_launch_description():
             ])
         ),
         launch_arguments={
-            'map_params_file': map_params_file
+            'map_params_file': map_params_file,
+            'if_on_robot': if_on_robot,
         }.items()
     )
 
@@ -47,6 +49,11 @@ def generate_launch_description():
             'map_params_file',
             default_value=default_map_params_file,
             description='Path to saved map bringup parameter file'
+        ),
+        DeclareLaunchArgument(
+            'if_on_robot',
+            default_value='true',
+            description='Whether map_to_baselink_node should publish real robot lidar extrinsics'
         ),
         savedmap_tf_launch,
         rviz2_node,

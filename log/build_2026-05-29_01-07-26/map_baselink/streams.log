@@ -1,0 +1,169 @@
+[0.008s] Invoking command in '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/xli/catkin_ws/src/Sentry-Nav/map_baselink -DCMAKE_INSTALL_PREFIX=/home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink
+[0.023s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.170s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.249s] -- Found rclcpp: 16.0.17 (/opt/ros/humble/share/rclcpp/cmake)
+[0.287s] -- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.291s] -- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.299s] -- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.310s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.324s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.361s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.363s] -- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.450s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[0.477s] -- Found FastRTPS: /opt/ros/humble/include  
+[0.511s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.520s] -- Looking for pthread.h
+[0.613s] -- Looking for pthread.h - found
+[0.613s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.706s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[0.707s] -- Found Threads: TRUE  
+[0.756s] -- Found geometry_msgs: 4.9.0 (/opt/ros/humble/share/geometry_msgs/cmake)
+[0.769s] -- Found tf2: 0.25.18 (/opt/ros/humble/share/tf2/cmake)
+[0.778s] -- Found tf2_ros: 0.25.18 (/opt/ros/humble/share/tf2_ros/cmake)
+[0.862s] -- Found tf2_geometry_msgs: 0.25.18 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)
+[0.873s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[0.875s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[0.875s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[0.877s] -- Found tf2_sensor_msgs: 0.25.18 (/opt/ros/humble/share/tf2_sensor_msgs/cmake)
+[0.901s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.961s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[0.961s] -- Configured cppcheck include dirs: 
+[0.961s] -- Configured cppcheck exclude dirs and/or files: 
+[0.962s] -- Added test 'lint_cmake' to check CMake code style
+[0.963s] -- Added test 'uncrustify' to check C / C++ code style
+[0.963s] -- Configured uncrustify additional arguments: 
+[0.963s] -- Added test 'xmllint' to check XML markup files
+[0.965s] -- Configuring done
+[1.004s] -- Generating done
+[1.009s] -- Build files have been written to: /home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink
+[30.029s] Invoked command in '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/xli/catkin_ws/src/Sentry-Nav/map_baselink -DCMAKE_INSTALL_PREFIX=/home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink
+[30.032s] Invoking command in '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink -- -j20 -l20
+[30.108s] [ 16%] Building CXX object CMakeFiles/map_to_baselink_node.dir/src/map_to_baselink_node.cpp.o
+[30.108s] [ 33%] Building CXX object CMakeFiles/nav_identity_bridge.dir/src/nav_identity_bridge.cpp.o
+[30.109s] [ 50%] Building CXX object CMakeFiles/cloud_frame_transformer.dir/src/cloud_frame_transformer.cpp.o
+[31.910s] In file included from /opt/ros/humble/include/rclcpp/rclcpp/node.hpp:1321,
+[31.910s]                  from /opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28,
+[31.910s]                  from /opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22,
+[31.911s]                  from /opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155,
+[31.911s]                  from /home/xli/catkin_ws/src/Sentry-Nav/map_baselink/src/map_to_baselink_node.cpp:6:
+[31.911s] /opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp: In instantiation of ‘auto rclcpp::Node::declare_parameter(const string&, const ParameterT&, const ParameterDescriptor&, bool) [with ParameterT = geometry_msgs::msg::TransformStamped_<std::allocator<void> >; std::string = std::__cxx11::basic_string<char>; rcl_interfaces::msg::ParameterDescriptor = rcl_interfaces::msg::ParameterDescriptor_<std::allocator<void> >]’:
+[31.911s] /home/xli/catkin_ws/src/Sentry-Nav/map_baselink/src/map_to_baselink_node.cpp:36:87:   required from here
+[31.911s] /opt/ros/humble/include/rclcpp/rclcpp/node_impl.hpp:204:15: error: no matching function for call to ‘rclcpp::ParameterValue::ParameterValue(const geometry_msgs::msg::TransformStamped_<std::allocator<void> >&)’
+[31.911s]   204 |       rclcpp::ParameterValue(default_value),
+[31.911s]       |               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[31.911s] In file included from /opt/ros/humble/include/rclcpp/rclcpp/parameter.hpp:26,
+[31.911s]                  from /opt/ros/humble/include/rclcpp/rclcpp/node_interfaces/node_parameters_interface.hpp:29,
+[31.911s]                  from /opt/ros/humble/include/rclcpp/rclcpp/node.hpp:54,
+[31.912s]                  from /opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28,
+[31.912s]                  from /opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22,
+[31.912s]                  from /opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155,
+[31.912s]                  from /home/xli/catkin_ws/src/Sentry-Nav/map_baselink/src/map_to_baselink_node.cpp:6:
+[31.912s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:121:12: note: candidate: ‘rclcpp::ParameterValue::ParameterValue(const std::vector<std::__cxx11::basic_string<char> >&)’
+[31.912s]   121 |   explicit ParameterValue(const std::vector<std::string> & string_array_value);
+[31.912s]       |            ^~~~~~~~~~~~~~
+[31.912s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:121:60: note:   no known conversion for argument 1 from ‘const geometry_msgs::msg::TransformStamped_<std::allocator<void> >’ to ‘const std::vector<std::__cxx11::basic_string<char> >&’
+[31.912s]   121 |   explicit ParameterValue(const std::vector<std::string> & string_array_value);
+[31.912s]       |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+[31.912s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:118:12: note: candidate: ‘rclcpp::ParameterValue::ParameterValue(const std::vector<double, std::allocator<double> >&)’
+[31.912s]   118 |   explicit ParameterValue(const std::vector<double> & double_array_value);
+[31.913s]       |            ^~~~~~~~~~~~~~
+[31.913s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:118:55: note:   no known conversion for argument 1 from ‘const geometry_msgs::msg::TransformStamped_<std::allocator<void> >’ to ‘const std::vector<double, std::allocator<double> >&’
+[31.913s]   118 |   explicit ParameterValue(const std::vector<double> & double_array_value);
+[31.913s]       |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+[31.913s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:115:12: note: candidate: ‘rclcpp::ParameterValue::ParameterValue(const std::vector<float>&)’
+[31.913s]   115 |   explicit ParameterValue(const std::vector<float> & double_array_value);
+[31.913s]       |            ^~~~~~~~~~~~~~
+[31.913s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:115:54: note:   no known conversion for argument 1 from ‘const geometry_msgs::msg::TransformStamped_<std::allocator<void> >’ to ‘const std::vector<float>&’
+[31.913s]   115 |   explicit ParameterValue(const std::vector<float> & double_array_value);
+[31.913s]       |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+[31.913s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:112:12: note: candidate: ‘rclcpp::ParameterValue::ParameterValue(const std::vector<long int, std::allocator<long int> >&)’
+[31.913s]   112 |   explicit ParameterValue(const std::vector<int64_t> & int_array_value);
+[31.914s]       |            ^~~~~~~~~~~~~~
+[31.914s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:112:56: note:   no known conversion for argument 1 from ‘const geometry_msgs::msg::TransformStamped_<std::allocator<void> >’ to ‘const std::vector<long int, std::allocator<long int> >&’
+[31.914s]   112 |   explicit ParameterValue(const std::vector<int64_t> & int_array_value);
+[31.914s]       |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+[31.914s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:109:12: note: candidate: ‘rclcpp::ParameterValue::ParameterValue(const std::vector<int>&)’
+[31.914s]   109 |   explicit ParameterValue(const std::vector<int> & int_array_value);
+[31.914s]       |            ^~~~~~~~~~~~~~
+[31.914s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:109:52: note:   no known conversion for argument 1 from ‘const geometry_msgs::msg::TransformStamped_<std::allocator<void> >’ to ‘const std::vector<int>&’
+[31.914s]   109 |   explicit ParameterValue(const std::vector<int> & int_array_value);
+[31.914s]       |                           ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+[31.914s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:106:12: note: candidate: ‘rclcpp::ParameterValue::ParameterValue(const std::vector<bool, std::allocator<bool> >&)’
+[31.915s]   106 |   explicit ParameterValue(const std::vector<bool> & bool_array_value);
+[31.915s]       |            ^~~~~~~~~~~~~~
+[31.915s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:106:53: note:   no known conversion for argument 1 from ‘const geometry_msgs::msg::TransformStamped_<std::allocator<void> >’ to ‘const std::vector<bool, std::allocator<bool> >&’
+[31.915s]   106 |   explicit ParameterValue(const std::vector<bool> & bool_array_value);
+[31.915s]       |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+[31.915s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:103:12: note: candidate: ‘rclcpp::ParameterValue::ParameterValue(const std::vector<unsigned char, std::allocator<unsigned char> >&)’
+[31.915s]   103 |   explicit ParameterValue(const std::vector<uint8_t> & byte_array_value);
+[31.915s]       |            ^~~~~~~~~~~~~~
+[31.915s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:103:56: note:   no known conversion for argument 1 from ‘const geometry_msgs::msg::TransformStamped_<std::allocator<void> >’ to ‘const std::vector<unsigned char, std::allocator<unsigned char> >&’
+[31.915s]   103 |   explicit ParameterValue(const std::vector<uint8_t> & byte_array_value);
+[31.915s]       |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+[31.915s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:100:12: note: candidate: ‘rclcpp::ParameterValue::ParameterValue(const char*)’
+[31.916s]   100 |   explicit ParameterValue(const char * string_value);
+[31.916s]       |            ^~~~~~~~~~~~~~
+[31.916s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:100:40: note:   no known conversion for argument 1 from ‘const geometry_msgs::msg::TransformStamped_<std::allocator<void> >’ to ‘const char*’
+[31.916s]   100 |   explicit ParameterValue(const char * string_value);
+[31.916s]       |                           ~~~~~~~~~~~~~^~~~~~~~~~~~
+[31.916s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:97:12: note: candidate: ‘rclcpp::ParameterValue::ParameterValue(const string&)’
+[31.916s]    97 |   explicit ParameterValue(const std::string & string_value);
+[31.916s]       |            ^~~~~~~~~~~~~~
+[31.916s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:97:47: note:   no known conversion for argument 1 from ‘const geometry_msgs::msg::TransformStamped_<std::allocator<void> >’ to ‘const string&’ {aka ‘const std::__cxx11::basic_string<char>&’}
+[31.916s]    97 |   explicit ParameterValue(const std::string & string_value);
+[31.916s]       |                           ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+[31.916s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:94:12: note: candidate: ‘rclcpp::ParameterValue::ParameterValue(double)’
+[31.917s]    94 |   explicit ParameterValue(const double double_value);
+[31.917s]       |            ^~~~~~~~~~~~~~
+[31.917s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:94:40: note:   no known conversion for argument 1 from ‘const geometry_msgs::msg::TransformStamped_<std::allocator<void> >’ to ‘double’
+[31.917s]    94 |   explicit ParameterValue(const double double_value);
+[31.917s]       |                           ~~~~~~~~~~~~~^~~~~~~~~~~~
+[31.917s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:91:12: note: candidate: ‘rclcpp::ParameterValue::ParameterValue(float)’
+[31.917s]    91 |   explicit ParameterValue(const float double_value);
+[31.917s]       |            ^~~~~~~~~~~~~~
+[31.917s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:91:39: note:   no known conversion for argument 1 from ‘const geometry_msgs::msg::TransformStamped_<std::allocator<void> >’ to ‘float’
+[31.917s]    91 |   explicit ParameterValue(const float double_value);
+[31.917s]       |                           ~~~~~~~~~~~~^~~~~~~~~~~~
+[31.918s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:88:12: note: candidate: ‘rclcpp::ParameterValue::ParameterValue(int64_t)’
+[31.918s]    88 |   explicit ParameterValue(const int64_t int_value);
+[31.918s]       |            ^~~~~~~~~~~~~~
+[31.918s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:88:41: note:   no known conversion for argument 1 from ‘const geometry_msgs::msg::TransformStamped_<std::allocator<void> >’ to ‘int64_t’ {aka ‘long int’}
+[31.918s]    88 |   explicit ParameterValue(const int64_t int_value);
+[31.918s]       |                           ~~~~~~~~~~~~~~^~~~~~~~~
+[31.918s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:85:12: note: candidate: ‘rclcpp::ParameterValue::ParameterValue(int)’
+[31.918s]    85 |   explicit ParameterValue(const int int_value);
+[31.918s]       |            ^~~~~~~~~~~~~~
+[31.918s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:85:37: note:   no known conversion for argument 1 from ‘const geometry_msgs::msg::TransformStamped_<std::allocator<void> >’ to ‘int’
+[31.918s]    85 |   explicit ParameterValue(const int int_value);
+[31.918s]       |                           ~~~~~~~~~~^~~~~~~~~
+[31.919s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:82:12: note: candidate: ‘rclcpp::ParameterValue::ParameterValue(bool)’
+[31.919s]    82 |   explicit ParameterValue(const bool bool_value);
+[31.919s]       |            ^~~~~~~~~~~~~~
+[31.919s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:82:38: note:   no known conversion for argument 1 from ‘const geometry_msgs::msg::TransformStamped_<std::allocator<void> >’ to ‘bool’
+[31.919s]    82 |   explicit ParameterValue(const bool bool_value);
+[31.919s]       |                           ~~~~~~~~~~~^~~~~~~~~~
+[31.919s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:79:12: note: candidate: ‘rclcpp::ParameterValue::ParameterValue(const ParameterValue&)’
+[31.919s]    79 |   explicit ParameterValue(const rcl_interfaces::msg::ParameterValue & value);
+[31.919s]       |            ^~~~~~~~~~~~~~
+[31.919s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:79:71: note:   no known conversion for argument 1 from ‘const geometry_msgs::msg::TransformStamped_<std::allocator<void> >’ to ‘const ParameterValue&’ {aka ‘const rcl_interfaces::msg::ParameterValue_<std::allocator<void> >&’}
+[31.919s]    79 |   explicit ParameterValue(const rcl_interfaces::msg::ParameterValue & value);
+[31.919s]       |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+[31.919s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:76:3: note: candidate: ‘rclcpp::ParameterValue::ParameterValue()’
+[31.920s]    76 |   ParameterValue();
+[31.920s]       |   ^~~~~~~~~~~~~~
+[31.920s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:76:3: note:   candidate expects 0 arguments, 1 provided
+[31.920s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:71:7: note: candidate: ‘rclcpp::ParameterValue::ParameterValue(const rclcpp::ParameterValue&)’
+[31.920s]    71 | class ParameterValue
+[31.920s]       |       ^~~~~~~~~~~~~~
+[31.920s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:71:7: note:   no known conversion for argument 1 from ‘const geometry_msgs::msg::TransformStamped_<std::allocator<void> >’ to ‘const rclcpp::ParameterValue&’
+[31.920s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:71:7: note: candidate: ‘rclcpp::ParameterValue::ParameterValue(rclcpp::ParameterValue&&)’
+[31.920s] /opt/ros/humble/include/rclcpp/rclcpp/parameter_value.hpp:71:7: note:   no known conversion for argument 1 from ‘const geometry_msgs::msg::TransformStamped_<std::allocator<void> >’ to ‘rclcpp::ParameterValue&&’
+[32.586s] gmake[2]: *** [CMakeFiles/map_to_baselink_node.dir/build.make:76: CMakeFiles/map_to_baselink_node.dir/src/map_to_baselink_node.cpp.o] Error 1
+[32.586s] gmake[1]: *** [CMakeFiles/Makefile2:141: CMakeFiles/map_to_baselink_node.dir/all] Error 2
+[32.586s] gmake[1]: *** Waiting for unfinished jobs....
+[33.024s] [ 66%] Linking CXX executable nav_identity_bridge
+[33.200s] [ 66%] Built target nav_identity_bridge
+[37.203s] [ 83%] Linking CXX executable cloud_frame_transformer
+[37.552s] [ 83%] Built target cloud_frame_transformer
+[37.553s] gmake: *** [Makefile:146: all] Error 2
+[37.555s] Invoked command in '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink' returned '2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink -- -j20 -l20

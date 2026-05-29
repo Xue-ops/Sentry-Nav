@@ -1,0 +1,404 @@
+[0.000000] (-) TimerEvent: {}
+[0.000114] (-) JobUnselected: {'identifier': 'costmap_queue'}
+[0.000156] (-) JobUnselected: {'identifier': 'cpp_lidar_filter'}
+[0.000181] (-) JobUnselected: {'identifier': 'dwb_core'}
+[0.000202] (-) JobUnselected: {'identifier': 'dwb_critics'}
+[0.000222] (-) JobUnselected: {'identifier': 'dwb_msgs'}
+[0.000241] (-) JobUnselected: {'identifier': 'dwb_plugins'}
+[0.000260] (-) JobUnselected: {'identifier': 'fake_msg'}
+[0.000279] (-) JobUnselected: {'identifier': 'goal_approach_controller'}
+[0.000345] (-) JobUnselected: {'identifier': 'graph_show'}
+[0.000367] (-) JobUnselected: {'identifier': 'grid_map'}
+[0.000387] (-) JobUnselected: {'identifier': 'grid_map_cmake_helpers'}
+[0.000407] (-) JobUnselected: {'identifier': 'grid_map_core'}
+[0.000436] (-) JobUnselected: {'identifier': 'grid_map_costmap_2d'}
+[0.000470] (-) JobUnselected: {'identifier': 'grid_map_cv'}
+[0.000494] (-) JobUnselected: {'identifier': 'grid_map_demos'}
+[0.000543] (-) JobUnselected: {'identifier': 'grid_map_filters'}
+[0.000565] (-) JobUnselected: {'identifier': 'grid_map_loader'}
+[0.000585] (-) JobUnselected: {'identifier': 'grid_map_msgs'}
+[0.000607] (-) JobUnselected: {'identifier': 'grid_map_octomap'}
+[0.000628] (-) JobUnselected: {'identifier': 'grid_map_pcl'}
+[0.000647] (-) JobUnselected: {'identifier': 'grid_map_ros'}
+[0.000668] (-) JobUnselected: {'identifier': 'grid_map_rviz_plugin'}
+[0.000712] (-) JobUnselected: {'identifier': 'grid_map_sdf'}
+[0.000741] (-) JobUnselected: {'identifier': 'grid_map_visualization'}
+[0.000762] (-) JobUnselected: {'identifier': 'nav2_amcl'}
+[0.000782] (-) JobUnselected: {'identifier': 'nav2_behavior_tree'}
+[0.000836] (-) JobUnselected: {'identifier': 'nav2_behaviors'}
+[0.000863] (-) JobUnselected: {'identifier': 'nav2_bringup'}
+[0.000883] (-) JobUnselected: {'identifier': 'nav2_bt_navigator'}
+[0.001046] (-) JobUnselected: {'identifier': 'nav2_collision_monitor'}
+[0.001107] (-) JobUnselected: {'identifier': 'nav2_common'}
+[0.001134] (-) JobUnselected: {'identifier': 'nav2_constrained_smoother'}
+[0.001154] (-) JobUnselected: {'identifier': 'nav2_controller'}
+[0.001173] (-) JobUnselected: {'identifier': 'nav2_core'}
+[0.001192] (-) JobUnselected: {'identifier': 'nav2_costmap_2d'}
+[0.001210] (-) JobUnselected: {'identifier': 'nav2_dwb_controller'}
+[0.001229] (-) JobUnselected: {'identifier': 'nav2_graceful_controller'}
+[0.001247] (-) JobUnselected: {'identifier': 'nav2_lifecycle_manager'}
+[0.001266] (-) JobUnselected: {'identifier': 'nav2_map_server'}
+[0.001286] (-) JobUnselected: {'identifier': 'nav2_mppi_controller'}
+[0.001337] (-) JobUnselected: {'identifier': 'nav2_msgs'}
+[0.001358] (-) JobUnselected: {'identifier': 'nav2_navfn_planner'}
+[0.001379] (-) JobUnselected: {'identifier': 'nav2_planner'}
+[0.001398] (-) JobUnselected: {'identifier': 'nav2_regulated_pure_pursuit_controller'}
+[0.001428] (-) JobUnselected: {'identifier': 'nav2_rotation_shim_controller'}
+[0.001455] (-) JobUnselected: {'identifier': 'nav2_route'}
+[0.001504] (-) JobUnselected: {'identifier': 'nav2_rviz_plugins'}
+[0.001528] (-) JobUnselected: {'identifier': 'nav2_simple_commander'}
+[0.001549] (-) JobUnselected: {'identifier': 'nav2_smac_planner'}
+[0.001567] (-) JobUnselected: {'identifier': 'nav2_smoother'}
+[0.001610] (-) JobUnselected: {'identifier': 'nav2_system_tests'}
+[0.001640] (-) JobUnselected: {'identifier': 'nav2_theta_star_planner'}
+[0.001660] (-) JobUnselected: {'identifier': 'nav2_util'}
+[0.001718] (-) JobUnselected: {'identifier': 'nav2_velocity_smoother'}
+[0.001740] (-) JobUnselected: {'identifier': 'nav2_voxel_grid'}
+[0.001761] (-) JobUnselected: {'identifier': 'nav2_waypoint_follower'}
+[0.001780] (-) JobUnselected: {'identifier': 'nav_2d_msgs'}
+[0.001798] (-) JobUnselected: {'identifier': 'nav_2d_utils'}
+[0.001914] (-) JobUnselected: {'identifier': 'navigation2'}
+[0.001942] (-) JobUnselected: {'identifier': 'occ_map'}
+[0.001962] (-) JobUnselected: {'identifier': 'octomap_mapping'}
+[0.001980] (-) JobUnselected: {'identifier': 'octomap_server'}
+[0.001999] (-) JobUnselected: {'identifier': 'pb_nav2_plugins'}
+[0.002017] (-) JobUnselected: {'identifier': 'pcd_pub'}
+[0.002041] (-) JobUnselected: {'identifier': 'sentry_nav_bringup'}
+[0.002060] (-) JobUnselected: {'identifier': 'waypoint_editor'}
+[0.002195] (map_baselink) JobQueued: {'identifier': 'map_baselink', 'dependencies': OrderedDict()}
+[0.002221] (map_baselink) JobStarted: {'identifier': 'map_baselink'}
+[0.006537] (map_baselink) JobProgress: {'identifier': 'map_baselink', 'progress': 'cmake'}
+[0.007132] (map_baselink) Command: {'cmd': ['/usr/bin/cmake', '/home/xli/catkin_ws/src/Sentry-Nav/map_baselink', '-DCMAKE_INSTALL_PREFIX=/home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink'], 'cwd': '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('VSCODE_CWD', '/home/xli'), ('VSCODE_ESM_ENTRYPOINT', 'vs/workbench/api/node/extensionHostProcess'), ('HTTPS_PROXY', 'http://127.0.0.1:7897'), ('CODEX_CI', '1'), ('USER', 'xli'), ('SNAP_COMMON', '/var/snap/code/common'), ('LC_TIME', 'en_CA.UTF-8'), ('CODEX_INTERNAL_ORIGINATOR_OVERRIDE', 'codex_vscode'), ('VSCODE_NLS_CONFIG', '{"userLocale":"en-us","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"/snap/code/241/usr/share/code/resources/app/out/nls.messages.json","locale":"en-us","availableLanguages":{}}'), ('FONTCONFIG_PATH', '/etc/fonts'), ('GIO_MODULE_DIR', '/home/xli/snap/code/common/.cache/gio-modules'), ('VSCODE_HANDLES_UNCAUGHT_ERRORS', 'true'), ('XDG_SESSION_TYPE', 'wayland'), ('DEBUG', 'release'), ('SNAP_UID', '1000'), ('SHLVL', '0'), ('HOME', '/home/xli'), ('CHROME_DESKTOP', 'code.desktop'), ('SNAP_LIBRARY_PATH', '/var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32'), ('DESKTOP_SESSION', 'ubuntu'), ('SNAP_USER_DATA', '/home/xli/snap/code/241'), ('GTK_PATH', '/snap/code/241/usr/lib/x86_64-linux-gnu/gtk-3.0'), ('VSCODE_IPC_HOOK', '/run/user/1000/vscode-a899b3bb-1.12-main.sock'), ('GTK_IM_MODULE_FILE', '/home/xli/snap/code/common/.cache/immodules/immodules.cache'), ('GIO_LAUNCHED_DESKTOP_FILE', '/var/lib/snapd/desktop/applications/code_code.desktop'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('PAGER', 'cat'), ('LC_MONETARY', 'en_CA.UTF-8'), ('MANAGERPID', '1354'), ('LC_CTYPE', 'C.UTF-8'), ('SYSTEMD_EXEC_PID', '1880'), ('IM_CONFIG_CHECK_ENV', '1'), ('NO_COLOR', '1'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('SNAP_REVISION', '241'), ('COLORTERM', ''), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3061'), ('VSCODE_CRASH_REPORTER_PROCESS_TYPE', 'extensionHost'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('LOGNAME', 'xli'), ('SNAP_CONTEXT', '4KgNUziVQOqABvm_e0JUxwUOic86huFILXJi_bc36kbFvh8NEAXa'), ('JOURNAL_STREAM', '8:13632'), ('_', '/usr/bin/colcon'), ('XDG_CONFIG_DIRS_VSCODE_SNAP_ORIG', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_SESSION_CLASS', 'user'), ('SNAP_VERSION', 'f6cfa2ea'), ('XDG_DATA_DIRS_VSCODE_SNAP_ORIG', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('RUST_LOG', 'warn'), ('USERNAME', 'xli'), ('TERM', 'dumb'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('SNAP_INSTANCE_NAME', 'code'), ('FC_FONTATIONS', '1'), ('PATH', '/home/xli/.local/bin:/home/xli/.codex/tmp/arg0/codex-arg07DCA13:/home/xli/.local/bin:/home/xli/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/xli/.vscode/extensions/openai.chatgpt-26.519.32039-linux-x64/bin/linux-x86_64'), ('SESSION_MANAGER', 'local/xli-Lenovo-ThinkBook-16p-Gen-4:@/tmp/.ICE-unix/1843,unix/xli-Lenovo-ThinkBook-16p-Gen-4:/tmp/.ICE-unix/1843'), ('GTK_EXE_PREFIX', '/snap/code/241/usr'), ('INVOCATION_ID', 'dd67cba90fee49f5a027a5585f48b8db'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'en_CA.UTF-8'), ('GNOME_SETUP_DISPLAY', ':1'), ('SNAP_DATA', '/var/snap/code/241'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LOCPATH', '/snap/code/241/usr/lib/locale'), ('CODEX_SANDBOX_NETWORK_DISABLED', '1'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'en_CA.UTF-8'), ('XDG_DATA_HOME', '/home/xli/snap/code/241/.local/share'), ('XMODIFIERS', '@im=ibus'), ('GH_PAGER', 'cat'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.2P6BQ3'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SNAP_USER_COMMON', '/home/xli/snap/code/common'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('GSETTINGS_SCHEMA_DIR', '/home/xli/snap/code/241/.local/share/glib-2.0/schemas'), ('SNAP_ARCH', 'amd64'), ('SNAP_COOKIE', '4KgNUziVQOqABvm_e0JUxwUOic86huFILXJi_bc36kbFvh8NEAXa'), ('SHELL', '/bin/bash'), ('LC_NAME', 'en_CA.UTF-8'), ('GDK_PIXBUF_MODULEDIR', '/snap/code/241/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders'), ('QT_ACCESSIBILITY', '1'), ('ELECTRON_RUN_AS_NODE', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('FONTCONFIG_FILE', '/etc/fonts/fonts.conf'), ('SNAP_NAME', 'code'), ('CODEX_THREAD_ID', '019e72c4-9aa8-7250-9907-914762208f3c'), ('LC_MEASUREMENT', 'en_CA.UTF-8'), ('GDK_PIXBUF_MODULE_FILE', '/home/xli/snap/code/common/.cache/gdk-pixbuf-loaders.cache'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('LC_IDENTIFICATION', 'en_CA.UTF-8'), ('SNAP_LAUNCHER_ARCH_TRIPLET', 'x86_64-linux-gnu'), ('GIT_PAGER', 'cat'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink'), ('VSCODE_CLI', '1'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('SNAP_REAL_HOME', '/home/xli'), ('VSCODE_CODE_CACHE_PATH', '/home/xli/.config/Code/CachedData/f6cfa2ea2403534de03f069bdf160d06451ed282'), ('XDG_DATA_DIRS', '/home/xli/snap/code/241/.local/share:/home/xli/snap/code/241:/snap/code/241/usr/share:/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('SNAP_EUID', '1000'), ('SNAP', '/snap/code/241'), ('HTTP_PROXY', 'http://127.0.0.1:7897'), ('LC_NUMERIC', 'en_CA.UTF-8'), ('LC_PAPER', 'en_CA.UTF-8'), ('COLCON', '1'), ('ELECTRON_NO_ATTACH_CONSOLE', '1'), ('VSCODE_PID', '3122')]), 'shell': False}
+[0.099342] (-) TimerEvent: {}
+[0.129285] (map_baselink) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.199109] (map_baselink) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.199401] (-) TimerEvent: {}
+[0.209099] (map_baselink) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.272605] (map_baselink) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.278286] (map_baselink) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.278447] (map_baselink) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.279551] (map_baselink) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.282125] (map_baselink) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.299529] (-) TimerEvent: {}
+[0.353992] (map_baselink) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.360176] (map_baselink) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.360494] (map_baselink) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.360695] (map_baselink) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.369411] (map_baselink) StderrLine: {'line': b'CMake Error at CMakeLists.txt:9 (find_package):\n'}
+[0.369628] (map_baselink) StderrLine: {'line': b'  By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project\n'}
+[0.369734] (map_baselink) StderrLine: {'line': b'  has asked CMake to find a package configuration file provided by\n'}
+[0.369825] (map_baselink) StderrLine: {'line': b'  "ament_cmake", but CMake did not find one.\n'}
+[0.369914] (map_baselink) StderrLine: {'line': b'\n'}
+[0.369998] (map_baselink) StderrLine: {'line': b'  Could not find a package configuration file provided by "ament_cmake" with\n'}
+[0.370081] (map_baselink) StderrLine: {'line': b'  any of the following names:\n'}
+[0.370162] (map_baselink) StderrLine: {'line': b'\n'}
+[0.370243] (map_baselink) StderrLine: {'line': b'    ament_cmakeConfig.cmake\n'}
+[0.370323] (map_baselink) StderrLine: {'line': b'    ament_cmake-config.cmake\n'}
+[0.370409] (map_baselink) StderrLine: {'line': b'\n'}
+[0.370502] (map_baselink) StderrLine: {'line': b'  Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set\n'}
+[0.370587] (map_baselink) StderrLine: {'line': b'  "ament_cmake_DIR" to a directory containing one of the above files.  If\n'}
+[0.370668] (map_baselink) StderrLine: {'line': b'  "ament_cmake" provides a separate development package or SDK, be sure it\n'}
+[0.370746] (map_baselink) StderrLine: {'line': b'  has been installed.\n'}
+[0.370823] (map_baselink) StderrLine: {'line': b'\n'}
+[0.370901] (map_baselink) StderrLine: {'line': b'\n'}
+[0.370979] (map_baselink) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[0.371063] (map_baselink) StdoutLine: {'line': b'See also "/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink/CMakeFiles/CMakeOutput.log".\n'}
+[0.399643] (-) TimerEvent: {}
+[0.499843] (-) TimerEvent: {}
+[0.600177] (-) TimerEvent: {}
+[0.700689] (-) TimerEvent: {}
+[0.800908] (-) TimerEvent: {}
+[0.901118] (-) TimerEvent: {}
+[1.001394] (-) TimerEvent: {}
+[1.101749] (-) TimerEvent: {}
+[1.202011] (-) TimerEvent: {}
+[1.302340] (-) TimerEvent: {}
+[1.402617] (-) TimerEvent: {}
+[1.502787] (-) TimerEvent: {}
+[1.603006] (-) TimerEvent: {}
+[1.703225] (-) TimerEvent: {}
+[1.803422] (-) TimerEvent: {}
+[1.903626] (-) TimerEvent: {}
+[2.003830] (-) TimerEvent: {}
+[2.104056] (-) TimerEvent: {}
+[2.204339] (-) TimerEvent: {}
+[2.304669] (-) TimerEvent: {}
+[2.404908] (-) TimerEvent: {}
+[2.505117] (-) TimerEvent: {}
+[2.605302] (-) TimerEvent: {}
+[2.705490] (-) TimerEvent: {}
+[2.805740] (-) TimerEvent: {}
+[2.906127] (-) TimerEvent: {}
+[3.006440] (-) TimerEvent: {}
+[3.106618] (-) TimerEvent: {}
+[3.206782] (-) TimerEvent: {}
+[3.306975] (-) TimerEvent: {}
+[3.407177] (-) TimerEvent: {}
+[3.507380] (-) TimerEvent: {}
+[3.607574] (-) TimerEvent: {}
+[3.707734] (-) TimerEvent: {}
+[3.807925] (-) TimerEvent: {}
+[3.908121] (-) TimerEvent: {}
+[4.008377] (-) TimerEvent: {}
+[4.108557] (-) TimerEvent: {}
+[4.208719] (-) TimerEvent: {}
+[4.308890] (-) TimerEvent: {}
+[4.409079] (-) TimerEvent: {}
+[4.509285] (-) TimerEvent: {}
+[4.609500] (-) TimerEvent: {}
+[4.709661] (-) TimerEvent: {}
+[4.809824] (-) TimerEvent: {}
+[4.910074] (-) TimerEvent: {}
+[5.010443] (-) TimerEvent: {}
+[5.110838] (-) TimerEvent: {}
+[5.211212] (-) TimerEvent: {}
+[5.311550] (-) TimerEvent: {}
+[5.411786] (-) TimerEvent: {}
+[5.512119] (-) TimerEvent: {}
+[5.612418] (-) TimerEvent: {}
+[5.712763] (-) TimerEvent: {}
+[5.813001] (-) TimerEvent: {}
+[5.913354] (-) TimerEvent: {}
+[6.013696] (-) TimerEvent: {}
+[6.114182] (-) TimerEvent: {}
+[6.214633] (-) TimerEvent: {}
+[6.314984] (-) TimerEvent: {}
+[6.415265] (-) TimerEvent: {}
+[6.515637] (-) TimerEvent: {}
+[6.616079] (-) TimerEvent: {}
+[6.716584] (-) TimerEvent: {}
+[6.817004] (-) TimerEvent: {}
+[6.917458] (-) TimerEvent: {}
+[7.018052] (-) TimerEvent: {}
+[7.118599] (-) TimerEvent: {}
+[7.219094] (-) TimerEvent: {}
+[7.319698] (-) TimerEvent: {}
+[7.420234] (-) TimerEvent: {}
+[7.520733] (-) TimerEvent: {}
+[7.621233] (-) TimerEvent: {}
+[7.721633] (-) TimerEvent: {}
+[7.821872] (-) TimerEvent: {}
+[7.922353] (-) TimerEvent: {}
+[8.022784] (-) TimerEvent: {}
+[8.123252] (-) TimerEvent: {}
+[8.223716] (-) TimerEvent: {}
+[8.324201] (-) TimerEvent: {}
+[8.424711] (-) TimerEvent: {}
+[8.525256] (-) TimerEvent: {}
+[8.625694] (-) TimerEvent: {}
+[8.726179] (-) TimerEvent: {}
+[8.826783] (-) TimerEvent: {}
+[8.927175] (-) TimerEvent: {}
+[9.027656] (-) TimerEvent: {}
+[9.128043] (-) TimerEvent: {}
+[9.228522] (-) TimerEvent: {}
+[9.328929] (-) TimerEvent: {}
+[9.429282] (-) TimerEvent: {}
+[9.529566] (-) TimerEvent: {}
+[9.629897] (-) TimerEvent: {}
+[9.730506] (-) TimerEvent: {}
+[9.830971] (-) TimerEvent: {}
+[9.931443] (-) TimerEvent: {}
+[10.031965] (-) TimerEvent: {}
+[10.132496] (-) TimerEvent: {}
+[10.232820] (-) TimerEvent: {}
+[10.333209] (-) TimerEvent: {}
+[10.433695] (-) TimerEvent: {}
+[10.534067] (-) TimerEvent: {}
+[10.634595] (-) TimerEvent: {}
+[10.734980] (-) TimerEvent: {}
+[10.835444] (-) TimerEvent: {}
+[10.935850] (-) TimerEvent: {}
+[11.036339] (-) TimerEvent: {}
+[11.136841] (-) TimerEvent: {}
+[11.237380] (-) TimerEvent: {}
+[11.337870] (-) TimerEvent: {}
+[11.438382] (-) TimerEvent: {}
+[11.538990] (-) TimerEvent: {}
+[11.639445] (-) TimerEvent: {}
+[11.739950] (-) TimerEvent: {}
+[11.840455] (-) TimerEvent: {}
+[11.940806] (-) TimerEvent: {}
+[12.041086] (-) TimerEvent: {}
+[12.141392] (-) TimerEvent: {}
+[12.241765] (-) TimerEvent: {}
+[12.342108] (-) TimerEvent: {}
+[12.442605] (-) TimerEvent: {}
+[12.542989] (-) TimerEvent: {}
+[12.643347] (-) TimerEvent: {}
+[12.743726] (-) TimerEvent: {}
+[12.844166] (-) TimerEvent: {}
+[12.944662] (-) TimerEvent: {}
+[13.044996] (-) TimerEvent: {}
+[13.145310] (-) TimerEvent: {}
+[13.245622] (-) TimerEvent: {}
+[13.345909] (-) TimerEvent: {}
+[13.446104] (-) TimerEvent: {}
+[13.546585] (-) TimerEvent: {}
+[13.647180] (-) TimerEvent: {}
+[13.747649] (-) TimerEvent: {}
+[13.848117] (-) TimerEvent: {}
+[13.948536] (-) TimerEvent: {}
+[14.048914] (-) TimerEvent: {}
+[14.149411] (-) TimerEvent: {}
+[14.249831] (-) TimerEvent: {}
+[14.350253] (-) TimerEvent: {}
+[14.450705] (-) TimerEvent: {}
+[14.551166] (-) TimerEvent: {}
+[14.651603] (-) TimerEvent: {}
+[14.751914] (-) TimerEvent: {}
+[14.852207] (-) TimerEvent: {}
+[14.952455] (-) TimerEvent: {}
+[15.052764] (-) TimerEvent: {}
+[15.153099] (-) TimerEvent: {}
+[15.253554] (-) TimerEvent: {}
+[15.353979] (-) TimerEvent: {}
+[15.454523] (-) TimerEvent: {}
+[15.555041] (-) TimerEvent: {}
+[15.655600] (-) TimerEvent: {}
+[15.756026] (-) TimerEvent: {}
+[15.856613] (-) TimerEvent: {}
+[15.957030] (-) TimerEvent: {}
+[16.057536] (-) TimerEvent: {}
+[16.157955] (-) TimerEvent: {}
+[16.258421] (-) TimerEvent: {}
+[16.358741] (-) TimerEvent: {}
+[16.459030] (-) TimerEvent: {}
+[16.559445] (-) TimerEvent: {}
+[16.659932] (-) TimerEvent: {}
+[16.760409] (-) TimerEvent: {}
+[16.860769] (-) TimerEvent: {}
+[16.961092] (-) TimerEvent: {}
+[17.061508] (-) TimerEvent: {}
+[17.161863] (-) TimerEvent: {}
+[17.262296] (-) TimerEvent: {}
+[17.362765] (-) TimerEvent: {}
+[17.463075] (-) TimerEvent: {}
+[17.563555] (-) TimerEvent: {}
+[17.663884] (-) TimerEvent: {}
+[17.764159] (-) TimerEvent: {}
+[17.864605] (-) TimerEvent: {}
+[17.965082] (-) TimerEvent: {}
+[18.065423] (-) TimerEvent: {}
+[18.165794] (-) TimerEvent: {}
+[18.266252] (-) TimerEvent: {}
+[18.366685] (-) TimerEvent: {}
+[18.466969] (-) TimerEvent: {}
+[18.567530] (-) TimerEvent: {}
+[18.668305] (-) TimerEvent: {}
+[18.768930] (-) TimerEvent: {}
+[18.869513] (-) TimerEvent: {}
+[18.970035] (-) TimerEvent: {}
+[19.070509] (-) TimerEvent: {}
+[19.170960] (-) TimerEvent: {}
+[19.271567] (-) TimerEvent: {}
+[19.372342] (-) TimerEvent: {}
+[19.472948] (-) TimerEvent: {}
+[19.573515] (-) TimerEvent: {}
+[19.674081] (-) TimerEvent: {}
+[19.774559] (-) TimerEvent: {}
+[19.874999] (-) TimerEvent: {}
+[19.975537] (-) TimerEvent: {}
+[20.075927] (-) TimerEvent: {}
+[20.176248] (-) TimerEvent: {}
+[20.276589] (-) TimerEvent: {}
+[20.376927] (-) TimerEvent: {}
+[20.477227] (-) TimerEvent: {}
+[20.577583] (-) TimerEvent: {}
+[20.677981] (-) TimerEvent: {}
+[20.778435] (-) TimerEvent: {}
+[20.878822] (-) TimerEvent: {}
+[20.979241] (-) TimerEvent: {}
+[21.079593] (-) TimerEvent: {}
+[21.179878] (-) TimerEvent: {}
+[21.280172] (-) TimerEvent: {}
+[21.380582] (-) TimerEvent: {}
+[21.481045] (-) TimerEvent: {}
+[21.581448] (-) TimerEvent: {}
+[21.681766] (-) TimerEvent: {}
+[21.782242] (-) TimerEvent: {}
+[21.882655] (-) TimerEvent: {}
+[21.983168] (-) TimerEvent: {}
+[22.083520] (-) TimerEvent: {}
+[22.183679] (-) TimerEvent: {}
+[22.283915] (-) TimerEvent: {}
+[22.384178] (-) TimerEvent: {}
+[22.484544] (-) TimerEvent: {}
+[22.584817] (-) TimerEvent: {}
+[22.685032] (-) TimerEvent: {}
+[22.785430] (-) TimerEvent: {}
+[22.885965] (-) TimerEvent: {}
+[22.986554] (-) TimerEvent: {}
+[23.086866] (-) TimerEvent: {}
+[23.187120] (-) TimerEvent: {}
+[23.287392] (-) TimerEvent: {}
+[23.387654] (-) TimerEvent: {}
+[23.487894] (-) TimerEvent: {}
+[23.588179] (-) TimerEvent: {}
+[23.688558] (-) TimerEvent: {}
+[23.788823] (-) TimerEvent: {}
+[23.889110] (-) TimerEvent: {}
+[23.989404] (-) TimerEvent: {}
+[24.089687] (-) TimerEvent: {}
+[24.190037] (-) TimerEvent: {}
+[24.290350] (-) TimerEvent: {}
+[24.390829] (-) TimerEvent: {}
+[24.491158] (-) TimerEvent: {}
+[24.591448] (-) TimerEvent: {}
+[24.692009] (-) TimerEvent: {}
+[24.792448] (-) TimerEvent: {}
+[24.892838] (-) TimerEvent: {}
+[24.993275] (-) TimerEvent: {}
+[25.093597] (-) TimerEvent: {}
+[25.193862] (-) TimerEvent: {}
+[25.294085] (-) TimerEvent: {}
+[25.394323] (-) TimerEvent: {}
+[25.494602] (-) TimerEvent: {}
+[25.594987] (-) TimerEvent: {}
+[25.695298] (-) TimerEvent: {}
+[25.795598] (-) TimerEvent: {}
+[25.895986] (-) TimerEvent: {}
+[25.996371] (-) TimerEvent: {}
+[26.096779] (-) TimerEvent: {}
+[26.197218] (-) TimerEvent: {}
+[26.297598] (-) TimerEvent: {}
+[26.397872] (-) TimerEvent: {}
+[26.498362] (-) TimerEvent: {}
+[26.598825] (-) TimerEvent: {}
+[26.699130] (-) TimerEvent: {}
+[26.799435] (-) TimerEvent: {}
+[26.899700] (-) TimerEvent: {}
+[26.999973] (-) TimerEvent: {}
+[27.100248] (-) TimerEvent: {}
+[27.200646] (-) TimerEvent: {}
+[27.301062] (-) TimerEvent: {}
+[27.401395] (-) TimerEvent: {}
+[27.501759] (-) TimerEvent: {}
+[27.602089] (-) TimerEvent: {}
+[27.702319] (-) TimerEvent: {}
+[27.802570] (-) TimerEvent: {}
+[27.902829] (-) TimerEvent: {}
+[28.003132] (-) TimerEvent: {}
+[28.103533] (-) TimerEvent: {}
+[28.203822] (-) TimerEvent: {}
+[28.304119] (-) TimerEvent: {}
+[28.404330] (-) TimerEvent: {}
+[28.504598] (-) TimerEvent: {}
+[28.604909] (-) TimerEvent: {}
+[28.705223] (-) TimerEvent: {}
+[28.805615] (-) TimerEvent: {}
+[28.905929] (-) TimerEvent: {}
+[29.006351] (-) TimerEvent: {}
+[29.106668] (-) TimerEvent: {}
+[29.207010] (-) TimerEvent: {}
+[29.307552] (-) TimerEvent: {}
+[29.407910] (-) TimerEvent: {}
+[29.508235] (-) TimerEvent: {}
+[29.608681] (-) TimerEvent: {}
+[29.709103] (-) TimerEvent: {}
+[29.809625] (-) TimerEvent: {}
+[29.910047] (-) TimerEvent: {}
+[30.009244] (map_baselink) CommandEnded: {'returncode': 1}
+[30.010050] (-) TimerEvent: {}
+[30.050198] (map_baselink) JobEnded: {'identifier': 'map_baselink', 'rc': 1}
+[30.061117] (-) EventReactorShutdown: {}

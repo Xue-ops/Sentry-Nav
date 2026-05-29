@@ -1,0 +1,143 @@
+[0.000000] (-) TimerEvent: {}
+[0.000072] (-) JobUnselected: {'identifier': 'costmap_queue'}
+[0.000165] (-) JobUnselected: {'identifier': 'cpp_lidar_filter'}
+[0.000410] (-) JobUnselected: {'identifier': 'dwb_core'}
+[0.000519] (-) JobUnselected: {'identifier': 'dwb_critics'}
+[0.000622] (-) JobUnselected: {'identifier': 'dwb_msgs'}
+[0.000649] (-) JobUnselected: {'identifier': 'dwb_plugins'}
+[0.000719] (-) JobUnselected: {'identifier': 'fake_msg'}
+[0.000752] (-) JobUnselected: {'identifier': 'goal_approach_controller'}
+[0.000827] (-) JobUnselected: {'identifier': 'graph_show'}
+[0.000852] (-) JobUnselected: {'identifier': 'grid_map'}
+[0.000875] (-) JobUnselected: {'identifier': 'grid_map_cmake_helpers'}
+[0.000919] (-) JobUnselected: {'identifier': 'grid_map_core'}
+[0.000973] (-) JobUnselected: {'identifier': 'grid_map_costmap_2d'}
+[0.000994] (-) JobUnselected: {'identifier': 'grid_map_cv'}
+[0.001059] (-) JobUnselected: {'identifier': 'grid_map_demos'}
+[0.001070] (-) JobUnselected: {'identifier': 'grid_map_filters'}
+[0.001089] (-) JobUnselected: {'identifier': 'grid_map_loader'}
+[0.001100] (-) JobUnselected: {'identifier': 'grid_map_msgs'}
+[0.001150] (-) JobUnselected: {'identifier': 'grid_map_octomap'}
+[0.001183] (-) JobUnselected: {'identifier': 'grid_map_pcl'}
+[0.001194] (-) JobUnselected: {'identifier': 'grid_map_ros'}
+[0.001207] (-) JobUnselected: {'identifier': 'grid_map_rviz_plugin'}
+[0.001228] (-) JobUnselected: {'identifier': 'grid_map_sdf'}
+[0.001268] (-) JobUnselected: {'identifier': 'grid_map_visualization'}
+[0.001278] (-) JobUnselected: {'identifier': 'nav2_amcl'}
+[0.001291] (-) JobUnselected: {'identifier': 'nav2_behavior_tree'}
+[0.001305] (-) JobUnselected: {'identifier': 'nav2_behaviors'}
+[0.001315] (-) JobUnselected: {'identifier': 'nav2_bringup'}
+[0.001457] (-) JobUnselected: {'identifier': 'nav2_bt_navigator'}
+[0.001477] (-) JobUnselected: {'identifier': 'nav2_collision_monitor'}
+[0.001506] (-) JobUnselected: {'identifier': 'nav2_common'}
+[0.001525] (-) JobUnselected: {'identifier': 'nav2_constrained_smoother'}
+[0.001543] (-) JobUnselected: {'identifier': 'nav2_controller'}
+[0.001577] (-) JobUnselected: {'identifier': 'nav2_core'}
+[0.001612] (-) JobUnselected: {'identifier': 'nav2_costmap_2d'}
+[0.001629] (-) JobUnselected: {'identifier': 'nav2_dwb_controller'}
+[0.001641] (-) JobUnselected: {'identifier': 'nav2_graceful_controller'}
+[0.001655] (-) JobUnselected: {'identifier': 'nav2_lifecycle_manager'}
+[0.001665] (-) JobUnselected: {'identifier': 'nav2_map_server'}
+[0.001676] (-) JobUnselected: {'identifier': 'nav2_mppi_controller'}
+[0.001709] (-) JobUnselected: {'identifier': 'nav2_msgs'}
+[0.001737] (-) JobUnselected: {'identifier': 'nav2_navfn_planner'}
+[0.001747] (-) JobUnselected: {'identifier': 'nav2_planner'}
+[0.001758] (-) JobUnselected: {'identifier': 'nav2_regulated_pure_pursuit_controller'}
+[0.001770] (-) JobUnselected: {'identifier': 'nav2_rotation_shim_controller'}
+[0.001780] (-) JobUnselected: {'identifier': 'nav2_route'}
+[0.001790] (-) JobUnselected: {'identifier': 'nav2_rviz_plugins'}
+[0.001801] (-) JobUnselected: {'identifier': 'nav2_simple_commander'}
+[0.001827] (-) JobUnselected: {'identifier': 'nav2_smac_planner'}
+[0.001863] (-) JobUnselected: {'identifier': 'nav2_smoother'}
+[0.001874] (-) JobUnselected: {'identifier': 'nav2_system_tests'}
+[0.001887] (-) JobUnselected: {'identifier': 'nav2_theta_star_planner'}
+[0.001904] (-) JobUnselected: {'identifier': 'nav2_util'}
+[0.001935] (-) JobUnselected: {'identifier': 'nav2_velocity_smoother'}
+[0.001961] (-) JobUnselected: {'identifier': 'nav2_voxel_grid'}
+[0.001973] (-) JobUnselected: {'identifier': 'nav2_waypoint_follower'}
+[0.001984] (-) JobUnselected: {'identifier': 'nav_2d_msgs'}
+[0.001995] (-) JobUnselected: {'identifier': 'nav_2d_utils'}
+[0.002005] (-) JobUnselected: {'identifier': 'navigation2'}
+[0.002017] (-) JobUnselected: {'identifier': 'occ_map'}
+[0.002028] (-) JobUnselected: {'identifier': 'octomap_mapping'}
+[0.002037] (-) JobUnselected: {'identifier': 'octomap_server'}
+[0.002046] (-) JobUnselected: {'identifier': 'pb_nav2_plugins'}
+[0.002056] (-) JobUnselected: {'identifier': 'pcd_pub'}
+[0.002075] (-) JobUnselected: {'identifier': 'sentry_nav_bringup'}
+[0.002106] (-) JobUnselected: {'identifier': 'waypoint_editor'}
+[0.002128] (map_baselink) JobQueued: {'identifier': 'map_baselink', 'dependencies': OrderedDict()}
+[0.002142] (map_baselink) JobStarted: {'identifier': 'map_baselink'}
+[0.010187] (map_baselink) JobProgress: {'identifier': 'map_baselink', 'progress': 'cmake'}
+[0.010945] (map_baselink) JobProgress: {'identifier': 'map_baselink', 'progress': 'build'}
+[0.011787] (map_baselink) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink', '--', '-j20', '-l20'], 'cwd': '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('VSCODE_CWD', '/home/xli'), ('VSCODE_ESM_ENTRYPOINT', 'vs/workbench/api/node/extensionHostProcess'), ('HTTPS_PROXY', 'http://127.0.0.1:7897'), ('CODEX_CI', '1'), ('USER', 'xli'), ('SNAP_COMMON', '/var/snap/code/common'), ('LC_TIME', 'en_CA.UTF-8'), ('CODEX_INTERNAL_ORIGINATOR_OVERRIDE', 'codex_vscode'), ('VSCODE_NLS_CONFIG', '{"userLocale":"en-us","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"/snap/code/241/usr/share/code/resources/app/out/nls.messages.json","locale":"en-us","availableLanguages":{}}'), ('FONTCONFIG_PATH', '/etc/fonts'), ('GIO_MODULE_DIR', '/home/xli/snap/code/common/.cache/gio-modules'), ('VSCODE_HANDLES_UNCAUGHT_ERRORS', 'true'), ('XDG_SESSION_TYPE', 'wayland'), ('DEBUG', 'release'), ('SNAP_UID', '1000'), ('SHLVL', '0'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/opt/openvdb_vendor/lib:/opt/ros/humble/lib'), ('HOME', '/home/xli'), ('CHROME_DESKTOP', 'code.desktop'), ('SNAP_LIBRARY_PATH', '/var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32'), ('DESKTOP_SESSION', 'ubuntu'), ('SNAP_USER_DATA', '/home/xli/snap/code/241'), ('GTK_PATH', '/snap/code/241/usr/lib/x86_64-linux-gnu/gtk-3.0'), ('VSCODE_IPC_HOOK', '/run/user/1000/vscode-a899b3bb-1.12-main.sock'), ('GTK_IM_MODULE_FILE', '/home/xli/snap/code/common/.cache/immodules/immodules.cache'), ('GIO_LAUNCHED_DESKTOP_FILE', '/var/lib/snapd/desktop/applications/code_code.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('PAGER', 'cat'), ('LC_MONETARY', 'en_CA.UTF-8'), ('MANAGERPID', '1354'), ('LC_CTYPE', 'C.UTF-8'), ('SYSTEMD_EXEC_PID', '1880'), ('IM_CONFIG_CHECK_ENV', '1'), ('NO_COLOR', '1'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('SNAP_REVISION', '241'), ('COLORTERM', ''), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3061'), ('VSCODE_CRASH_REPORTER_PROCESS_TYPE', 'extensionHost'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'xli'), ('SNAP_CONTEXT', '4KgNUziVQOqABvm_e0JUxwUOic86huFILXJi_bc36kbFvh8NEAXa'), ('JOURNAL_STREAM', '8:13632'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_CONFIG_DIRS_VSCODE_SNAP_ORIG', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_SESSION_CLASS', 'user'), ('SNAP_VERSION', 'f6cfa2ea'), ('XDG_DATA_DIRS_VSCODE_SNAP_ORIG', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('RUST_LOG', 'warn'), ('USERNAME', 'xli'), ('TERM', 'dumb'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('SNAP_INSTANCE_NAME', 'code'), ('FC_FONTATIONS', '1'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/xli/.local/bin:/home/xli/.codex/tmp/arg0/codex-arg07DCA13:/home/xli/.local/bin:/home/xli/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/xli/.vscode/extensions/openai.chatgpt-26.519.32039-linux-x64/bin/linux-x86_64'), ('SESSION_MANAGER', 'local/xli-Lenovo-ThinkBook-16p-Gen-4:@/tmp/.ICE-unix/1843,unix/xli-Lenovo-ThinkBook-16p-Gen-4:/tmp/.ICE-unix/1843'), ('GTK_EXE_PREFIX', '/snap/code/241/usr'), ('INVOCATION_ID', 'dd67cba90fee49f5a027a5585f48b8db'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'en_CA.UTF-8'), ('GNOME_SETUP_DISPLAY', ':1'), ('SNAP_DATA', '/var/snap/code/241'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LOCPATH', '/snap/code/241/usr/lib/locale'), ('CODEX_SANDBOX_NETWORK_DISABLED', '1'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'en_CA.UTF-8'), ('XDG_DATA_HOME', '/home/xli/snap/code/241/.local/share'), ('XMODIFIERS', '@im=ibus'), ('GH_PAGER', 'cat'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.2P6BQ3'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SNAP_USER_COMMON', '/home/xli/snap/code/common'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('GSETTINGS_SCHEMA_DIR', '/home/xli/snap/code/241/.local/share/glib-2.0/schemas'), ('SNAP_ARCH', 'amd64'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SNAP_COOKIE', '4KgNUziVQOqABvm_e0JUxwUOic86huFILXJi_bc36kbFvh8NEAXa'), ('SHELL', '/bin/bash'), ('LC_NAME', 'en_CA.UTF-8'), ('GDK_PIXBUF_MODULEDIR', '/snap/code/241/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders'), ('QT_ACCESSIBILITY', '1'), ('ELECTRON_RUN_AS_NODE', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('FONTCONFIG_FILE', '/etc/fonts/fonts.conf'), ('SNAP_NAME', 'code'), ('CODEX_THREAD_ID', '019e72c4-9aa8-7250-9907-914762208f3c'), ('LC_MEASUREMENT', 'en_CA.UTF-8'), ('GDK_PIXBUF_MODULE_FILE', '/home/xli/snap/code/common/.cache/gdk-pixbuf-loaders.cache'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('LC_IDENTIFICATION', 'en_CA.UTF-8'), ('SNAP_LAUNCHER_ARCH_TRIPLET', 'x86_64-linux-gnu'), ('GIT_PAGER', 'cat'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink'), ('VSCODE_CLI', '1'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('SNAP_REAL_HOME', '/home/xli'), ('VSCODE_CODE_CACHE_PATH', '/home/xli/.config/Code/CachedData/f6cfa2ea2403534de03f069bdf160d06451ed282'), ('XDG_DATA_DIRS', '/home/xli/snap/code/241/.local/share:/home/xli/snap/code/241:/snap/code/241/usr/share:/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('SNAP_EUID', '1000'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('SNAP', '/snap/code/241'), ('HTTP_PROXY', 'http://127.0.0.1:7897'), ('LC_NUMERIC', 'en_CA.UTF-8'), ('LC_PAPER', 'en_CA.UTF-8'), ('COLCON', '1'), ('ELECTRON_NO_ATTACH_CONSOLE', '1'), ('VSCODE_PID', '3122'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.058369] (map_baselink) StdoutLine: {'line': b'Consolidate compiler generated dependencies of target map_to_baselink_node\n'}
+[0.061818] (map_baselink) StdoutLine: {'line': b'[ 33%] Built target nav_identity_bridge\n'}
+[0.066580] (map_baselink) StdoutLine: {'line': b'[ 66%] Built target cloud_frame_transformer\n'}
+[0.072483] (map_baselink) StdoutLine: {'line': b'[ 83%] Building CXX object CMakeFiles/map_to_baselink_node.dir/src/map_to_baselink_node.cpp.o\n'}
+[0.099855] (-) TimerEvent: {}
+[0.200086] (-) TimerEvent: {}
+[0.300298] (-) TimerEvent: {}
+[0.400529] (-) TimerEvent: {}
+[0.500855] (-) TimerEvent: {}
+[0.601067] (-) TimerEvent: {}
+[0.701297] (-) TimerEvent: {}
+[0.801527] (-) TimerEvent: {}
+[0.901840] (-) TimerEvent: {}
+[1.002043] (-) TimerEvent: {}
+[1.102376] (-) TimerEvent: {}
+[1.202676] (-) TimerEvent: {}
+[1.302972] (-) TimerEvent: {}
+[1.403194] (-) TimerEvent: {}
+[1.503525] (-) TimerEvent: {}
+[1.603766] (-) TimerEvent: {}
+[1.704097] (-) TimerEvent: {}
+[1.804347] (-) TimerEvent: {}
+[1.904591] (-) TimerEvent: {}
+[2.004935] (-) TimerEvent: {}
+[2.105171] (-) TimerEvent: {}
+[2.205491] (-) TimerEvent: {}
+[2.305803] (-) TimerEvent: {}
+[2.406104] (-) TimerEvent: {}
+[2.506383] (-) TimerEvent: {}
+[2.606703] (-) TimerEvent: {}
+[2.707027] (-) TimerEvent: {}
+[2.807357] (-) TimerEvent: {}
+[2.907671] (-) TimerEvent: {}
+[3.007921] (-) TimerEvent: {}
+[3.108124] (-) TimerEvent: {}
+[3.208318] (-) TimerEvent: {}
+[3.308616] (-) TimerEvent: {}
+[3.408889] (-) TimerEvent: {}
+[3.509101] (-) TimerEvent: {}
+[3.585716] (map_baselink) StdoutLine: {'line': b'[100%] Linking CXX executable map_to_baselink_node\n'}
+[3.609210] (-) TimerEvent: {}
+[3.709436] (-) TimerEvent: {}
+[3.754646] (map_baselink) StdoutLine: {'line': b'[100%] Built target map_to_baselink_node\n'}
+[3.763621] (map_baselink) CommandEnded: {'returncode': 0}
+[3.764538] (map_baselink) JobProgress: {'identifier': 'map_baselink', 'progress': 'install'}
+[3.773632] (map_baselink) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink'], 'cwd': '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('VSCODE_CWD', '/home/xli'), ('VSCODE_ESM_ENTRYPOINT', 'vs/workbench/api/node/extensionHostProcess'), ('HTTPS_PROXY', 'http://127.0.0.1:7897'), ('CODEX_CI', '1'), ('USER', 'xli'), ('SNAP_COMMON', '/var/snap/code/common'), ('LC_TIME', 'en_CA.UTF-8'), ('CODEX_INTERNAL_ORIGINATOR_OVERRIDE', 'codex_vscode'), ('VSCODE_NLS_CONFIG', '{"userLocale":"en-us","osLocale":"en-us","resolvedLanguage":"en","defaultMessagesFile":"/snap/code/241/usr/share/code/resources/app/out/nls.messages.json","locale":"en-us","availableLanguages":{}}'), ('FONTCONFIG_PATH', '/etc/fonts'), ('GIO_MODULE_DIR', '/home/xli/snap/code/common/.cache/gio-modules'), ('VSCODE_HANDLES_UNCAUGHT_ERRORS', 'true'), ('XDG_SESSION_TYPE', 'wayland'), ('DEBUG', 'release'), ('SNAP_UID', '1000'), ('SHLVL', '0'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/opt/openvdb_vendor/lib:/opt/ros/humble/lib'), ('HOME', '/home/xli'), ('CHROME_DESKTOP', 'code.desktop'), ('SNAP_LIBRARY_PATH', '/var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32'), ('DESKTOP_SESSION', 'ubuntu'), ('SNAP_USER_DATA', '/home/xli/snap/code/241'), ('GTK_PATH', '/snap/code/241/usr/lib/x86_64-linux-gnu/gtk-3.0'), ('VSCODE_IPC_HOOK', '/run/user/1000/vscode-a899b3bb-1.12-main.sock'), ('GTK_IM_MODULE_FILE', '/home/xli/snap/code/common/.cache/immodules/immodules.cache'), ('GIO_LAUNCHED_DESKTOP_FILE', '/var/lib/snapd/desktop/applications/code_code.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('PAGER', 'cat'), ('LC_MONETARY', 'en_CA.UTF-8'), ('MANAGERPID', '1354'), ('LC_CTYPE', 'C.UTF-8'), ('SYSTEMD_EXEC_PID', '1880'), ('IM_CONFIG_CHECK_ENV', '1'), ('NO_COLOR', '1'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('SNAP_REVISION', '241'), ('COLORTERM', ''), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3061'), ('VSCODE_CRASH_REPORTER_PROCESS_TYPE', 'extensionHost'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'xli'), ('SNAP_CONTEXT', '4KgNUziVQOqABvm_e0JUxwUOic86huFILXJi_bc36kbFvh8NEAXa'), ('JOURNAL_STREAM', '8:13632'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_CONFIG_DIRS_VSCODE_SNAP_ORIG', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_SESSION_CLASS', 'user'), ('SNAP_VERSION', 'f6cfa2ea'), ('XDG_DATA_DIRS_VSCODE_SNAP_ORIG', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('RUST_LOG', 'warn'), ('USERNAME', 'xli'), ('TERM', 'dumb'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('SNAP_INSTANCE_NAME', 'code'), ('FC_FONTATIONS', '1'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/xli/.local/bin:/home/xli/.codex/tmp/arg0/codex-arg07DCA13:/home/xli/.local/bin:/home/xli/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/xli/.vscode/extensions/openai.chatgpt-26.519.32039-linux-x64/bin/linux-x86_64'), ('SESSION_MANAGER', 'local/xli-Lenovo-ThinkBook-16p-Gen-4:@/tmp/.ICE-unix/1843,unix/xli-Lenovo-ThinkBook-16p-Gen-4:/tmp/.ICE-unix/1843'), ('GTK_EXE_PREFIX', '/snap/code/241/usr'), ('INVOCATION_ID', 'dd67cba90fee49f5a027a5585f48b8db'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'en_CA.UTF-8'), ('GNOME_SETUP_DISPLAY', ':1'), ('SNAP_DATA', '/var/snap/code/241'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LOCPATH', '/snap/code/241/usr/lib/locale'), ('CODEX_SANDBOX_NETWORK_DISABLED', '1'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'en_CA.UTF-8'), ('XDG_DATA_HOME', '/home/xli/snap/code/241/.local/share'), ('XMODIFIERS', '@im=ibus'), ('GH_PAGER', 'cat'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.2P6BQ3'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SNAP_USER_COMMON', '/home/xli/snap/code/common'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('GSETTINGS_SCHEMA_DIR', '/home/xli/snap/code/241/.local/share/glib-2.0/schemas'), ('SNAP_ARCH', 'amd64'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SNAP_COOKIE', '4KgNUziVQOqABvm_e0JUxwUOic86huFILXJi_bc36kbFvh8NEAXa'), ('SHELL', '/bin/bash'), ('LC_NAME', 'en_CA.UTF-8'), ('GDK_PIXBUF_MODULEDIR', '/snap/code/241/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders'), ('QT_ACCESSIBILITY', '1'), ('ELECTRON_RUN_AS_NODE', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('FONTCONFIG_FILE', '/etc/fonts/fonts.conf'), ('SNAP_NAME', 'code'), ('CODEX_THREAD_ID', '019e72c4-9aa8-7250-9907-914762208f3c'), ('LC_MEASUREMENT', 'en_CA.UTF-8'), ('GDK_PIXBUF_MODULE_FILE', '/home/xli/snap/code/common/.cache/gdk-pixbuf-loaders.cache'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('LC_IDENTIFICATION', 'en_CA.UTF-8'), ('SNAP_LAUNCHER_ARCH_TRIPLET', 'x86_64-linux-gnu'), ('GIT_PAGER', 'cat'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink'), ('VSCODE_CLI', '1'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('SNAP_REAL_HOME', '/home/xli'), ('VSCODE_CODE_CACHE_PATH', '/home/xli/.config/Code/CachedData/f6cfa2ea2403534de03f069bdf160d06451ed282'), ('XDG_DATA_DIRS', '/home/xli/snap/code/241/.local/share:/home/xli/snap/code/241:/snap/code/241/usr/share:/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('SNAP_EUID', '1000'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('SNAP', '/snap/code/241'), ('HTTP_PROXY', 'http://127.0.0.1:7897'), ('LC_NUMERIC', 'en_CA.UTF-8'), ('LC_PAPER', 'en_CA.UTF-8'), ('COLCON', '1'), ('ELECTRON_NO_ATTACH_CONSOLE', '1'), ('VSCODE_PID', '3122'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[3.780585] (map_baselink) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[3.780759] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/lib/map_baselink/map_to_baselink_node\n'}
+[3.781481] (map_baselink) StdoutLine: {'line': b'-- Set runtime path of "/home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/lib/map_baselink/map_to_baselink_node" to ""\n'}
+[3.781617] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/lib/map_baselink/nav_identity_bridge\n'}
+[3.782002] (map_baselink) StdoutLine: {'line': b'-- Set runtime path of "/home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/lib/map_baselink/nav_identity_bridge" to ""\n'}
+[3.782156] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/lib/map_baselink/cloud_frame_transformer\n'}
+[3.784003] (map_baselink) StdoutLine: {'line': b'-- Set runtime path of "/home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/lib/map_baselink/cloud_frame_transformer" to ""\n'}
+[3.784252] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/share/ament_index/resource_index/package_run_dependencies/map_baselink\n'}
+[3.784577] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/share/ament_index/resource_index/parent_prefix_path/map_baselink\n'}
+[3.784751] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/share/map_baselink/environment/ament_prefix_path.sh\n'}
+[3.784888] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/share/map_baselink/environment/ament_prefix_path.dsv\n'}
+[3.784996] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/share/map_baselink/environment/path.sh\n'}
+[3.785037] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/share/map_baselink/environment/path.dsv\n'}
+[3.785074] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/share/map_baselink/local_setup.bash\n'}
+[3.785109] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/share/map_baselink/local_setup.sh\n'}
+[3.785144] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/share/map_baselink/local_setup.zsh\n'}
+[3.785179] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/share/map_baselink/local_setup.dsv\n'}
+[3.785215] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/share/map_baselink/package.dsv\n'}
+[3.785369] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/share/ament_index/resource_index/packages/map_baselink\n'}
+[3.785405] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/share/map_baselink/cmake/map_baselinkConfig.cmake\n'}
+[3.785438] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/share/map_baselink/cmake/map_baselinkConfig-version.cmake\n'}
+[3.785469] (map_baselink) StdoutLine: {'line': b'-- Installing: /home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink/share/map_baselink/package.xml\n'}
+[3.786200] (map_baselink) CommandEnded: {'returncode': 0}
+[3.799629] (map_baselink) JobEnded: {'identifier': 'map_baselink', 'rc': 0}
+[3.800133] (-) EventReactorShutdown: {}
