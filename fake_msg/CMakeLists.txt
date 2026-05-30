@@ -12,15 +12,28 @@ find_package(ament_cmake REQUIRED)
 # find_package(<dependency> REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(tf2_ros REQUIRED)
+find_package(Eigen3 REQUIRED)
+find_package(rclcpp REQUIRED)
+
+include_directories(include)
+
+add_executable(simple_cmd_publish src/simple_cmd_publish.cpp)
 
 add_executable(fake_odom_map src/fake_odom_map.cpp)
 
+ament_target_dependencies(simple_cmd_publish
+  geometry_msgs
+  rclcpp
+)
+
 ament_target_dependencies(fake_odom_map
   geometry_msgs
+  rclcpp
   tf2_ros
 )
 
 install(TARGETS
+  simple_cmd_publish
   fake_odom_map
   DESTINATION lib/${PROJECT_NAME}
 )
