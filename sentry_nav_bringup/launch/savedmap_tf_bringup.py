@@ -52,8 +52,8 @@ def generate_launch_description():
             name='lidar_filter_node',
             output='screen',
             parameters=[{
-                'input_topic': '/odin1/cloud_slam',
-                'output_topic': '/odin1/cloud_slam_filtered',
+                'input_topic': '/cloud_nav2_raw',
+                'output_topic': '/cloud_nav2',
                 'min_x': -0.3,
                 'max_x': 0.3,
                 'min_y': -0.3,

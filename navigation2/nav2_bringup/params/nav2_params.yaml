@@ -151,23 +151,23 @@ controller_server:
 
       vx_std: 0.3 #增大采样多样性，让MPPI能采到更多减速/停止轨迹
       vy_std: 0.3
-      wz_std: 0.2
+      wz_std: 0.00001
 
       vx_max: 2.5
       vy_max: 2.5
-      wz_max: 2.5
+      wz_max: 0.00001
 
       vx_min: -2.5
       vy_min: -2.5
-      wz_min: -2.5
+      wz_min: -0.00001
 
       ax_max: 2.5 #加速度提高，高速时能快速响应
       ay_max: 2.5
-      az_max: 2.5
+      az_max: 0.00001
 
       ax_min: -3.5 #关键：制动力必须对称，高速下刹得住
       ay_min: -3.5
-      az_min: -3.0
+      az_min: -0.00001
 
       iteration_count: 1
       prune_distance: 3.0 #高速下提前剪枝已通过的路径点
