@@ -83,7 +83,8 @@ private:
       sensor_msgs::msg::PointCloud2 out_cloud;
       tf2::doTransform(source_cloud, out_cloud, tf);
 
-      out_cloud.header.stamp = msg->header.stamp;
+      const auto output_stamp = now();
+      out_cloud.header.stamp = output_stamp;
       out_cloud.header.frame_id = target_frame_;
 
       sensor_msgs::msg::PointCloud2 merged_cloud;
@@ -92,6 +93,7 @@ private:
         latest_cloud = std::make_shared<sensor_msgs::msg::PointCloud2>(std::move(out_cloud));
         merged_cloud = buildMergedCloudLocked(*latest_cloud);
       }
+      merged_cloud.header.stamp = output_stamp;
 
       pub_->publish(merged_cloud);
 

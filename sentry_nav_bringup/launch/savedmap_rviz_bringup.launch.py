@@ -8,6 +8,7 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     map_params_file = LaunchConfiguration('map_params_file')
+    use_sim_time = LaunchConfiguration('use_sim_time')
     if_on_robot = LaunchConfiguration('if_on_robot')
     default_map_params_file = PathJoinSubstitution([
         FindPackageShare('sentry_nav_bringup'),
@@ -24,6 +25,7 @@ def generate_launch_description():
             ])
         ),
         launch_arguments={
+            'use_sim_time': use_sim_time,
             'map_params_file': map_params_file,
             'if_on_robot': if_on_robot,
         }.items()
@@ -41,10 +43,17 @@ def generate_launch_description():
         name='rviz2_savedmap_nav',
         output='screen',
         arguments=['-d', rviz_config],
-        parameters=[map_params_file]
+        parameters=[map_params_file, {
+            'use_sim_time': use_sim_time
+        }]
     )
 
     return LaunchDescription([
+        DeclareLaunchArgument(
+            'use_sim_time',
+            default_value='true',
+            description='Use simulation time for all launched nodes'
+        ),
         DeclareLaunchArgument(
             'map_params_file',
             default_value=default_map_params_file,

@@ -41,6 +41,7 @@ def generate_launch_description():
             ])
         ),
         launch_arguments={
+            'use_sim_time': use_sim_time,
             'map_params_file': map_params_file,
             'if_on_robot': if_on_robot,
         }.items()

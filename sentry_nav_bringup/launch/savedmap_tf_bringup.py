@@ -7,6 +7,7 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     map_params_file = LaunchConfiguration('map_params_file')
+    use_sim_time = LaunchConfiguration('use_sim_time')
     if_on_robot = LaunchConfiguration('if_on_robot')
     default_map_params_file = PathJoinSubstitution([
         FindPackageShare('sentry_nav_bringup'),
@@ -15,6 +16,12 @@ def generate_launch_description():
     ])
 
     return LaunchDescription([
+
+        DeclareLaunchArgument(
+            'use_sim_time',
+            default_value='true',
+            description='Use simulation time for all launched nodes'
+        ),
 
         DeclareLaunchArgument(
             'map_params_file',
@@ -33,7 +40,9 @@ def generate_launch_description():
             executable='nav_identity_bridge',
             name='nav_identity_bridge',
             output='screen',
-            parameters=[map_params_file]
+            parameters=[map_params_file, {
+                'use_sim_time': use_sim_time
+            }]
         ),
 
         Node(
@@ -42,6 +51,7 @@ def generate_launch_description():
             name='map_to_baselink_node',
             output='screen',
             parameters=[map_params_file, {
+                'use_sim_time': use_sim_time,
                 'if_on_robot': if_on_robot
             }]
         ),
@@ -62,6 +72,7 @@ def generate_launch_description():
                 'max_z': 0.6,
                 'negative': True,
                 'leaf_size': 0.05,
+                'use_sim_time': use_sim_time,
             }]
         ),
 
@@ -70,7 +81,9 @@ def generate_launch_description():
             executable='cloud_frame_transformer',
             name='cloud_frame_transformer',
             output='screen',
-            parameters=[map_params_file]
+            parameters=[map_params_file, {
+                'use_sim_time': use_sim_time
+            }]
         ),
 
         Node(
@@ -78,6 +91,8 @@ def generate_launch_description():
             executable='map_publish',
             name='map_publish',
             output='screen',
-            parameters=[map_params_file]
+            parameters=[map_params_file, {
+                'use_sim_time': use_sim_time
+            }]
         ),
     ])
