@@ -22,7 +22,7 @@ public:
     tf_buffer_(this->get_clock()),
     tf_listener_(tf_buffer_)
   {
-    input_topic_ = declare_parameter<std::string>("input_topic", "/odin1/cloud_slam");
+    input_topic_ = declare_parameter<std::string>("input_topic", "/odin1/cloud_slam_filter");
     mid360_pointcloud_topic_ = declare_parameter<std::string>("mid360_pointcloud_topic", "livox/lidar");
     mid360_frame_ = declare_parameter<std::string>("mid360_frame", "livox_frame");
     output_topic_ = declare_parameter<std::string>("output_topic", "/cloud_nav2_raw");

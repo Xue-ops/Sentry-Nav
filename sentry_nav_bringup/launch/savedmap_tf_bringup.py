@@ -61,18 +61,18 @@ def generate_launch_description():
             executable='lidar_filter_node',
             name='lidar_filter_node',
             output='screen',
-            parameters=[{
-                'input_topic': '/cloud_nav2_raw',
-                'output_topic': '/cloud_nav2',
-                'min_x': -0.3,
-                'max_x': 0.3,
-                'min_y': -0.3,
-                'max_y': 0.3,
-                'min_z': -0.1,
-                'max_z': 0.6,
-                'negative': True,
-                'leaf_size': 0.05,
-                'use_sim_time': use_sim_time,
+            parameters=[map_params_file, {
+                'use_sim_time': use_sim_time
+            }]
+        ),
+
+        Node(
+            package='cpp_lidar_filter',
+            executable='odin1_filter_node',
+            name='odin1_filter_node',
+            output='screen',
+            parameters=[map_params_file, {
+                'use_sim_time': use_sim_time
             }]
         ),
 

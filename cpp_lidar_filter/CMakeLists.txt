@@ -29,8 +29,19 @@ ament_target_dependencies(lidar_filter_node
 target_link_libraries(lidar_filter_node ${PCL_LIBRARIES})
 target_include_directories(lidar_filter_node PUBLIC ${PCL_INCLUDE_DIRS})
 
+add_executable(odin1_filter_node src/odin1_filter.cpp)
+ament_target_dependencies(odin1_filter_node
+        rclcpp sensor_msgs
+        pcl_conversions
+        pcl_ros
+)
+
+target_link_libraries(odin1_filter_node ${PCL_LIBRARIES})
+target_include_directories(odin1_filter_node PUBLIC ${PCL_INCLUDE_DIRS})
+
 install(TARGETS
         lidar_filter_node
+        odin1_filter_node
         DESTINATION lib/${PROJECT_NAME}
 )
 
