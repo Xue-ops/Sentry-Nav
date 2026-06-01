@@ -146,8 +146,8 @@ controller_server:
       direct_approach_distance: 0.5  #进入直接驱动模式的距离，绕过MPPI防止画弧
       direct_approach_kp: 3.0  #直接驱动P控制增益
       time_steps: 80  #增加到80，预测时域4.8s，让MPPI能看到冲过目标的后果
-      model_dt: 0.03  #稍微放大步长，配合time_steps延长预测时域
-      batch_size: 1500 #控制器的采样数。
+      model_dt: 0.05  #稍微放大步长，配合time_steps延长预测时域
+      batch_size: 1000 #控制器的采样数。
 
       vx_std: 0.3 #增大采样多样性，让MPPI能采到更多减速/停止轨迹
       vy_std: 0.3
@@ -161,8 +161,8 @@ controller_server:
       vy_min: -2.5
       wz_min: -0.00001
 
-      ax_max: 2.5 #加速度提高，高速时能快速响应
-      ay_max: 2.5
+      ax_max: 1.5 #加速度提高，高速时能快速响应
+      ay_max: 1.5
       az_max: 0.00001
 
       ax_min: -3.5 #关键：制动力必须对称，高速下刹得住
@@ -199,16 +199,16 @@ controller_server:
         enabled: true
         cost_power: 1
         repulsion_weight: 1.0 #排斥权重
-        critical_weight: 20.0 #近距离障碍物惩罚
+        critical_weight: 40.0 #近距离障碍物惩罚
         consider_footprint: false #用圆形近似，omni机器人更高效
         collision_cost: 10000.0
-        collision_margin_distance: 0.5 #碰撞边界余量
+        collision_margin_distance: 0.7 #碰撞边界余量
         near_goal_distance: 0.5
 
       CostCritic: #通过 costmap 梯度引导避障
         enabled: true
         cost_power: 1
-        cost_weight: 3.0 #适当降低，配合修正后的 inflation 梯度
+        cost_weight: 4.0 #适当降低，配合修正后的 inflation 梯度
         critical_cost: 253.0 #关键修正！只有 inscribed/lethal 才触发碰撞惩罚，不再把整个膨胀区都当碰撞
         consider_footprint: true
         collision_cost: 1000000.0
@@ -291,8 +291,8 @@ local_costmap:
       plugins: ["static_layer","stvl_voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 8.0
-        inflation_radius: 0.25
+        cost_scaling_factor: 5.0
+        inflation_radius: 0.28
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
         enabled: True
@@ -303,7 +303,7 @@ local_costmap:
         max_obstacle_height: 2.0
         mark_threshold: 0
 
-        observation_sources: scan cloud
+        observation_sources: scan livox_cloud odin1_cloud
 
         scan:
           topic: /scan
@@ -316,8 +316,20 @@ local_costmap:
           obstacle_max_range: 2.5
           obstacle_min_range: 0.0
 
-        cloud:
-          topic: /cloud_nav2
+        livox_cloud:
+          topic: /livox/lidar_filtered
+          max_obstacle_height: 2.0
+          min_obstacle_height: 0.05
+          clearing: False
+          marking: True
+          data_type: "PointCloud2"
+          raytrace_max_range: 5.0
+          raytrace_min_range: 0.0
+          obstacle_max_range: 5.0
+          obstacle_min_range: 0.0
+
+        odin1_cloud:
+          topic: /odin1/cloud_slam_filtered
           max_obstacle_height: 2.0
           min_obstacle_height: 0.05
           clearing: False
@@ -348,10 +360,32 @@ local_costmap:
         transform_tolerance: 0.2    # seconds
         mapping_mode: false  # default off, saves map not for navigation
         map_save_duration: 60.0     #default 60s, how often to autosave
-        observation_sources: odin1_source
+        observation_sources: odin1_source livox_source
         odin1_source:
           data_type: PointCloud2
-          topic:  /cloud_nav2
+          topic:  /odin1/cloud_slam_filtered
+          transport_type: "raw"        #default raw -No compression-, Options: zlib, draco, zstd
+          marking: true
+          clearing: true
+
+          obstacle_range: 8.0
+          raytrace_range: 9.0
+
+          min_obstacle_height: 0.15     #default 0, meters
+          max_obstacle_height: 1.0     #defaule 3, meters
+          expected_update_rate: 0.0    #default 0, if not updating at this rate at least, remove from buffer
+          observation_persistence: 0.0 #default 0, use all measurements taken during now-value, 0=latest
+          inf_is_valid: false          #default false, for laser scans
+          clear_after_reading: true    #default false, clear the buffer after the layer gets readings from it
+          filter: "voxel"              #default passthrough, apply "voxel", "passthrough", or no filter to sensor data, recommended to have at one filter on
+          voxel_min_points: 0          #default 0, minimum points per voxel for voxel filter
+          model_type: 1
+          vertical_fov_angle: 2.00      #default 0.7, radians
+          vertical_fov_offset: 0.0
+          horizontal_fov_angle: 6.28
+        livox_source:
+          data_type: PointCloud2
+          topic:  /livox/lidar_filtered
           transport_type: "raw"        #default raw -No compression-, Options: zlib, draco, zstd
           marking: true
           clearing: true
@@ -403,10 +437,32 @@ global_costmap:
         transform_tolerance: 0.2    # seconds
         mapping_mode: false  # default off, saves map not for navigation
         map_save_duration: 60.0     #default 60s, how often to autosave
-        observation_sources: odin1_source
+        observation_sources: odin1_source livox_source
         odin1_source:
           data_type: PointCloud2
-          topic:  /cloud_nav2
+          topic:  /odin1/cloud_slam_filtered
+          transport_type: "raw"        #default raw -No compression-, Options: zlib, draco, zstd
+          marking: true
+          clearing: true
+
+          obstacle_range: 8.0
+          raytrace_range: 9.0
+
+          min_obstacle_height: 0.15     #default 0, meters
+          max_obstacle_height: 1.0     #defaule 3, meters
+          expected_update_rate: 0.0    #default 0, if not updating at this rate at least, remove from buffer
+          observation_persistence: 0.0 #default 0, use all measurements taken during now-value, 0=latest
+          inf_is_valid: false          #default false, for laser scans
+          clear_after_reading: true    #default false, clear the buffer after the layer gets readings from it
+          filter: "voxel"              #default passthrough, apply "voxel", "passthrough", or no filter to sensor data, recommended to have at one filter on
+          voxel_min_points: 0          #default 0, minimum points per voxel for voxel filter
+          model_type: 1
+          vertical_fov_angle: 2.00      #default 0.7, radians
+          vertical_fov_offset: 0.0
+          horizontal_fov_angle: 6.28
+        livox_source:
+          data_type: PointCloud2
+          topic:  /livox/lidar_filtered
           transport_type: "raw"        #default raw -No compression-, Options: zlib, draco, zstd
           marking: true
           clearing: true
@@ -446,7 +502,7 @@ global_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 4.0
-        inflation_radius: 0.4
+        inflation_radius: 0.55
       always_send_full_costmap: True
 
 map_server:

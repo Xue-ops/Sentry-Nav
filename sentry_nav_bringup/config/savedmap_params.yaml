@@ -27,8 +27,10 @@ map_to_baselink_node:
 lidar_filter_node:
   ros__parameters:
     use_sim_time: true
-    input_topic: /cloud_nav2_raw
-    output_topic: /cloud_nav2
+    input_topic: /livox/lidar
+    output_topic: /livox/lidar_filtered
+    input_topic_2: /odin1/cloud_slam_filter
+    output_topic_2: /odin1/cloud_slam_filtered
     crop_frame: map_corrected_base_link
     min_x: -0.3
     max_x: 0.3
@@ -47,15 +49,6 @@ odin1_filter_node:
     output_topic: /odin1/cloud_slam_filter
     z_threshold: 1.0
     leaf_size: 0.05
-
-cloud_frame_transformer:
-  ros__parameters:
-    use_sim_time: true
-    input_topic: /odin1/cloud_slam_filter
-    mid360_pointcloud_topic: livox/lidar
-    mid360_frame: livox_frame
-    output_topic: /cloud_nav2_raw
-    target_frame: odom_nav
 
 map_publish:
   ros__parameters:

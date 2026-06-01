@@ -77,16 +77,6 @@ def generate_launch_description():
         ),
 
         Node(
-            package='map_baselink',
-            executable='cloud_frame_transformer',
-            name='cloud_frame_transformer',
-            output='screen',
-            parameters=[map_params_file, {
-                'use_sim_time': use_sim_time
-            }]
-        ),
-
-        Node(
             package='occ_map',
             executable='map_publish',
             name='map_publish',
