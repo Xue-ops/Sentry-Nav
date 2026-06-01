@@ -68,7 +68,7 @@ public:
     tf_baselink_mid360_ = make_transform_param(
       "tf_baselink_mid360",
       mid360_camera_frame_,
-      {0.0025, -0.13509, 0.29325, -0.270598, -0.270598, -0.653282, 0.653282});
+      {0.0025, -0.13509, 0.29325, 0.0, 0.382684, -0.923879, 0.0});
 
     tf_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
     auto timer_interface = std::make_shared<tf2_ros::CreateTimerROS>(
