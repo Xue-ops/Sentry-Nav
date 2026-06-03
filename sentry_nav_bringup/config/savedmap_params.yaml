@@ -17,7 +17,7 @@ map_to_baselink_node:
     publish_tf: true
     if_nav2: true
     if_on_robot: true
-    tf_child_frame: map_corrected_base_link
+    tf_child_frame: base_link
     odin1_camera_frame: odin1_camera_link
     mid360_camera_frame: livox_frame
     publish_rate: 20.0
@@ -31,7 +31,7 @@ lidar_filter_node:
     output_topic: /livox/lidar_filtered
     input_topic_2: /odin1/cloud_slam_filter
     output_topic_2: /odin1/cloud_slam_filtered
-    crop_frame: map_corrected_base_link
+    crop_frame: base_link
     min_x: -0.3
     max_x: 0.3
     min_y: -0.3
