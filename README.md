@@ -92,3 +92,8 @@ ros2 launch waypoint_editor waypoint_through_nav2.launch.py waypoint_file:=/home
 ```bash
 ros2 service call /start_waypoint_through std_srvs/srv/Trigger
 ```
+
+TODO:
+not use map_baselink, add tf transfer on the relocaliaztion packages not this packages.
+Need write new launch and config
+transfer back map_nav, odom_nav to map, odom
