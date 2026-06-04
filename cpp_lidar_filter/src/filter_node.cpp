@@ -175,7 +175,7 @@ private:
 
       sensor_msgs::msg::PointCloud2 output;
       tf2::doTransform(output_in_crop_frame, output, tf_crop_to_cloud);
-      output.header.stamp = msg->header.stamp;
+      output.header.stamp = this->now();
       output.header.frame_id = msg->header.frame_id;
 
       publisher->publish(output);

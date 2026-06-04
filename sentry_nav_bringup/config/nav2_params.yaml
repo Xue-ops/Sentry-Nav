@@ -11,7 +11,7 @@ amcl:
     beam_skip_error_threshold: 0.9
     beam_skip_threshold: 0.3
     do_beamskip: false
-    global_frame_id: "map_nav"
+    global_frame_id: "map"
     lambda_short: 0.1
     laser_likelihood_max_dist: 2.0
     laser_max_range: 100.0
@@ -20,7 +20,7 @@ amcl:
     max_beams: 60
     max_particles: 2000
     min_particles: 500
-    odom_frame_id: "odom_nav"
+    odom_frame_id: "odom"
     pf_err: 0.05
     pf_z: 0.99
     recovery_alpha_fast: 0.0
@@ -42,7 +42,7 @@ amcl:
 bt_navigator:
   ros__parameters:
     use_sim_time: true
-    global_frame: map_nav
+    global_frame: map
     robot_base_frame: base_link
     odom_topic: /odom
     bt_loop_duration: 10
@@ -153,20 +153,20 @@ controller_server:
       vy_std: 0.3
       wz_std: 0.00001
 
-      vx_max: 2.5
-      vy_max: 2.5
+      vx_max: 1.0
+      vy_max: 1.0
       wz_max: 0.00001
 
-      vx_min: -2.5
-      vy_min: -2.5
+      vx_min: -1.0
+      vy_min: -1.0
       wz_min: -0.00001
 
-      ax_max: 1.5 #加速度提高，高速时能快速响应
-      ay_max: 1.5
+      ax_max: 1.0 #加速度提高，高速时能快速响应
+      ay_max: 1.0
       az_max: 0.00001
 
-      ax_min: -3.5 #关键：制动力必须对称，高速下刹得住
-      ay_min: -3.5
+      ax_min: -1.0 #关键：制动力必须对称，高速下刹得住
+      ay_min: -1.0
       az_min: -0.00001
 
       iteration_count: 1
@@ -279,7 +279,7 @@ local_costmap:
     ros__parameters:
       update_frequency: 20.0
       publish_frequency: 20.0
-      global_frame: odom_nav
+      global_frame: odom
       robot_base_frame: base_link
       use_sim_time: true
       rolling_window: true
@@ -412,7 +412,7 @@ global_costmap:
     ros__parameters:
       update_frequency: 1.0
       publish_frequency: 1.0
-      global_frame: map_nav
+      global_frame: map
       robot_base_frame: base_link
       use_sim_time: true
       robot_radius: 0.1
@@ -587,7 +587,7 @@ behavior_server:
       plugin: "nav2_behaviors/Wait"
     assisted_teleop:
       plugin: "nav2_behaviors/AssistedTeleop"
-    global_frame: odom_nav
+    global_frame: odom
     robot_base_frame: base_link
     transform_tolerance: 0.1
     use_sim_time: true
