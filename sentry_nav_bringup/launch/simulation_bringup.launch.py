@@ -18,9 +18,11 @@ def generate_launch_description():
         'savedmap_params.yaml'
     ])
 
-    default_params_file = (
-        '/home/xli/catkin_ws/src/Sentry-Nav/navigation2/nav2_bringup/params/nav2_params.yaml'
-    )
+    default_params_file = PathJoinSubstitution([
+        FindPackageShare('sentry_nav_bringup'),
+        'config',
+        'nav2_params.yaml'
+    ])
 
     fake_odom_map_node = Node(
         package='fake_msg',
