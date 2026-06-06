@@ -55,8 +55,10 @@ odin1_filter_node:
 map_publish:
   ros__parameters:
     use_sim_time: true
-    yaml_path: /home/xli/catkin_ws/src/sentry_description/maps/cad_map.yaml
-    #地图yaml文件路径,默认/home/xli/catkin_ws/src/Sentry-Nav/map/map_nav.yaml
+    #地图yaml文件路径
+    yaml_path: /home/xli/catkin_ws/src/Sentry-Nav/map/map_nav.yaml
+    #模拟器map路径
+    #yaml_path: /home/xli/catkin_ws/src/sentry_description/maps/cad_map.yaml
     topic_name: /map
     frame_id: map
     publish_period: 1.0

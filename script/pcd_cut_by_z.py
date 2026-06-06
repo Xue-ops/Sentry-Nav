@@ -3,9 +3,9 @@ import open3d as o3d
 import numpy as np
 
 # ========= 直接写死 =========
-INPUT_PCD = "/home/xli/MT20260517_235852-Cloud_Opt.pcd"
-OUTPUT_PCD = "/home/xli/0517_cut_up.pcd"
-Z_THRESHOLD = 0
+INPUT_PCD = "/home/xli/catkin_ws/src/mapping_relocalization/small_point_lio/pcd/scan_baselink.pcd"
+OUTPUT_PCD = "/home/xli/catkin_ws/src/mapping_relocalization/small_point_lio/pcd/scan_baselink_cut.pcd"
+Z_THRESHOLD = 1.0
 # ===========================
 
 pcd = o3d.io.read_point_cloud(INPUT_PCD)
