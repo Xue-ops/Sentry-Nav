@@ -41,10 +41,21 @@ const uint16_t CRC16_TABLE[256] = {
 
 struct __attribute__((packed)) CMDPacket
 {
-  uint8_t frame_head = 0x5a;
-  float velocity_x;
-  float velocity_y;
-  uint16_t crc;
+  uint8_t head[2] = {'S', 'P'}; // Must be {'S', 'P'};
+  uint8_t mode;  // 0: 不控制, 1: 控制云台但不开火，2: 控制云台且开火
+  uint8_t is_self_color_red;
+  float yaw;
+  float yaw_vel;
+  float yaw_acc;
+  float pitch;
+  float pitch_vel;
+  float pitch_acc;
+
+  float x_vel;
+  float y_vel;
+  uint8_t spintop_level;
+  
+  uint16_t crc16;
 
 };
 
@@ -70,7 +81,7 @@ public:
   : Node("simple_cmd_publish")
   {
     port_name_ = this->declare_parameter<std::string>("port_name", "/dev/ttyUSB0");
-    baud_rate_ = this->declare_parameter<int>("baud_rate", 115200);
+    baud_rate_ = this->declare_parameter<int>("baud_rate", 921600);
     cmd_vel_topic_ = this->declare_parameter<std::string>("cmd_vel_topic", "/cmd_vel");
 
     openSerial();
@@ -120,6 +131,8 @@ private:
         return B115200;
       case 230400:
         return B230400;
+      case 921600:
+        return B921600;
       default:
         return B115200;
     }
@@ -179,10 +192,25 @@ private:
   static CMDPacket makePacket(const double velocity_x, const double velocity_y)
   {
     CMDPacket packet;
-    packet.velocity_x = static_cast<float>(velocity_x);
-    packet.velocity_y = static_cast<float>(velocity_y);
-    packet.crc = get_crc16(
-    reinterpret_cast<uint8_t *>(&packet), sizeof(packet) - sizeof(packet.crc));
+    packet.mode = 0;
+    packet.is_self_color_red = 0;
+    packet.yaw = 0;
+    packet.yaw_vel = 0;
+    packet.yaw_acc = 0;
+    packet.pitch = 0;
+    packet.pitch_vel = 0;
+    packet.pitch_acc = 0;
+    packet.x_vel = static_cast<float>(velocity_x);
+    packet.y_vel = static_cast<float>(velocity_y);
+    RCLCPP_INFO(
+      rclcpp::get_logger("cmd_packet"),
+      "v_x is %f, v_y is %f",
+      packet.x_vel,
+      packet.y_vel
+    );
+    packet.spintop_level = 0;
+    packet.crc16 = get_crc16(
+    reinterpret_cast<uint8_t *>(&packet), sizeof(packet) - sizeof(packet.crc16));
     return packet;
   }
 

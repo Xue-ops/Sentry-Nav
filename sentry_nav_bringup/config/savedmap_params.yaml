@@ -32,6 +32,8 @@ lidar_filter_node:
     input_topic_2: /odin1/cloud_slam_filter
     output_topic_2: /odin1/cloud_slam_filtered
     crop_frame: base_link
+    z_filter_frame: odom
+    z_threshold: 1.0
     min_x: -0.3
     max_x: 0.3
     min_y: -0.3

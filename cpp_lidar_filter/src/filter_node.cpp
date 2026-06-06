@@ -1,4 +1,6 @@
 #include <chrono>
+#include <cmath>
+#include <cstring>
 #include <functional>
 #include <memory>
 #include <string>
@@ -8,6 +10,7 @@
 #include "visualization_msgs/msg/marker.hpp"
 
 #include "tf2/exceptions.h"
+#include "tf2/LinearMath/Transform.h"
 #include "tf2_ros/buffer.h"
 #include "tf2_ros/transform_listener.h"
 #include "tf2_sensor_msgs/tf2_sensor_msgs.hpp"
@@ -30,6 +33,9 @@ public:
     this->declare_parameter("input_topic_2", "/odin1/cloud_slam_filter");
     this->declare_parameter("output_topic_2", "/odin1/cloud_slam_filtered");
     this->declare_parameter("crop_frame", "map_corrected_base_link");
+    this->declare_parameter("z_filter_frame", "odom");
+    this->declare_parameter("z_threshold", 1.0);
+
     // 裁剪参数 (CropBox)
     this->declare_parameter("min_x", -0.3);
     this->declare_parameter("max_x", 0.3);
@@ -47,12 +53,18 @@ public:
     std::string input_topic_2 = this->get_parameter("input_topic_2").as_string();
     std::string output_topic_2 = this->get_parameter("output_topic_2").as_string();
     crop_frame_ = this->get_parameter("crop_frame").as_string();
+    z_filter_frame_ = this->get_parameter("z_filter_frame").as_string();
 
     RCLCPP_INFO(this->get_logger(), "Listening on: %s", input_topic.c_str());
     RCLCPP_INFO(this->get_logger(), "Publishing to: %s", output_topic.c_str());
     RCLCPP_INFO(this->get_logger(), "Listening on: %s", input_topic_2.c_str());
     RCLCPP_INFO(this->get_logger(), "Publishing to: %s", output_topic_2.c_str());
     RCLCPP_INFO(this->get_logger(), "Crop box frame: %s", crop_frame_.c_str());
+    RCLCPP_INFO(
+      this->get_logger(),
+      "Livox z filter frame: %s, keep z <= %.3f",
+      z_filter_frame_.c_str(),
+      this->get_parameter("z_threshold").as_double());
 
     pub_ = this->create_publisher<sensor_msgs::msg::PointCloud2>(
           output_topic, 10);
@@ -63,13 +75,13 @@ public:
     sub_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
       input_topic, rclcpp::SensorDataQoS(),
       [this](const sensor_msgs::msg::PointCloud2::SharedPtr msg) {
-        cloud_callback(msg, pub_);
+        cloud_callback(msg, pub_, true);
       });
 
     sub2_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
       input_topic_2, rclcpp::SensorDataQoS(),
       [this](const sensor_msgs::msg::PointCloud2::SharedPtr msg) {
-        cloud_callback(msg, pub2_);
+        cloud_callback(msg, pub2_, false);
       });
 
     timer_ = this->create_wall_timer(
@@ -77,6 +89,111 @@ public:
   }
 
 private:
+  bool getFloat32FieldOffset(
+    const sensor_msgs::msg::PointCloud2 & cloud,
+    const std::string & field_name,
+    size_t & offset) const
+  {
+    for (const auto & field : cloud.fields) {
+      if (field.name == field_name &&
+        field.datatype == sensor_msgs::msg::PointField::FLOAT32 &&
+        field.count >= 1)
+      {
+        offset = field.offset;
+        return true;
+      }
+    }
+    return false;
+  }
+
+  void filterByZPlaneInPlace(
+    sensor_msgs::msg::PointCloud2 & cloud,
+    const geometry_msgs::msg::TransformStamped & tf_crop_to_z_filter,
+    const double z_threshold) const
+  {
+    size_t x_offset = 0;
+    size_t y_offset = 0;
+    size_t z_offset = 0;
+    if (!getFloat32FieldOffset(cloud, "x", x_offset) ||
+      !getFloat32FieldOffset(cloud, "y", y_offset) ||
+      !getFloat32FieldOffset(cloud, "z", z_offset))
+    {
+      RCLCPP_WARN(
+        this->get_logger(),
+        "Cannot apply z plane filter: point cloud fields x/y/z must be FLOAT32");
+      return;
+    }
+    if (x_offset + sizeof(float) > cloud.point_step ||
+      y_offset + sizeof(float) > cloud.point_step ||
+      z_offset + sizeof(float) > cloud.point_step)
+    {
+      RCLCPP_WARN(
+        this->get_logger(),
+        "Cannot apply z plane filter: point cloud x/y/z offsets exceed point_step");
+      return;
+    }
+
+    tf2::Transform T_z_filter_crop;
+    T_z_filter_crop.setOrigin(tf2::Vector3(
+      tf_crop_to_z_filter.transform.translation.x,
+      tf_crop_to_z_filter.transform.translation.y,
+      tf_crop_to_z_filter.transform.translation.z));
+    T_z_filter_crop.setRotation(tf2::Quaternion(
+      tf_crop_to_z_filter.transform.rotation.x,
+      tf_crop_to_z_filter.transform.rotation.y,
+      tf_crop_to_z_filter.transform.rotation.z,
+      tf_crop_to_z_filter.transform.rotation.w));
+    const tf2::Vector3 z_axis_in_crop = T_z_filter_crop.getBasis().getRow(2);
+    const double plane_offset = T_z_filter_crop.getOrigin().z() - z_threshold;
+
+    sensor_msgs::msg::PointCloud2 filtered = cloud;
+    filtered.height = 1;
+    filtered.width = 0;
+    filtered.row_step = 0;
+    filtered.is_dense = false;
+    filtered.data.resize(
+      static_cast<size_t>(cloud.width) * static_cast<size_t>(cloud.height) * cloud.point_step);
+
+    size_t kept_points = 0;
+    for (uint32_t row = 0; row < cloud.height; ++row) {
+      const size_t row_start = static_cast<size_t>(row) * cloud.row_step;
+      for (uint32_t col = 0; col < cloud.width; ++col) {
+        const size_t point_start = row_start + static_cast<size_t>(col) * cloud.point_step;
+        if (point_start + cloud.point_step > cloud.data.size()) {
+          continue;
+        }
+
+        float x = 0.0f;
+        float y = 0.0f;
+        float z = 0.0f;
+        std::memcpy(&x, &cloud.data[point_start + x_offset], sizeof(float));
+        std::memcpy(&y, &cloud.data[point_start + y_offset], sizeof(float));
+        std::memcpy(&z, &cloud.data[point_start + z_offset], sizeof(float));
+
+        if (!std::isfinite(x) || !std::isfinite(y) || !std::isfinite(z)) {
+          continue;
+        }
+
+        const double z_in_filter_frame =
+          z_axis_in_crop.x() * x +
+          z_axis_in_crop.y() * y +
+          z_axis_in_crop.z() * z +
+          plane_offset;
+
+        if (z_in_filter_frame <= 0.0) {
+          const size_t output_start = kept_points * cloud.point_step;
+          std::memcpy(&filtered.data[output_start], &cloud.data[point_start], cloud.point_step);
+          ++kept_points;
+        }
+      }
+    }
+
+    filtered.width = static_cast<uint32_t>(kept_points);
+    filtered.row_step = filtered.width * filtered.point_step;
+    filtered.data.resize(filtered.row_step);
+    cloud = std::move(filtered);
+  }
+
   void publish_marker() {
     double min_x = this->get_parameter("min_x").as_double();
     double max_x = this->get_parameter("max_x").as_double();
@@ -114,9 +231,11 @@ private:
 
   void cloud_callback(
     const sensor_msgs::msg::PointCloud2::SharedPtr msg,
-    const rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr & publisher)
+    const rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr & publisher,
+    const bool apply_z_filter)
   {
     crop_frame_ = this->get_parameter("crop_frame").as_string();
+    z_filter_frame_ = this->get_parameter("z_filter_frame").as_string();
 
     try {
       auto tf_cloud_to_crop = tf_buffer_.lookupTransform(
@@ -167,6 +286,18 @@ private:
       pcl_conversions::fromPCL(*cloud_filtered, output_in_crop_frame);
       output_in_crop_frame.header = cloud_in_crop_frame.header;
 
+      if (apply_z_filter) {
+        auto tf_crop_to_z_filter = tf_buffer_.lookupTransform(
+          z_filter_frame_,
+          crop_frame_,
+          rclcpp::Time(0),
+          rclcpp::Duration::from_seconds(0.1));
+        filterByZPlaneInPlace(
+          output_in_crop_frame,
+          tf_crop_to_z_filter,
+          this->get_parameter("z_threshold").as_double());
+      }
+
       auto tf_crop_to_cloud = tf_buffer_.lookupTransform(
         msg->header.frame_id,
         crop_frame_,
@@ -193,6 +324,7 @@ private:
   }
 
   std::string crop_frame_;
+  std::string z_filter_frame_;
 
   rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr sub_;
   rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pub_;
