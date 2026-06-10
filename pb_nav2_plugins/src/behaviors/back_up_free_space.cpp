@@ -51,13 +51,13 @@ void BackUpFreeSpace::onCleanup()
   marker_pub_.reset();
 }
 
-nav2_behaviors::Status BackUpFreeSpace::onRun(
+nav2_behaviors::ResultStatus BackUpFreeSpace::onRun(
   const std::shared_ptr<const BackUpAction::Goal> command)
 {
   while (!costmap_client_->wait_for_service(std::chrono::seconds(1))) {
     if (!rclcpp::ok()) {
       RCLCPP_ERROR(logger_, "Interrupted while waiting for the service. Exiting.");
-      return nav2_behaviors::Status::FAILED;
+      return nav2_behaviors::ResultStatus{nav2_behaviors::Status::FAILED, BackUpAction::Result::NONE};
     }
     RCLCPP_WARN(logger_, "service not available, waiting again...");
   }
@@ -66,7 +66,7 @@ nav2_behaviors::Status BackUpFreeSpace::onRun(
   auto result = costmap_client_->async_send_request(request);
   if (result.wait_for(std::chrono::seconds(1)) == std::future_status::timeout) {
     RCLCPP_ERROR(logger_, "Interrupted while waiting for the service. Exiting.");
-    return nav2_behaviors::Status::FAILED;
+    return nav2_behaviors::ResultStatus{nav2_behaviors::Status::FAILED, BackUpAction::Result::NONE};
   }
 
   // get costmap
@@ -75,7 +75,7 @@ nav2_behaviors::Status BackUpFreeSpace::onRun(
   if (!nav2_util::getCurrentPose(
         initial_pose_, *tf_, global_frame_, robot_base_frame_, transform_tolerance_)) {
     RCLCPP_ERROR(logger_, "Initial robot pose is not available.");
-    return nav2_behaviors::Status::FAILED;
+    return nav2_behaviors::ResultStatus{nav2_behaviors::Status::FAILED, BackUpAction::Result::NONE};
   }
 
   // get current pose
@@ -98,15 +98,15 @@ nav2_behaviors::Status BackUpFreeSpace::onRun(
   if (!nav2_util::getCurrentPose(
         initial_pose_, *tf_, global_frame_, robot_base_frame_, transform_tolerance_)) {
     RCLCPP_ERROR(logger_, "Initial robot pose is not available.");
-    return nav2_behaviors::Status::FAILED;
+    return nav2_behaviors::ResultStatus{nav2_behaviors::Status::FAILED, 0};
   }
   RCLCPP_WARN(
     logger_, "backing up %f meters towards free space at angle %f", command_x_, best_angle);
 
-  return nav2_behaviors::Status::SUCCEEDED;
+  return nav2_behaviors::ResultStatus{nav2_behaviors::Status::SUCCEEDED, 0};
 }
 
-nav2_behaviors::Status BackUpFreeSpace::onCycleUpdate()
+nav2_behaviors::ResultStatus BackUpFreeSpace::onCycleUpdate()
 {
   rclcpp::Duration time_remaining = end_time_ - clock_->now();
   if (time_remaining.seconds() < 0.0 && command_time_allowance_.seconds() > 0.0) {
@@ -115,14 +115,14 @@ nav2_behaviors::Status BackUpFreeSpace::onCycleUpdate()
       logger_,
       "Exceeded time allowance before reaching the "
       "DriveOnHeading goal - Exiting DriveOnHeading");
-    return nav2_behaviors::Status::FAILED;
+    return nav2_behaviors::ResultStatus{nav2_behaviors::Status::FAILED, 0};
   }
 
   geometry_msgs::msg::PoseStamped current_pose;
   if (!nav2_util::getCurrentPose(
         current_pose, *tf_, global_frame_, robot_base_frame_, transform_tolerance_)) {
     RCLCPP_ERROR(logger_, "Current robot pose is not available.");
-    return nav2_behaviors::Status::FAILED;
+    return nav2_behaviors::ResultStatus{nav2_behaviors::Status::FAILED, 0};
   }
 
   float diff_x = initial_pose_.pose.position.x - current_pose.pose.position.x;
@@ -134,7 +134,7 @@ nav2_behaviors::Status BackUpFreeSpace::onCycleUpdate()
 
   if (distance >= std::fabs(command_x_)) {
     stopRobot();
-    return nav2_behaviors::Status::SUCCEEDED;
+    return nav2_behaviors::ResultStatus{nav2_behaviors::Status::SUCCEEDED, 0};
   }
 
   auto cmd_vel = std::make_unique<geometry_msgs::msg::Twist>();
@@ -146,15 +146,23 @@ nav2_behaviors::Status BackUpFreeSpace::onCycleUpdate()
   pose.y = current_pose.pose.position.y;
   pose.theta = tf2::getYaw(current_pose.pose.orientation);
 
-  if (!isCollisionFree(distance, cmd_vel.get(), pose)) {
+  if (!isCollisionFree(distance, *cmd_vel, pose)) {
     stopRobot();
     RCLCPP_WARN(logger_, "Collision Ahead - Exiting DriveOnHeading");
-    return nav2_behaviors::Status::FAILED;
+    return nav2_behaviors::ResultStatus{nav2_behaviors::Status::FAILED, 0};
   }
 
-  vel_pub_->publish(std::move(cmd_vel));
+  auto stamped_cmd =
+  std::make_unique<geometry_msgs::msg::TwistStamped>();
 
-  return nav2_behaviors::Status::RUNNING;
+stamped_cmd->header.stamp = clock_->now();
+stamped_cmd->header.frame_id = local_frame_;
+
+stamped_cmd->twist = *cmd_vel;
+
+vel_pub_->publish(std::move(stamped_cmd));
+
+  return nav2_behaviors::ResultStatus{nav2_behaviors::Status::RUNNING, 0};
 }
 
 float BackUpFreeSpace::findBestDirection(

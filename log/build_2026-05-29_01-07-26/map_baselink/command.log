@@ -1,4 +1,0 @@
-Invoking command in '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/xli/catkin_ws/src/Sentry-Nav/map_baselink -DCMAKE_INSTALL_PREFIX=/home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink
-Invoked command in '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/xli/catkin_ws/src/Sentry-Nav/map_baselink -DCMAKE_INSTALL_PREFIX=/home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink
-Invoking command in '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink -- -j20 -l20
-Invoked command in '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink' returned '2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink -- -j20 -l20

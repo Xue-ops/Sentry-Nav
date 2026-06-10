@@ -9,6 +9,7 @@
 #include <string>
 #include <utility>
 #include <pcl/filters/radius_outlier_removal.h>
+#include <pcl/common/transforms.h>
 #include <pcl/filters/conditional_removal.h>
 
 #include "grid_map_demos/PointCloud2ToGridmapDemo.hpp"

@@ -27,9 +27,9 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 #include <octomap_server/octomap_server.hpp>
-
-#include <tf2_eigen/tf2_eigen.h>
-#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
+#include <pcl/common/transforms.h>
+#include <tf2_eigen/tf2_eigen.hpp>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 
 #include <algorithm>
 #include <limits>
@@ -1110,7 +1110,7 @@ void OctomapServer::filterGroundPlane(
       second_pass.setFilterLimits(-ground_filter_plane_distance_, ground_filter_plane_distance_);
       second_pass.setInputCloud(pc.makeShared());
       second_pass.filter(ground);
-      second_pass.setFilterLimitsNegative(true);
+      second_pass.setNegative(true);
       second_pass.filter(nonground);
     }
     // debug:

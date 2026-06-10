@@ -1,2 +1,0 @@
-Invoking command in '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink': /usr/bin/cmake /home/xli/catkin_ws/src/Sentry-Nav/map_baselink -DCMAKE_INSTALL_PREFIX=/home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink
-Invoked command in '/home/xli/catkin_ws/src/Sentry-Nav/build/map_baselink' returned '1': /usr/bin/cmake /home/xli/catkin_ws/src/Sentry-Nav/map_baselink -DCMAKE_INSTALL_PREFIX=/home/xli/catkin_ws/src/Sentry-Nav/install/map_baselink

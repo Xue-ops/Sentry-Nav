@@ -16,7 +16,7 @@ public:
   : Node("pcd_publisher", options)
   {
     // ---- parameters ----
-    this->declare_parameter<std::string>("pcd_file", "");
+    this->declare_parameter<std::string>("pcd_path", "");
     this->declare_parameter<std::string>("frame_id", "map");
     this->declare_parameter<std::string>("topic", "/pcd_cloud");
     this->declare_parameter<double>("leaf_size", 0.03);
@@ -98,7 +98,7 @@ int main(int argc, char **argv)
   rclcpp::init(argc, argv);
 
   rclcpp::NodeOptions options;
-  options.automatically_declare_parameters_from_overrides(true);
+  // options.automatically_declare_parameters_from_overrides(true);
 
   rclcpp::spin(std::make_shared<PCDPublisher>(options));
   return 0;

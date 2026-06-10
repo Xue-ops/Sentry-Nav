@@ -21,6 +21,7 @@ grid_map_package()
 ## Specify additional locations of header files
 include_directories(
   include
+  ${cv_bridge_INCLUDE_DIRS}
 )
 
 set(dependencies
@@ -41,6 +42,10 @@ set(dependencies
 add_library(${PROJECT_NAME} SHARED
   src/GridMapCvProcessing.cpp
   src/InpaintFilter.cpp
+)
+target_compile_options(${PROJECT_NAME} PRIVATE
+  -Wno-error=stringop-overflow
+  -Wno-error=array-bounds
 )
 
 ament_target_dependencies(${PROJECT_NAME} SYSTEM
