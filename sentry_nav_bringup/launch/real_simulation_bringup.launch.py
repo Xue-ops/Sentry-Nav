@@ -17,7 +17,7 @@ def generate_launch_description():
     ])
 
     default_params_file = (
-        '/home/xli/catkin_ws/src/Sentry-Nav/navigation2/nav2_bringup/params/nav2_params.yaml'
+        '/home/melodywu/sentry_test_ws/src/Sentry-Nav/navigation2/nav2_bringup/params/nav2_params.yaml'
     )
 
     simulation_bringup = IncludeLaunchDescription(

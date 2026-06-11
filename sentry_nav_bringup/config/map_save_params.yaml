@@ -1,6 +1,6 @@
 pcd_to_gridmap:
   ros__parameters:
-    pcd_file_path: "/home/xli/catkin_ws/src/mapping_relocalization/small_point_lio/pcd/scan_baselink_cut.pcd"
+    pcd_file_path: "/home/melodywu/sentry_test_ws/src/mapping_relocalization/small_point_lio/pcd/scan_baselink_cut.pcd"
     map_frame_id: "map"
     filters:
       filter1:  # Fill holes in the map with inpainting.
