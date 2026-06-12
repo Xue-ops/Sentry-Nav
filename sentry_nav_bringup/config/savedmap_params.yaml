@@ -32,7 +32,7 @@ lidar_filter_node:
     input_topic_2: /odin1/cloud_slam_filter
     output_topic_2: /odin1/cloud_slam_filtered
     crop_frame: base_link
-    z_filter_frame: odom
+    z_filter_frame: base_link
     z_threshold: 1.0
     min_x: -0.3
     max_x: 0.3
@@ -56,7 +56,7 @@ map_publish:
   ros__parameters:
     use_sim_time: true
     #地图yaml文件路径
-    yaml_path: /home/melodywu/sentry_test_ws/src/Sentry-Nav/map/map_nav.yaml
+    yaml_path: /home/wele/ros_ws/src/Sentry-Nav/map/map_nav.yaml
     #模拟器map路径
     #yaml_path: /home/xli/catkin_ws/src/sentry_description/maps/cad_map.yaml
     topic_name: /map

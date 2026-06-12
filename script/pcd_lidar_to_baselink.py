@@ -31,10 +31,10 @@ TYPE_MAP = {
 }
 
 DEFAULT_INPUT_PCD = (
-    "/home/xli/catkin_ws/src/mapping_relocalization/small_point_lio/pcd/scan.pcd"
+    "/home/wele/ros_ws/src/Mapping-and-Relocalization/small_point_lio/pcd/scan.pcd"
 )
 DEFAULT_OUTPUT_PCD = (
-    "/home/xli/catkin_ws/src/mapping_relocalization/small_point_lio/pcd/scan_baselink.pcd"
+    "/home/wele/ros_ws/src/Mapping-and-Relocalization/small_point_lio/pcd/scan_baselink.pcd"
 )
 DEFAULT_TF_BASELINK_LIDAR = [
     0.0025, -0.13509, 0.29325, 0.0, 0.382684, -0.923879, 0.0

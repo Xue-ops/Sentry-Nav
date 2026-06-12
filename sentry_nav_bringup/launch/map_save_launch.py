@@ -1,9 +1,10 @@
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, GroupAction, SetEnvironmentVariable
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
+import os
 
 def generate_launch_description():
     map_params_file = LaunchConfiguration('map_params_file')
@@ -12,19 +13,32 @@ def generate_launch_description():
         'config',
         'map_save_params.yaml'
     ])
+    ld_library_path_no_mvs = ":".join(
+        p for p in os.environ.get("LD_LIBRARY_PATH", "").split(":")
+        if p and "/opt/MVS" not in p
+    )
 
-    grid_map_bringup_node = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            PathJoinSubstitution([
-                FindPackageShare('grid_map_demos'),
-                'launch',
-                'pcd_to_gridmap_demo_launch.py'
-            ])
-        ),
-        launch_arguments={
-            'use_sim_time': 'false',
-            'param_file': map_params_file,
-        }.items()
+    grid_map_bringup_node = GroupAction(
+        actions=[
+            SetEnvironmentVariable(
+                name="LD_LIBRARY_PATH",
+                value=ld_library_path_no_mvs,
+            ),
+
+            IncludeLaunchDescription(
+                PythonLaunchDescriptionSource(
+                    PathJoinSubstitution([
+                        FindPackageShare('grid_map_demos'),
+                        'launch',
+                        'pcd_to_gridmap_demo_launch.py'
+                    ])
+                ),
+                launch_arguments={
+                    'use_sim_time': 'false',
+                    'param_file': map_params_file,
+                }.items()
+            ),
+        ]
     )
     return LaunchDescription([
         DeclareLaunchArgument(
