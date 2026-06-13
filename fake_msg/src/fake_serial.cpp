@@ -74,22 +74,21 @@ uint16_t get_crc16(const uint8_t * data, uint32_t len)
   return crc16;
 }
 
-class SimpleCmdPublish : public rclcpp::Node
+class FakeSerial : public rclcpp::Node
 {
 public:
-  SimpleCmdPublish()
-  : Node("simple_cmd_publish")
+  FakeSerial()
+  : Node("fake_serial")
   {
     port_name_ = this->declare_parameter<std::string>("port_name", "/dev/ttyUSB0");
     baud_rate_ = this->declare_parameter<int>("baud_rate", 921600);
-    cmd_vel_topic_ = this->declare_parameter<std::string>("cmd_vel_topic", "/cmd_vel_smoothed");
+    cmd_vel_topic_ = this->declare_parameter<std::string>("cmd_vel_topic", "/cmd_vel_nav");
 
     openSerial();
 
-    cmd_vel_sub_ = this->create_subscription<geometry_msgs::msg::Twist>(
-      cmd_vel_topic_,
-      rclcpp::QoS(10),
-      std::bind(&SimpleCmdPublish::cmdVelCallback, this, std::placeholders::_1));
+    timercallback_handle_ = this->create_wall_timer(
+      std::chrono::milliseconds(100),
+      std::bind(&FakeSerial::timerCallback, this));
 
     RCLCPP_INFO(
       this->get_logger(),
@@ -99,7 +98,7 @@ public:
       baud_rate_);
   }
 
-  ~SimpleCmdPublish() override
+  ~FakeSerial() override
   {
     if (serial_fd_ >= 0) {
       close(serial_fd_);
@@ -114,7 +113,7 @@ private:
   int baud_rate_;
   int serial_fd_{-1};
 
-  rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_sub_;
+  rclcpp::TimerBase::SharedPtr timercallback_handle_;
 
   static speed_t baudRateToFlag(const int baud_rate)
   {
@@ -214,7 +213,7 @@ private:
     return packet;
   }
 
-  void cmdVelCallback(const geometry_msgs::msg::Twist::SharedPtr msg)
+  void timerCallback()
   {
     if (serial_fd_ < 0) {
       openSerial();
@@ -223,7 +222,7 @@ private:
       }
     }
 
-    const CMDPacket packet = makePacket(msg->linear.x, msg->linear.y);
+    const CMDPacket packet = makePacket(0.0, 0.0);
     const ssize_t written = write(serial_fd_, &packet, sizeof(packet));
     if (written != static_cast<ssize_t>(sizeof(packet))) {
       RCLCPP_WARN(
@@ -238,7 +237,7 @@ private:
 int main(int argc, char ** argv)
 {
   rclcpp::init(argc, argv);
-  auto node = std::make_shared<SimpleCmdPublish>();
+  auto node = std::make_shared<FakeSerial>();
   rclcpp::spin(node);
   rclcpp::shutdown();
   return 0;

@@ -1,6 +1,6 @@
 nav_identity_bridge:
   ros__parameters:
-    use_sim_time: true
+    use_sim_time: false
     map_frame: map
     nav_map_frame: map_nav
     nav_odom_frame: odom_nav
@@ -8,7 +8,7 @@ nav_identity_bridge:
 
 map_to_baselink_node:
   ros__parameters:
-    use_sim_time: true
+    use_sim_time: false
     odom_frame: odom
     odom_nav_frame: odom_nav
     map_frame: map
@@ -26,7 +26,7 @@ map_to_baselink_node:
 
 lidar_filter_node:
   ros__parameters:
-    use_sim_time: true
+    use_sim_time: false
     input_topic: /livox/lidar
     output_topic: /livox/lidar_filtered
     input_topic_2: /odin1/cloud_slam_filter
@@ -46,7 +46,7 @@ lidar_filter_node:
 
 odin1_filter_node:
   ros__parameters:
-    use_sim_time: true
+    use_sim_time: false
     input_topic: /odin1/cloud_slam
     output_topic: /odin1/cloud_slam_filter
     z_threshold: 1.0
@@ -54,7 +54,7 @@ odin1_filter_node:
 
 map_publish:
   ros__parameters:
-    use_sim_time: true
+    use_sim_time: false
     #地图yaml文件路径
     yaml_path: /home/wele/ros_ws/src/Sentry-Nav/map/map_nav.yaml
     #模拟器map路径
@@ -65,4 +65,4 @@ map_publish:
 
 rviz2_savedmap_nav:
   ros__parameters:
-    use_sim_time: true
+    use_sim_time: false

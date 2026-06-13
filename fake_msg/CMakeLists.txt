@@ -20,11 +20,17 @@ find_package(rclcpp REQUIRED)
 include_directories(include)
 
 add_executable(simple_cmd_publish src/simple_cmd_publish.cpp)
+add_executable(fake_serial src/fake_serial.cpp)
 
 add_executable(fake_odom_map src/fake_odom_map.cpp)
 add_executable(fake_tf src/fake_tf.cpp)
 
 ament_target_dependencies(simple_cmd_publish
+  geometry_msgs
+  rclcpp
+)
+
+ament_target_dependencies(fake_serial
   geometry_msgs
   rclcpp
 )
@@ -45,6 +51,7 @@ ament_target_dependencies(fake_tf
 
 install(TARGETS
   simple_cmd_publish
+  fake_serial
   fake_odom_map
   fake_tf
   DESTINATION lib/${PROJECT_NAME}
