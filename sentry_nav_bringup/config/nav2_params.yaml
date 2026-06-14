@@ -104,7 +104,7 @@ controller_server:
     general_goal_checker:
       stateful: True
       plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 0.5
+      xy_goal_tolerance: 0.2
       yaw_goal_tolerance: 6.28
     FollowPath:
       #MPPI param
@@ -130,12 +130,12 @@ controller_server:
       vy_min: -1.0
       wz_min: -0.00001
 
-      ax_max: 1.0 #加速度提高，高速时能快速响应
-      ay_max: 1.0
+      ax_max: 10.0 #加速度提高，高速时能快速响应
+      ay_max: 10.0
       az_max: 0.00001
 
-      ax_min: -1.0 #关键：制动力必须对称，高速下刹得住
-      ay_min: -1.0
+      ax_min: -10.0 #关键：制动力必须对称，高速下刹得住
+      ay_min: -10.0
       az_min: -0.00001
 
       iteration_count: 1
@@ -171,7 +171,7 @@ controller_server:
         critical_weight: 40.0 #近距离障碍物惩罚
         consider_footprint: false #用圆形近似，omni机器人更高效
         collision_cost: 10000.0
-        collision_margin_distance: 0.3 #碰撞边界余量
+        collision_margin_distance: 0.5 #碰撞边界余量
         near_goal_distance: 0.5
 
       CostCritic: #通过 costmap 梯度引导避障
@@ -261,7 +261,7 @@ local_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 5.0
-        inflation_radius: 0.28
+        inflation_radius: 0.3
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
         enabled: True
