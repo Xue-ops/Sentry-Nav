@@ -104,15 +104,15 @@ controller_server:
     general_goal_checker:
       stateful: True
       plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 0.2
+      xy_goal_tolerance: 0.1
       yaw_goal_tolerance: 6.28
     FollowPath:
       #MPPI param
       plugin: "goal_approach_controller::GoalApproachController"
       inner_plugin: "nav2_mppi_controller::MPPIController"
-      approach_distance: 1.0  #距目标时开始限速
+      approach_distance: 0.0  #距目标时开始限速
       approach_velocity: 0.8 #限速值
-      direct_approach_distance: 0.5  #进入直接驱动模式的距离，绕过MPPI防止画弧
+      direct_approach_distance: 0.0  #进入直接驱动模式的距离，绕过MPPI防止画弧
       direct_approach_kp: 3.0  #直接驱动P控制增益
       time_steps: 80  #增加到80，预测时域4.8s，让MPPI能看到冲过目标的后果
       model_dt: 0.05  #稍微放大步长，配合time_steps延长预测时域
@@ -122,20 +122,20 @@ controller_server:
       vy_std: 0.3
       wz_std: 0.00001
 
-      vx_max: 1.0
-      vy_max: 1.0
+      vx_max: 1.2
+      vy_max: 1.2
       wz_max: 0.00001
 
-      vx_min: -1.0
-      vy_min: -1.0
+      vx_min: -1.2
+      vy_min: -1.2
       wz_min: -0.00001
 
-      ax_max: 10.0 #加速度提高，高速时能快速响应
-      ay_max: 10.0
+      ax_max: 40.0 #加速度提高，高速时能快速响应
+      ay_max: 40.0
       az_max: 0.00001
 
-      ax_min: -10.0 #关键：制动力必须对称，高速下刹得住
-      ay_min: -10.0
+      ax_min: -40.0 #关键：制动力必须对称，高速下刹得住
+      ay_min: -40.0
       az_min: -0.00001
 
       iteration_count: 1
@@ -162,16 +162,16 @@ controller_server:
       GoalCritic: #必须开启，否则机器人没有到达目标的动力
         enabled: true
         cost_power: 1
-        cost_weight: 5.0 #提高权重，增强最终接近阶段的目标吸引力，防止弧线绕圈
+        cost_weight: 3.0 #提高权重，增强最终接近阶段的目标吸引力，防止弧线绕圈
         threshold_to_consider: 4.0
       ObstaclesCritic: #开启提供额外的障碍物排斥力
         enabled: true
         cost_power: 1
         repulsion_weight: 1.0 #排斥权重
-        critical_weight: 40.0 #近距离障碍物惩罚
+        critical_weight: 20.0 #近距离障碍物惩罚
         consider_footprint: false #用圆形近似，omni机器人更高效
         collision_cost: 10000.0
-        collision_margin_distance: 0.5 #碰撞边界余量
+        collision_margin_distance: 0.3 #碰撞边界余量
         near_goal_distance: 0.5
 
       CostCritic: #通过 costmap 梯度引导避障

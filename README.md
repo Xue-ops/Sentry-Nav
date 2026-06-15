@@ -93,6 +93,8 @@ ros2 launch waypoint_editor waypoint_through_nav2.launch.py waypoint_file:=/home
 ros2 service call /start_waypoint_through std_srvs/srv/Trigger
 ```
 
+TODO: add republihser for imu with new header (maybe not needed, work well with one mid)
+
 ros2 run livox_ros_driver2 livox_ros_driver2_node \
   --ros-args \
   -r __node:=mid360_front_driver \

@@ -27,7 +27,7 @@ map_to_baselink_node:
 lidar_filter_node:
   ros__parameters:
     use_sim_time: false
-    input_topic: /livox/lidar
+    input_topic: /mid360_front/lidar
     output_topic: /livox/lidar_filtered
     input_topic_2: /odin1/cloud_slam_filter
     output_topic_2: /odin1/cloud_slam_filtered
