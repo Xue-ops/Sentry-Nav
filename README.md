@@ -93,7 +93,15 @@ ros2 launch waypoint_editor waypoint_through_nav2.launch.py waypoint_file:=/home
 ros2 service call /start_waypoint_through std_srvs/srv/Trigger
 ```
 
-TODO:
-not use map_baselink, add tf transfer on the relocaliaztion packages not this packages.
-Need write new launch and config
-transfer back map_nav, odom_nav to map, odom
+ros2 run livox_ros_driver2 livox_ros_driver2_node \
+  --ros-args \
+  -r __node:=mid360_front_driver \
+  -p user_config_path:=/home/wele/ros_ws/src/Sentry-Nav/sentry_nav_bringup/config/mid_front_params.json \
+  -p xfer_format:=0 \
+  -p multi_topic:=0 \
+  -p data_src:=0 \
+  -p publish_freq:=10.0 \
+  -p output_type:=0 \
+  -p frame_id:=mid360_front_frame \
+  -r /livox/lidar:=/mid360_front/lidar \
+  -r /livox/imu:=/mid360_front/imu
