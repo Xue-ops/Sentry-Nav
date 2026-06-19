@@ -107,3 +107,16 @@ ros2 run livox_ros_driver2 livox_ros_driver2_node \
   -p frame_id:=mid360_front_frame \
   -r /livox/lidar:=/mid360_front/lidar \
   -r /livox/imu:=/mid360_front/imu
+
+ros2 run livox_ros_driver2 livox_ros_driver2_node \
+--ros-args \
+-r __node:=mid360_back_driver \
+-p user_config_path:=/home/wele/ros_ws/src/Sentry-Nav/sentry_nav_bringup/config/mid_back_params.json \
+-p xfer_format:=0 \
+-p multi_topic:=0 \
+-p data_src:=0 \
+-p publish_freq:=10.0 \
+-p output_type:=0 \
+-p frame_id:=mid360_back_frame \
+-r /livox/lidar:=/mid360_back/lidar \
+-r /livox/imu:=/mid360_back/imu
