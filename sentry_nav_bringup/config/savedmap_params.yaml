@@ -44,6 +44,16 @@ lidar_filter_node:
     use_voxel: false
     leaf_size: 0.05
 
+dual_lidar_republisher:
+  ros__parameters:
+    use_sim_time: false
+    front_input_topic: /livox/lidar_192_168_1_188
+    front_output_topic: /mid360_front/lidar
+    front_frame_id: mid360_front_frame
+    back_input_topic: /livox/lidar_192_168_1_182
+    back_output_topic: /mid360_back/lidar
+    back_frame_id: mid360_back_frame
+
 odin1_filter_node:
   ros__parameters:
     use_sim_time: false

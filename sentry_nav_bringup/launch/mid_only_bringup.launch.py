@@ -81,6 +81,16 @@ def generate_launch_description():
 
         Node(
             package='cpp_lidar_filter',
+            executable='dual_lidar_republisher',
+            name='dual_lidar_republisher',
+            output='screen',
+            parameters=[map_params_file, {
+                'use_sim_time': use_sim_time
+            }]
+        ),
+
+        Node(
+            package='cpp_lidar_filter',
             executable='lidar_filter_node',
             name='lidar_filter_node',
             output='screen',

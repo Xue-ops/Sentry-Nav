@@ -39,9 +39,13 @@ ament_target_dependencies(odin1_filter_node
 target_link_libraries(odin1_filter_node ${PCL_LIBRARIES})
 target_include_directories(odin1_filter_node PUBLIC ${PCL_INCLUDE_DIRS})
 
+add_executable(dual_lidar_republisher src/dual_lidar_republisher.cpp)
+ament_target_dependencies(dual_lidar_republisher rclcpp sensor_msgs)
+
 install(TARGETS
         lidar_filter_node
         odin1_filter_node
+        dual_lidar_republisher
         DESTINATION lib/${PROJECT_NAME}
 )
 
