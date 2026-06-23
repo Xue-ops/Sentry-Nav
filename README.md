@@ -1,5 +1,5 @@
 Publish pcd to rviz2
-ros2 run graph_show pcd_publisher --ros-args -p pcd_path:=/home/xli/catkin_ws/src/mapping_relocalization/small_point_lio/pcd/scan_baselink_cut.pcd
+ros2 run graph_show pcd_publisher --ros-args -p pcd_path:=/home/wele/ros_ws/src/Mapping-and-Relocalization/small_point_lio/pcd/scan_baselink_cut.pcd
 
 For map->odom->baselink tf link (need in order)
 colcon build --packages-select map_baselink
@@ -120,3 +120,14 @@ ros2 run livox_ros_driver2 livox_ros_driver2_node \
 -p frame_id:=mid360_back_frame \
 -r /livox/lidar:=/mid360_back/lidar \
 -r /livox/imu:=/mid360_back/imu
+
+ros2 run livox_ros_driver2 livox_ros_driver2_node \
+  --ros-args \
+  -r __node:=mid360_dual_driver \
+  -p user_config_path:=/home/wele/ros_ws/src/Sentry-Nav/sentry_nav_bringup/config/mid_mix_params.json \
+  -p xfer_format:=0 \
+  -p multi_topic:=1 \
+  -p data_src:=0 \
+  -p publish_freq:=10.0 \
+  -p output_type:=0 \
+  -p frame_id:=livox_frame

@@ -37,7 +37,7 @@ DEFAULT_OUTPUT_PCD = (
     "/home/wele/ros_ws/src/Mapping-and-Relocalization/small_point_lio/pcd/scan_baselink.pcd"
 )
 DEFAULT_TF_BASELINK_LIDAR = [
-    0.0025, -0.13509, 0.29325, 0.0, 0.382684, -0.923879, 0.0
+    -0.000500, 0.143336, 0.353036, -0.382684, 0.0, 0.0, 0.923879
 ]
 
 

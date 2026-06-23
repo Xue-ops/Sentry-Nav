@@ -27,14 +27,14 @@ public:
     tf_buffer_(this->get_clock()),
     tf_listener_(tf_buffer_)
   {
-    this->declare_parameter("input_topic", "/livox/lidar");
-    this->declare_parameter("output_topic", "/livox/lidar_filtered");
+    this->declare_parameter("input_topic", "/mid360_front/lidar");
+    this->declare_parameter("output_topic", "/mid360_front/lidar_filtered");
 
     this->declare_parameter("input_topic_2", "/odin1/cloud_slam_filter");
     this->declare_parameter("output_topic_2", "/odin1/cloud_slam_filtered");
-    this->declare_parameter("crop_frame", "map_corrected_base_link");
-    this->declare_parameter("z_filter_frame", "odom");
-    this->declare_parameter("z_threshold", 1.0);
+    this->declare_parameter("crop_frame", "base_link");
+    this->declare_parameter("z_filter_frame", "base_link");
+    this->declare_parameter("z_threshold", 100.0);
 
     // 裁剪参数 (CropBox)
     this->declare_parameter("min_x", -0.3);
