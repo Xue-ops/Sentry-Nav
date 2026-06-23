@@ -50,9 +50,13 @@ dual_lidar_republisher:
     front_input_topic: /livox/lidar_192_168_1_188
     front_output_topic: /mid360_front/lidar
     front_frame_id: mid360_front_frame
+    front_imu_input_topic: /livox/imu_192_168_1_188
+    front_imu_output_topic: /mid360_front/imu
     back_input_topic: /livox/lidar_192_168_1_182
     back_output_topic: /mid360_back/lidar
     back_frame_id: mid360_back_frame
+    back_imu_input_topic: /livox/imu_192_168_1_182
+    back_imu_output_topic: /mid360_back/imu
 
 odin1_filter_node:
   ros__parameters:
