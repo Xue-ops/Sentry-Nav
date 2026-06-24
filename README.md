@@ -134,7 +134,7 @@ ros2 run livox_ros_driver2 livox_ros_driver2_node \
 
 ros2 run cpp_lidar_filter dual_lidar_republisher 
 
-ros2 launch fake_vel_transform fake_vel_transform_launch.py 
+//ros2 launch fake_vel_transform fake_vel_transform_launch.py 
 
 ros2 launch slam_bringup slam_relocalization.py
 

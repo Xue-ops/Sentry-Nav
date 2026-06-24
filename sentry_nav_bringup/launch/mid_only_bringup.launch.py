@@ -36,6 +36,19 @@ def generate_launch_description():
         }.items()
     )
 
+    fake_vel_transform = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            PathJoinSubstitution([
+                FindPackageShare('fake_vel_transform'),
+                'launch',
+                'fake_vel_transform_launch.py'
+            ])
+        ),
+        launch_arguments={
+            'use_sim_time': use_sim_time
+        }.items()
+    )
+
     rviz_config = PathJoinSubstitution([
         FindPackageShare('sentry_nav_bringup'),
         'rviz',
@@ -78,6 +91,7 @@ def generate_launch_description():
             default_value=default_params_file,
             description='Path to Nav2 parameter file'
         ),
+        fake_vel_transform,
 
         Node(
             package='cpp_lidar_filter',
