@@ -82,7 +82,7 @@ public:
   {
     port_name_ = this->declare_parameter<std::string>("port_name", "/dev/ttyUSB0");
     baud_rate_ = this->declare_parameter<int>("baud_rate", 921600);
-    cmd_vel_topic_ = this->declare_parameter<std::string>("cmd_vel_topic", "/cmd_vel_smoothed");
+    cmd_vel_topic_ = this->declare_parameter<std::string>("cmd_vel_topic", "/aft_cmd_vel");
 
     openSerial();
 
