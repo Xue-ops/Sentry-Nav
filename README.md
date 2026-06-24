@@ -138,3 +138,8 @@ ros2 run cpp_lidar_filter dual_lidar_republisher
 
 ros2 launch slam_bringup slam_relocalization.py
 
+ros2 launch sentry_nav_bringup mid_only_bringup.launch.py use_sim_time:=false
+
+ros2 run cod_behavior tree_1 --ros-args --params-file /home/wele/ros_ws/src/CODNav_BahaviorTree/COD_Behavior/launch/cod_pose.yaml -p cod_bt_path:=/home/wele/ros_ws/src/CODNav_BahaviorTree/COD_Behavior/cod_bt/nav_tree.xml
+
+
