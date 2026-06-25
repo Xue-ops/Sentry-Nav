@@ -1,0 +1,82 @@
+nav_identity_bridge:
+  ros__parameters:
+    use_sim_time: false
+    map_frame: map
+    nav_map_frame: map_nav
+    nav_odom_frame: odom_nav
+    publish_rate: 20.0
+
+map_to_baselink_node:
+  ros__parameters:
+    use_sim_time: false
+    odom_frame: odom
+    odom_nav_frame: odom_nav
+    map_frame: map
+    base_frame: odin1_base_link
+    output_topic: /map_base_pose
+    publish_tf: true
+    if_nav2: true
+    if_on_robot: true
+    tf_child_frame: base_link
+    odin1_camera_frame: odin1_camera_link
+    mid360_camera_frame: livox_frame
+    publish_rate: 20.0
+    tf_baselink_odin1: [-0.02897, 0.11458, 0.24799, 0.0, 0.0, 0.7071068, 0.7071068]
+    tf_baselink_mid360: [0.0025, -0.13509, 0.29325, 0.0, 0.382684, -0.923879, 0.0]
+
+lidar_filter_node:
+  ros__parameters:
+    use_sim_time: false
+    input_topic: /mid360_front/lidar
+    output_topic: /livox/lidar_filtered
+    input_topic_2: /mid360_back/lidar
+    output_topic_2: /odin1/cloud_slam_filtered
+    crop_frame: base_link
+    z_filter_frame: base_link
+    z_threshold: 1.0
+    min_x: -0.3
+    max_x: 0.3
+    min_y: -0.3
+    max_y: 0.3
+    min_z: -0.1
+    max_z: 1.0
+    negative: true
+    use_voxel: false
+    leaf_size: 0.05
+
+dual_lidar_republisher:
+  ros__parameters:
+    use_sim_time: false
+    front_input_topic: /livox/lidar_192_168_1_188
+    front_output_topic: /mid360_front/lidar
+    front_frame_id: mid360_front_frame
+    front_imu_input_topic: /livox/imu_192_168_1_188
+    front_imu_output_topic: /mid360_front/imu
+    back_input_topic: /livox/lidar_192_168_1_182
+    back_output_topic: /mid360_back/lidar
+    back_frame_id: mid360_back_frame
+    back_imu_input_topic: /livox/imu_192_168_1_182
+    back_imu_output_topic: /mid360_back/imu
+
+odin1_filter_node:
+  ros__parameters:
+    use_sim_time: false
+    input_topic: /odin1/cloud_slam
+    output_topic: /odin1/cloud_slam_filter
+    z_threshold: 1.0
+    leaf_size: 0.05
+
+map_publish:
+  ros__parameters:
+    use_sim_time: false
+    #地图yaml文件路径
+    yaml_path: /home/wele/ros_ws/src/Sentry-Nav/map/map_nav_red.yaml
+    #模拟器map路径
+    #yaml_path: /home/xli/catkin_ws/src/sentry_description/maps/cad_map.yaml
+    topic_name: /map
+    frame_id: map
+    publish_period: 1.0
+
+rviz2_savedmap_nav:
+  ros__parameters:
+    use_sim_time: false
