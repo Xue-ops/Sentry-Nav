@@ -9,7 +9,7 @@ import os
 
 def generate_launch_description():
     map_params_file = LaunchConfiguration('map_params_file')
-    team = LaunchConfiguration('team')
+    color = LaunchConfiguration('color')
     default_map_params_file = PathJoinSubstitution([
         FindPackageShare('sentry_nav_bringup'),
         'config',
@@ -31,20 +31,20 @@ def generate_launch_description():
     )
 
     def launch_setup(context, *args, **kwargs):
-        selected_team = team.perform(context).strip().lower()
+        selected_color = color.perform(context).strip().lower()
         explicit_map_params_file = map_params_file.perform(context).strip()
 
         if explicit_map_params_file:
             selected_map_params_file = explicit_map_params_file
-        elif selected_team == 'red':
+        elif selected_color == 'red':
             selected_map_params_file = red_map_params_file
-        elif selected_team == 'blue':
+        elif selected_color == 'blue':
             selected_map_params_file = blue_map_params_file
-        elif selected_team == 'default':
+        elif selected_color == 'default':
             selected_map_params_file = default_map_params_file
         else:
             raise RuntimeError(
-                f"Unsupported team '{selected_team}'. Use default, red, or blue."
+                f"Unsupported color '{selected_color}'. Use default, red, or blue."
             )
 
         grid_map_bringup_node = GroupAction(
@@ -93,10 +93,10 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'map_params_file',
             default_value='',
-            description='Explicit path to map-save parameter file; overrides team'
+            description='Explicit path to map-save parameter file; overrides color'
         ),
         DeclareLaunchArgument(
-            'team',
+            'color',
             default_value='default',
             choices=['default', 'red', 'blue'],
             description='Map-save parameter set to use when map_params_file is not set'
