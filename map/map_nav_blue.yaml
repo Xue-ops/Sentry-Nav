@@ -1,4 +1,4 @@
-image: map_nav.pgm
+image: map_nav_blue.pgm
 mode: trinary
 resolution: 0.05000000074505806
 origin: [-14.000790023803711, -7.121291542053223, 0.0]
