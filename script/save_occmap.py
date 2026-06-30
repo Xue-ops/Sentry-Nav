@@ -10,6 +10,17 @@ from nav_msgs.msg import OccupancyGrid
 from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy, HistoryPolicy
 
 
+class InlineList(list):
+    pass
+
+
+def inline_list_representer(dumper, data):
+    return dumper.represent_sequence('tag:yaml.org,2002:seq', data, flow_style=True)
+
+
+yaml.SafeDumper.add_representer(InlineList, inline_list_representer)
+
+
 class MapSaverNode(Node):
     def __init__(self, topic_name: str, output_base: str):
         super().__init__('simple_map_saver')
@@ -92,11 +103,11 @@ class MapSaverNode(Node):
             'image': os.path.basename(pgm_path),
             'mode': 'trinary',
             'resolution': float(resolution),
-            'origin': [
+            'origin': InlineList([
                 float(origin.position.x),
                 float(origin.position.y),
                 0.0
-            ],
+            ]),
             'negate': 0,
             'occupied_thresh': 0.65,
             'free_thresh': 0.25
