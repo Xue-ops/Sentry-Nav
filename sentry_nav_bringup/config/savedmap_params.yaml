@@ -70,7 +70,7 @@ map_publish:
   ros__parameters:
     use_sim_time: false
     #地图yaml文件路径
-    yaml_path: /home/wele/ros_ws/src/Sentry-Nav/map/map_nav.yaml
+    yaml_path: /home/wele/ros_ws/src/Sentry-Nav/map/map_nav_red.yaml
     #模拟器map路径
     #yaml_path: /home/xli/catkin_ws/src/sentry_description/maps/cad_map.yaml
     topic_name: /map

@@ -163,7 +163,7 @@ controller_server:
         enabled: true
         cost_power: 1
         cost_weight: 4.0 #提高权重，增强最终接近阶段的目标吸引力，防止弧线绕圈
-        threshold_to_consider: 4.0
+        threshold_to_consider: 1.5
       ObstaclesCritic: #开启提供额外的障碍物排斥力
         enabled: true
         cost_power: 1
@@ -171,7 +171,7 @@ controller_server:
         critical_weight: 30.0 #近距离障碍物惩罚
         consider_footprint: false #用圆形近似，omni机器人更高效
         collision_cost: 10000.0
-        collision_margin_distance: 0.4 #碰撞边界余量
+        collision_margin_distance: 0.5 #碰撞边界余量
         near_goal_distance: 0.5
 
       CostCritic: #通过 costmap 梯度引导避障
@@ -187,9 +187,9 @@ controller_server:
       PathFollowCritic: #必须开启，这是防止乱跑的核心
         enabled: true
         cost_power: 1
-        cost_weight: 5.0
+        cost_weight: 10.0
         offset_from_furthest: 5 #关注路径前方更远的点
-        threshold_to_consider: 4.0 #放大关闭距离，让GoalCritic在近目标区域主导，防止画弧
+        threshold_to_consider: 1.0 #放大关闭距离，让GoalCritic在近目标区域主导，防止画弧
 
       PathAlignCritic: #让轨迹方向与路径对齐，高速下更平滑
         enabled: true
@@ -255,13 +255,13 @@ local_costmap:
       width: 10
       height: 10
       resolution: 0.05
-      robot_radius: 0.2
+      robot_radius: 0.1
       footprint: "[ [0.1, 0.1], [0.1, -0.1], [-0.1, -0.1], [-0.1, 0.1] ]"
       plugins: ["static_layer", "stvl_voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 5.0
-        inflation_radius: 0.3
+        inflation_radius: 0.25
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
         enabled: True

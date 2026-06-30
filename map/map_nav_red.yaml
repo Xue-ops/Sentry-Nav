@@ -1,7 +1,7 @@
-image: map_nav_red.pgm
+image: map_nav.pgm
 mode: trinary
 resolution: 0.05000000074505806
-origin: [-11.958210277557374, -18.67515649795532, 0.0]
+origin: [-5.698650932312013, -9.850293302536011, 0.0]
 negate: 0
 occupied_thresh: 0.65
 free_thresh: 0.25
